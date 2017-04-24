@@ -7,6 +7,7 @@
 //
 
 #import "RYFlowTabController.h"
+#import "RYBaseConfig.h"
 
 @interface RYFlowTabController ()
 
@@ -34,6 +35,21 @@
 - (void)setupUI {
     self.title = @"微博";
     self.view.backgroundColor = [UIColor blueColor];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [RYNetworkManager ry_getWithUrl:@"https://api.weibo.com/2/statuses/public_timeline.json"
+                   requestDictionary:@{
+                                       @"access_token" : [RYDefaults accessToken],
+                                       @"count" : @20,
+                                       @"page" : @1
+                                       }
+                       responseModel:nil
+                            useCache:NO
+                        writeToCache:NO
+                   completionHandler:^(id data) {
+        
+    }];
 }
 
 @end
