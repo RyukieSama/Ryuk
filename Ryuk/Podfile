@@ -1,0 +1,17 @@
+# Uncomment this line to define a global platform for your project
+# run: pod install --no-repo-update
+platform :ios, '8.0'
+# 工程不显示任何警告
+inhibit_all_warnings!
+
+target 'Ryuk' do
+
+    #第三方库
+    pod 'Masonry'
+    pod 'SDWebImage'
+    # pod 'SDWebImage/WebP'
+    pod 'MJExtension'
+    pod 'AFNetworking'
+    pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
+
+end
