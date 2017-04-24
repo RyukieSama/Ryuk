@@ -20,6 +20,7 @@
 		A4FE99E01EADCDF900BE84A7 /* RYMessageTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99DF1EADCDF900BE84A7 /* RYMessageTabController.m */; };
 		A4FE99E71EADD7B000BE84A7 /* RYLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99E61EADD7B000BE84A7 /* RYLoginController.m */; };
 		A4FE99EC1EADDAC100BE84A7 /* RYNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99EB1EADDAC100BE84A7 /* RYNetworkManager.m */; };
+		A4FE99F01EADED2200BE84A7 /* RYDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99EF1EADED2200BE84A7 /* RYDefaults.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,8 @@
 		A4FE99E61EADD7B000BE84A7 /* RYLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginController.m; sourceTree = "<group>"; };
 		A4FE99EA1EADDAC100BE84A7 /* RYNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNetworkManager.h; sourceTree = "<group>"; };
 		A4FE99EB1EADDAC100BE84A7 /* RYNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNetworkManager.m; sourceTree = "<group>"; };
+		A4FE99EE1EADED2200BE84A7 /* RYDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYDefaults.h; sourceTree = "<group>"; };
+		A4FE99EF1EADED2200BE84A7 /* RYDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYDefaults.m; sourceTree = "<group>"; };
 		C395411A88D6E6D1FAB95F0E /* Pods-Ryuk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryuk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ryuk/Pods-Ryuk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,6 +276,7 @@
 		A4FE99E81EADDAAC00BE84A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A4FE99ED1EADED1100BE84A7 /* RYDefaults */,
 				A4FE99E91EADDAAC00BE84A7 /* RYNetworkManager */,
 			);
 			path = Components;
@@ -285,6 +289,15 @@
 				A4FE99EB1EADDAC100BE84A7 /* RYNetworkManager.m */,
 			);
 			path = RYNetworkManager;
+			sourceTree = "<group>";
+		};
+		A4FE99ED1EADED1100BE84A7 /* RYDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				A4FE99EE1EADED2200BE84A7 /* RYDefaults.h */,
+				A4FE99EF1EADED2200BE84A7 /* RYDefaults.m */,
+			);
+			path = RYDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */,
+				A4FE99F01EADED2200BE84A7 /* RYDefaults.m in Sources */,
 				A4FE99DA1EADCDCA00BE84A7 /* RYCenterTabController.m in Sources */,
 				A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */,
 				A4FE99E71EADD7B000BE84A7 /* RYLoginController.m in Sources */,

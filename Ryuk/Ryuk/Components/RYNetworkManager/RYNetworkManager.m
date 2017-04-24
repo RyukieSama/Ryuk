@@ -8,6 +8,13 @@
 
 #import "RYNetworkManager.h"
 
+typedef NS_ENUM(NSInteger, RYWeiboErrorCode) {
+    //token过期   统一处理  提醒重新授权
+    RYWeiboErrorCodeTokenExpired = 21315,
+    RYWeiboErrorCodeExpiredToken = 21327,
+    //
+};
+
 @implementation RYNetworkManager
 
 + (instancetype)sharedManager {

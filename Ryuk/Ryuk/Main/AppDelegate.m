@@ -24,11 +24,14 @@
 @implementation AppDelegate
 
 - (UIViewController *)setRootController {
-//    RYMainTabBarController *tvVC = [[RYMainTabBarController alloc] init];
-//    return tvVC;
-    
-    RYLoginController *log = [[RYLoginController alloc] init];
-    return log;
+    NSString *at = [RYDefaults accessToken];
+    if (at.length > 0) {
+        RYMainTabBarController *tvVC = [[RYMainTabBarController alloc] init];
+        return tvVC;
+    } else {
+        RYLoginController *log = [[RYLoginController alloc] init];
+        return log;
+    }
 }
 
 - (void)setupNetWork {
@@ -115,8 +118,11 @@
                                               otherButtonTitles:nil];
         
         self.wbtoken = [(WBAuthorizeResponse *)response accessToken];
+        [RYDefaults setAccessToken:self.wbtoken];
         self.wbCurrentUserID = [(WBAuthorizeResponse *)response userID];
+        [RYDefaults setUserID:self.wbCurrentUserID];
         self.wbRefreshToken = [(WBAuthorizeResponse *)response refreshToken];
+        [RYDefaults setRefreshToken:self.wbRefreshToken];
         [alert show];
     }
 }

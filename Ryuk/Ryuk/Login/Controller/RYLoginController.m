@@ -45,7 +45,7 @@
 - (void)loginClick {
     NSLog(@"login");
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI = @"https://www.sina.com";
+    request.redirectURI = WEIBO_REDIRECT_URI;
     request.scope = @"all";
     request.userInfo = @{@"SSO_From": @"RYLoginController",
                          @"Other_Info_1": [NSNumber numberWithInt:123],
