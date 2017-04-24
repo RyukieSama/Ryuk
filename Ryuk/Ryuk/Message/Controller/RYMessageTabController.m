@@ -14,9 +14,14 @@
 
 @implementation RYMessageTabController
 
+#pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+}
+
+- (void)dealloc {
+    NSLog(@"- [%@ dealloc]",[self class]);
 }
 
 - (void)didReceiveMemoryWarning {

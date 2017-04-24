@@ -14,10 +14,15 @@
 
 @implementation RYFlowTabController
 
+#pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupUI];
+}
+
+- (void)dealloc {
+    NSLog(@"- [%@ dealloc]",[self class]);
 }
 
 - (void)didReceiveMemoryWarning {

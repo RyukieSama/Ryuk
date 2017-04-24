@@ -14,9 +14,14 @@
 
 @implementation RYCenterTabController
 
+#pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+}
+
+- (void)dealloc {
+    NSLog(@"- [%@ dealloc]",[self class]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +29,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UI
 - (void)setupUI {
     self.title = @"个人中心";
     self.view.backgroundColor = [UIColor greenColor];

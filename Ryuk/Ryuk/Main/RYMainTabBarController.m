@@ -31,7 +31,7 @@
     NSLog(@"- [%@ dealloc]",[self class]);
 }
 
-#pragma mark - config
+#pragma mark - UI
 - (void)setChildrenVCs {
     //Flow
     UIViewController *flow = [self creatChildVC:@"RYFlowTabController" title:@"主页" image:nil];

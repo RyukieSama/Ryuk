@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RYBaseConfig.h"
 #import "RYMainTabBarController.h"
+#import "RYLoginController.h"
 #import <AFNetworking.h>
 #import <AFNetworkActivityIndicatorManager.h>
 
@@ -19,9 +20,11 @@
 @implementation AppDelegate
 
 - (UIViewController *)setRootController {
-    RYMainTabBarController *tvVC = [[RYMainTabBarController alloc] init];
+//    RYMainTabBarController *tvVC = [[RYMainTabBarController alloc] init];
+//    return tvVC;
     
-    return tvVC;
+    RYLoginController *log = [[RYLoginController alloc] init];
+    return log;
 }
 
 - (void)setupNetWork {
