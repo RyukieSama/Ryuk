@@ -20,12 +20,14 @@
 #import <UIButton+WebCache.h>
 #import <UIView+WebCache.h>
 #import <UIImageView+WebCache.h>
+#import <WeiboSDK.h>
 
 #pragma mark - SCREEN
 #define RY_UI_SCREEN_WID [RYBaseConfig screenWid]
 #define RY_UI_SCREEN_RECT [RYBaseConfig screenRect]
 
 #pragma mark - SYSTEM
+#define WEIBO_APPKEY                            @"4001732132"
 #define APP_VERSION                              [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
 #define APP_BUILD_VERSION                   [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"]
 #define APP_DISPLAY_NAME                    [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"]

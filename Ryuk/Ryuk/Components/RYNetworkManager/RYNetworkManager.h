@@ -10,6 +10,14 @@
 #import <AFNetworking.h>
 #import <MJExtension.h>
 
-@interface RYNetworkManager : NSObject
+typedef void(^networkCallBack)(id data);
+
+@interface RYNetworkManager : AFHTTPSessionManager
+
++ (instancetype)sharedManager;
+
++ (void)postURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
+
++ (void)getURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
 
 @end

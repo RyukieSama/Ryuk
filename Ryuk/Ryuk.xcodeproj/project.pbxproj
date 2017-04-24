@@ -535,7 +535,7 @@
 				DEVELOPMENT_TEAM = DE9LJ533VH;
 				INFOPLIST_FILE = Ryuk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ryukiewang.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryukiewang.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -548,7 +548,7 @@
 				DEVELOPMENT_TEAM = DE9LJ533VH;
 				INFOPLIST_FILE = Ryuk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ryukiewang.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryukiewang.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
