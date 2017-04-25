@@ -7,6 +7,7 @@
 //
 
 #import "RYNetworkManager.h"
+#import "RYBaseConfig.h"
 
 typedef NS_ENUM(NSInteger, RYWeiboErrorCode) {
     //token过期   统一处理  提醒重新授权
@@ -24,12 +25,6 @@ static NSConditionLock *conditionLock;
 + (void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //         *baseModel = [ new];
-        //        baseModel.ver = [[UIApplication sharedApplication] appVersion];
-        //        baseModel.protocol_ver = 1;
-        //        baseModel.platformType = 1;
-        //        baseModel.larkAppId = 1;
-        //        baseDict = [[NSMutableDictionary alloc] initWithDictionary:[baseModel mj_keyValues]];
         operationCachePool = [[NSMutableDictionary alloc] initWithCapacity:0];
         conditionLock = [[NSConditionLock alloc] init];
     });
@@ -53,19 +48,19 @@ static NSConditionLock *conditionLock;
 }
 
 + (NSURLSessionDataTask *)ry_postWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache writeToCache:(BOOL)writeToCache completionHandler:(networkCallBack)completionHandler {
-    if([url rangeOfString:@" "].location != NSNotFound)
+    if([url rangeOfString:@" "].location != NSNotFound) {
         url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    if (useCache && url && responseModel) {
-        //        [[RYNetworkManager sharedInstance] getProtocolCacheWithURL:url responseModel:responseModel completionHandler:completionHandler];
     }
     
     [conditionLock lock];
     
-    NSLog(@"------------------------------- \n %@ \n -------------------------------",requestDict);
+    NSMutableDictionary *mudic = requestDict.mutableCopy;
+    [mudic setObject:[RYDefaults accessToken] forKey:@"access_token"];
+    
+    NSLog(@"------------------------------- \n %@ \n -------------------------------",mudic);
     
     NSURLSessionDataTask *operation = [[RYNetworkManager sharedManager] POST:url
-                                                                  parameters:requestDict
+                                                                  parameters:mudic
                                                                     progress:nil
                                                                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                                          if ([operationCachePool objectForKey:url]) {
@@ -82,18 +77,6 @@ static NSConditionLock *conditionLock;
                                                                              return;
                                                                          }
                                                                          
-                                                                         //                                                                            *meta = [ metaWithDictionary:dic responseModel:responseModel];
-                                                                         //                                                                           if (meta.errcode != ERROR_CODE_JAVA_200 && meta) {
-                                                                         //                                                                               if ([ sharedInstance].errorHandler)
-                                                                         //                                                                                   [ sharedInstance].errorHandler(meta,url,parameters);
-                                                                         //                                                                           }
-                                                                         //                                                                           /**
-                                                                         //                                                                            *  使用缓存的时候 请求结果成功时
-                                                                         //                                                                            */
-                                                                         //                                                                           if (writeToCache && dic && useCache && meta.ret && meta.errcode == ERROR_CODE_JAVA_200) {
-                                                                         //                                                                               [[ sharedInstance] putObject:dic withId:url dataType:];
-                                                                         //                                                                           }
-                                                                         
                                                                          dispatch_async(dispatch_get_main_queue(), ^{
                                                                              completionHandler(dic ?: nil);
                                                                          });
@@ -105,11 +88,7 @@ static NSConditionLock *conditionLock;
                                                                          
                                                                          NSLog(@"\n error------------%@ \n",error);
                                                                          NSDictionary *errorInfo = error.userInfo;
-                                                                         
-                                                                         //                                                                       if ([ sharedInstance].errorHandler) {
-                                                                         //                                                                           [ sharedInstance].errorHandler(errorInfo?:@"no meta",url,parameters);
-                                                                         //                                                                       }
-                                                                         
+
                                                                          if ([errorInfo objectForKey:@"NSLocalizedDescription"]) {
                                                                              if ([[errorInfo objectForKey:@"NSLocalizedDescription"] isEqualToString:@"cancelled"] || [[errorInfo objectForKey:@"NSLocalizedDescription"] isEqualToString:@"已取消"]) {
                                                                                  NSLog(@"operation call cancelled");
@@ -132,20 +111,20 @@ static NSConditionLock *conditionLock;
     return operation;
 }
 
-+ (NSURLSessionDataTask *)ry_getWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache writeToCache:(BOOL)writeToCache completionHandler:(networkCallBack)completionHandler {
-    if([url rangeOfString:@" "].location != NSNotFound)
++ (NSURLSessionDataTask *)ry_getWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache completionHandler:(networkCallBack)completionHandler {
+    if([url rangeOfString:@" "].location != NSNotFound) {
         url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    if (useCache && url && responseModel) {
-        //        [[RYNetworkManager sharedInstance] getProtocolCacheWithURL:url responseModel:responseModel completionHandler:completionHandler];
     }
     
     [conditionLock lock];
     
-    NSLog(@"------------------------------- \n %@ \n -------------------------------",requestDict);
+    NSMutableDictionary *mudic = requestDict.mutableCopy;
+    [mudic setObject:[RYDefaults accessToken] forKey:@"access_token"];
+    
+    NSLog(@"------------------------------- \n %@ \n -------------------------------",mudic);
     
     NSURLSessionDataTask *operation = [[RYNetworkManager sharedManager] GET:url
-                                                                 parameters:requestDict
+                                                                 parameters:mudic
                                                                    progress:nil
                                                                     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                                         if ([operationCachePool objectForKey:url]) {
@@ -155,6 +134,7 @@ static NSConditionLock *conditionLock;
                                                                         
                                                                         NSLog(@"------------------------------- \n %@ \n -------------------------------",dic);
                                                                         
+                                                                        //空
                                                                         if (dic.allKeys.count == 0) {
                                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                                 completionHandler(nil);
@@ -162,20 +142,20 @@ static NSConditionLock *conditionLock;
                                                                             return;
                                                                         }
                                                                         
-                                                                        //                                                                            *meta = [ metaWithDictionary:dic responseModel:responseModel];
-                                                                        //                                                                           if (meta.errcode != ERROR_CODE_JAVA_200 && meta) {
-                                                                        //                                                                               if ([ sharedInstance].errorHandler)
-                                                                        //                                                                                   [ sharedInstance].errorHandler(meta,url,parameters);
-                                                                        //                                                                           }
-                                                                        //                                                                           /**
-                                                                        //                                                                            *  使用缓存的时候 请求结果成功时
-                                                                        //                                                                            */
-                                                                        //                                                                           if (writeToCache && dic && useCache && meta.ret && meta.errcode == ERROR_CODE_JAVA_200) {
-                                                                        //                                                                               [[ sharedInstance] putObject:dic withId:url dataType:];
-                                                                        //                                                                           }
+                                                                        //是否报错
+                                                                        if ([dic objectForKey:@"error_code"]) {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                completionHandler(dic ?: nil);
+                                                                            });
+                                                                        }
                                                                         
+                                                                        //正常返回
                                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                                            completionHandler(dic ?: nil);
+                                                                            if (responseModel) {
+                                                                                completionHandler([responseModel mj_objectWithKeyValues:dic] ?: nil);
+                                                                            } else {
+                                                                                completionHandler(dic ?: nil);
+                                                                            }
                                                                         });
                                                                     }
                                                                     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -185,10 +165,6 @@ static NSConditionLock *conditionLock;
                                                                         
                                                                         NSLog(@"\n error------------%@ \n",error);
                                                                         NSDictionary *errorInfo = error.userInfo;
-                                                                        
-                                                                        //                                                                       if ([ sharedInstance].errorHandler) {
-                                                                        //                                                                           [ sharedInstance].errorHandler(errorInfo?:@"no meta",url,parameters);
-                                                                        //                                                                       }
                                                                         
                                                                         if ([errorInfo objectForKey:@"NSLocalizedDescription"]) {
                                                                             if ([[errorInfo objectForKey:@"NSLocalizedDescription"] isEqualToString:@"cancelled"] || [[errorInfo objectForKey:@"NSLocalizedDescription"] isEqualToString:@"已取消"]) {

@@ -11,6 +11,8 @@
 
 #import "RYMainTabBarController.h"
 #import "RYBaseNavigationController.h"
+//基础微博对象
+#import "RYStatuse.h"
 //本地用户信息
 #import "RYDefaults.h"
 //Net
