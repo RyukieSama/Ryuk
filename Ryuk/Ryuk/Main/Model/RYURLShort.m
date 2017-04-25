@@ -7,7 +7,10 @@
 //
 
 #import "RYURLShort.h"
+#import <MJExtension.h>
 
 @implementation RYURLShort
+
+MJLogAllIvars
 
 @end

@@ -11,6 +11,8 @@
 
 @implementation RYUser
 
+MJLogAllIvars
+
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return  @{
               @"description_wb" : @"description"

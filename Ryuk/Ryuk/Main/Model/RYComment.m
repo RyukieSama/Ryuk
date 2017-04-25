@@ -7,7 +7,10 @@
 //
 
 #import "RYComment.h"
+#import <MJExtension.h>
 
 @implementation RYComment
+
+MJLogAllIvars
 
 @end

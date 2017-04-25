@@ -10,7 +10,6 @@
 #import "RYBaseConfig.h"
 #import "RYGeo.h"
 #import "RYUser.h"
-#import "RYComment.h"
 #import "RYPrivacy.h"
 #import "RYRemind.h"
 #import "RYURLShort.h"

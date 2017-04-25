@@ -7,7 +7,10 @@
 //
 
 #import "RYGeo.h"
+#import <MJExtension.h>
 
 @implementation RYGeo
+
+MJLogAllIvars
 
 @end

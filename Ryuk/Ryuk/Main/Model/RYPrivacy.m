@@ -7,7 +7,10 @@
 //
 
 #import "RYPrivacy.h"
+#import <MJExtension.h>
 
 @implementation RYPrivacy
+
+MJLogAllIvars
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "RYRemind.h"
+#import <MJExtension.h>
 
 @implementation RYRemind
+
+MJLogAllIvars
 
 @end
