@@ -22,7 +22,11 @@ CGFloat ryColorComponentFrom(NSString *string, NSUInteger start, NSUInteger leng
 + (CGFloat)screenWid {
     return [UIScreen mainScreen].bounds.size.width;
 }
-    
+
++ (CGFloat)screenHeight {
+    return [UIScreen mainScreen].bounds.size.height;
+}
+
 + (CGRect)screenRect {
     return [UIScreen mainScreen].bounds;
 }

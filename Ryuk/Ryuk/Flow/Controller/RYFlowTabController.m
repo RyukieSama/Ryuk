@@ -120,7 +120,9 @@ static NSString *cellID = @"RYFlowStatuseCell";
         _tvFlow.showsVerticalScrollIndicator = NO;
         _tvFlow.estimatedRowHeight = 100;
         _tvFlow.rowHeight = UITableViewAutomaticDimension;
-        [_tvFlow registerNib:[UINib nibWithNibName:@"RYFlowStatuseCell" bundle:nil] forCellReuseIdentifier:cellID];
+        _tvFlow.backgroundColor = RY_COLOR_GRAY_E8E8E8;
+//        [_tvFlow registerNib:[UINib nibWithNibName:@"RYFlowStatuseCell" bundle:nil] forCellReuseIdentifier:cellID];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:cellID];
         __weak typeof(self) weakSelf = self;
         _tvFlow.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [weakSelf loadData:YES];
