@@ -9,6 +9,9 @@
 #import "RYFlowTabController.h"
 #import "RYBaseConfig.h"
 #import "RYFlowPageModel.h"
+#import "RYFlowStatuseCell.h"
+
+static NSString *cellID = @"RYFlowStatuseCell";
 
 #define API_MY_TIMELINE @"https://api.weibo.com/2/statuses/home_timeline.json"
 
@@ -31,6 +34,7 @@
     // Do any additional setup after loading the view.
     [self setupUI];
     [self setDefault];
+    [self.tvFlow.mj_header beginRefreshing];
 }
 
 - (void)dealloc {
@@ -43,18 +47,17 @@
 }
 
 #pragma mark - data
+- (void)setStatuses:(NSMutableArray<RYStatuse *> *)statuses {
+    _statuses = statuses;
+    [self.tvFlow reloadData];
+}
+
 - (void)setDefault {
     self.page = 1;
     self.feature = 0;
 }
 
-#pragma mark - UI
-- (void)setupUI {
-    self.title = @"微博";
-    self.view.backgroundColor = [UIColor blueColor];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)loadData:(BOOL)header {
     __weak typeof(self) weakSelf = self;
     [RYNetworkManager ry_getWithUrl:API_MY_TIMELINE
                   requestDictionary:@{
@@ -69,6 +72,9 @@
                       responseModel:[RYFlowPageModel class]
                            useCache:NO
                   completionHandler:^(id data) {
+                      [weakSelf.tvFlow.mj_header endRefreshing];
+                      [weakSelf.tvFlow.mj_footer endRefreshing];
+                      
                       //TODO: 错误处理
                       weakSelf.since_id = ((RYFlowPageModel *)data).since_id;
                       weakSelf.max_id = ((RYFlowPageModel *)data).max_id;
@@ -76,12 +82,32 @@
                   }];
 }
 
+#pragma mark - UI
+- (void)setupUI {
+    self.title = @"微博";
+    self.view.backgroundColor = [UIColor blueColor];
+    
+    [self.view addSubview:self.tvFlow];
+    [self.tvFlow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    
+}
+
 #pragma mark - tableVIew
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.statuses.count;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RYFlowStatuseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    cell.statuse = [self.statuses objectAtIndex:indexPath.item];
+    return cell;
+}
 
 #pragma mark - lazy
 - (UITableView *)tvFlow {
@@ -90,6 +116,18 @@
         _tvFlow.delegate = self;
         _tvFlow.dataSource = self;
         _tvFlow.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _tvFlow.showsHorizontalScrollIndicator = NO;
+        _tvFlow.showsVerticalScrollIndicator = NO;
+        _tvFlow.estimatedRowHeight = 100;
+        _tvFlow.rowHeight = UITableViewAutomaticDimension;
+        [_tvFlow registerNib:[UINib nibWithNibName:@"RYFlowStatuseCell" bundle:nil] forCellReuseIdentifier:cellID];
+        __weak typeof(self) weakSelf = self;
+        _tvFlow.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf loadData:YES];
+        }];
+        _tvFlow.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [weakSelf loadData:NO];
+        }];
     }
     return _tvFlow;
 }

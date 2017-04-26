@@ -12,6 +12,7 @@ target 'Ryuk' do
     # pod 'SDWebImage/WebP'
     pod 'MJExtension'
     pod 'AFNetworking'
+    pod 'MJRefresh'
     pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
 
 end

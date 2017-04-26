@@ -25,6 +25,7 @@
 #import <UIView+WebCache.h>
 #import <UIImageView+WebCache.h>
 #import <WeiboSDK.h>
+#import <MJRefresh.h>
 
 #pragma mark - SCREEN
 #define RY_UI_SCREEN_WID [RYBaseConfig screenWid]

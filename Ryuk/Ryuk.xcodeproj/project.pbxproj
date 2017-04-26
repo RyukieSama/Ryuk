@@ -15,6 +15,8 @@
 		A4C9EFDE1EAD958B00DC6EAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C9EFDD1EAD958B00DC6EAA /* main.m */; };
 		A4C9EFE91EAD958B00DC6EAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C9EFE81EAD958B00DC6EAA /* Assets.xcassets */; };
 		A4C9EFEC1EAD958B00DC6EAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C9EFEA1EAD958B00DC6EAA /* LaunchScreen.storyboard */; };
+		A4FC71671EB050B3009B245B /* RYFlowStatuseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FC71651EB050B3009B245B /* RYFlowStatuseCell.m */; };
+		A4FC71681EB050B3009B245B /* RYFlowStatuseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FC71661EB050B3009B245B /* RYFlowStatuseCell.xib */; };
 		A4FE99DA1EADCDCA00BE84A7 /* RYCenterTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99D91EADCDCA00BE84A7 /* RYCenterTabController.m */; };
 		A4FE99DD1EADCDE300BE84A7 /* RYFlowTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99DC1EADCDE300BE84A7 /* RYFlowTabController.m */; };
 		A4FE99E01EADCDF900BE84A7 /* RYMessageTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE99DF1EADCDF900BE84A7 /* RYMessageTabController.m */; };
@@ -47,6 +49,9 @@
 		A4C9EFE81EAD958B00DC6EAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4C9EFEB1EAD958B00DC6EAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4C9EFED1EAD958B00DC6EAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4FC71641EB050B3009B245B /* RYFlowStatuseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYFlowStatuseCell.h; sourceTree = "<group>"; };
+		A4FC71651EB050B3009B245B /* RYFlowStatuseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYFlowStatuseCell.m; sourceTree = "<group>"; };
+		A4FC71661EB050B3009B245B /* RYFlowStatuseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYFlowStatuseCell.xib; sourceTree = "<group>"; };
 		A4FE99D81EADCDCA00BE84A7 /* RYCenterTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCenterTabController.h; sourceTree = "<group>"; };
 		A4FE99D91EADCDCA00BE84A7 /* RYCenterTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCenterTabController.m; sourceTree = "<group>"; };
 		A4FE99DB1EADCDE300BE84A7 /* RYFlowTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYFlowTabController.h; sourceTree = "<group>"; };
@@ -254,6 +259,9 @@
 		A4FE99D61EADCD9300BE84A7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A4FC71641EB050B3009B245B /* RYFlowStatuseCell.h */,
+				A4FC71651EB050B3009B245B /* RYFlowStatuseCell.m */,
+				A4FC71661EB050B3009B245B /* RYFlowStatuseCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -411,6 +419,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4FC71681EB050B3009B245B /* RYFlowStatuseCell.xib in Resources */,
 				A4C9EFEC1EAD958B00DC6EAA /* LaunchScreen.storyboard in Resources */,
 				A4C9EFE91EAD958B00DC6EAA /* Assets.xcassets in Resources */,
 			);
@@ -485,6 +494,7 @@
 				A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */,
 				A4FE99EC1EADDAC100BE84A7 /* RYNetworkManager.m in Sources */,
 				A4FE99DD1EADCDE300BE84A7 /* RYFlowTabController.m in Sources */,
+				A4FC71671EB050B3009B245B /* RYFlowStatuseCell.m in Sources */,
 				A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */,
 				A4FE9A061EAEF98000BE84A7 /* RYPrivacy.m in Sources */,
 				A4FE9A0C1EAEF9BE00BE84A7 /* RYURLShort.m in Sources */,
