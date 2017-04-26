@@ -96,23 +96,31 @@ static NSString *cellID = @"RYFlowStatuseCell";
 
 #pragma mark - tableVIew
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.statuses.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.statuses.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RYFlowStatuseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    cell.statuse = [self.statuses objectAtIndex:indexPath.item];
+    cell.statuse = [self.statuses objectAtIndex:indexPath.section];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
 }
 
 #pragma mark - lazy
 - (UITableView *)tvFlow {
     if (!_tvFlow) {
-        _tvFlow = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tvFlow = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tvFlow.delegate = self;
         _tvFlow.dataSource = self;
         _tvFlow.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
