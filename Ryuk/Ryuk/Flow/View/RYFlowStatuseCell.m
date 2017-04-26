@@ -74,6 +74,7 @@
     [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
     //原po
     [self.lbContent setText:statuse.text];
+    //昵称
     [self.lbNickName setText:statuse.user.screen_name];
 }
 
@@ -86,7 +87,6 @@
             make.edges.mas_equalTo(0);
         }];
         _btCover.imageView.layer.masksToBounds = YES;
-//        _btCover.backgroundColor = RY_COLOR_GRAY_E8E8E8;
         _btCover.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
         _btCover.layer.shadowOpacity = 0.5;   // 阴影透明度
         _btCover.layer.shadowOffset = CGSizeMake(0,3); // 阴影的范围
@@ -125,6 +125,21 @@
         _lbNickName.font = RY_FONT(18);
     }
     return _lbNickName;
+}
+
+- (UIButton *)btFrom {
+    if (!_btFrom) {
+        _btFrom = [[UIButton alloc] init];
+        _btFrom.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _btFrom.imageView.layer.cornerRadius = 8;
+        _btFrom.imageView.layer.masksToBounds = YES;
+        //阴影
+        _btFrom.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
+        _btFrom.layer.shadowOpacity = 0.5;   // 阴影透明度
+        _btFrom.layer.shadowOffset = CGSizeMake(0,2); // 阴影的范围
+        _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
+    }
+    return _btFrom;
 }
 
 @end
