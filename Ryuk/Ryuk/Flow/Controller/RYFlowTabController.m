@@ -112,7 +112,7 @@
 
 #pragma mark - UI
 - (void)setupUI {
-    self.title = @"微博";
+//    self.title = @"微博";
     self.view.backgroundColor = [UIColor blueColor];
     
     [self.view addSubview:self.tvFlow];

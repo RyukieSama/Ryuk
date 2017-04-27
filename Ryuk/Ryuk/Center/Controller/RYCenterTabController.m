@@ -65,7 +65,7 @@
 
 #pragma mark - UI
 - (void)setupUI {
-    self.title = @"个人中心";
+//    self.title = @"个人中心";
     self.view.backgroundColor = [UIColor greenColor];
 }
 

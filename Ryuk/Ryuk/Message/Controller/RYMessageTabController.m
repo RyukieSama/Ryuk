@@ -31,7 +31,7 @@
 
 #pragma mark - UI
 - (void)setupUI {
-    self.title = @"消息";
+//    self.title = @"消息";
     self.view.backgroundColor = [UIColor redColor];
 }
 

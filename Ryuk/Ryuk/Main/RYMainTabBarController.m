@@ -34,7 +34,7 @@
 #pragma mark - UI
 - (void)setChildrenVCs {
     //Flow
-    UIViewController *flow = [self creatChildVC:@"RYFlowTabController" title:@"主页" image:nil];
+    UIViewController *flow = [self creatChildVC:@"RYFlowTabController" title:@"主页" image:[UIImage imageNamed:@"tab_flow"]];
     if (flow) {
         [self addChildViewController:flow];
     }

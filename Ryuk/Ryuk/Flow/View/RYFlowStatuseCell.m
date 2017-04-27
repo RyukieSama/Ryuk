@@ -15,8 +15,13 @@
 @property (nonatomic, strong) UIButton *btAvatar;
 @property (nonatomic, strong) UIButton *btFrom;
 @property (nonatomic, strong) UIButton *btShowReComment;
+@property (nonatomic, strong) UIButton *btLike;//赞
+@property (nonatomic, strong) UIButton *btRe;//转发
+@property (nonatomic, strong) UIButton *btComment;//评论
+@property (nonatomic, strong) UIButton *btFavo;//收藏
 @property (nonatomic, strong) UILabel *lbNickName;
 @property (nonatomic, strong) UILabel *lbContent;
+@property (nonatomic, strong) UIView *vLine;
 @property (nonatomic, strong) RYStatuseReCommentView *vReComment;
 
 @end
@@ -61,7 +66,15 @@
     [self.contentView addSubview:self.btCover];
     [self.btCover mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID/920*300);
+    }];
+    
+    //line
+    [self.contentView addSubview:self.vLine];
+    [self.vLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.mas_equalTo(self.btCover.mas_bottom);
+        make.width.mas_equalTo(RY_UI_SCREEN_WID);
     }];
     
     //文本
@@ -128,7 +141,7 @@
     _statuse = statuse;
     
     //清封面
-    [self.btCover setImage:RY_PLACEHOLDER_IMAGE forState:UIControlStateNormal];
+    [self.btCover setImage:RY_COVER_IMAGE forState:UIControlStateNormal];
     //公共部分
     if (statuse.retweeted_status) {//转发
         self.btFrom.hidden = NO;
@@ -174,7 +187,7 @@
 }
 
 - (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
-    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_COVER_IMAGE];
 }
 
 - (void)setStatuseRYStatuseCellIDOne:(RYStatuse *)statuse {
@@ -203,15 +216,15 @@
 - (UIButton *)btCover {
     if (!_btCover) {
         _btCover = [[UIButton alloc] init];
-        _btCover.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _btCover.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_btCover.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
         _btCover.imageView.layer.masksToBounds = YES;
-        _btCover.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
-        _btCover.layer.shadowOpacity = 0.5;   // 阴影透明度
-        _btCover.layer.shadowOffset = CGSizeMake(0,3); // 阴影的范围
-        _btCover.layer.shadowRadius = 3.0;  // 阴影扩散的范围控制
+//        _btCover.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
+//        _btCover.layer.shadowOpacity = 0.5;   // 阴影透明度
+//        _btCover.layer.shadowOffset = CGSizeMake(0,3); // 阴影的范围
+//        _btCover.layer.shadowRadius = 3.0;  // 阴影扩散的范围控制
     }
     return _btCover;
 }
@@ -225,7 +238,7 @@
         //阴影
         _btAvatar.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
         _btAvatar.layer.shadowOpacity = 0.5;   // 阴影透明度
-        _btAvatar.layer.shadowOffset = CGSizeMake(0,2); // 阴影的范围
+        _btAvatar.layer.shadowOffset = CGSizeMake(-2,2); // 阴影的范围
         _btAvatar.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
     }
     return _btAvatar;
@@ -257,7 +270,7 @@
         //阴影
         _btFrom.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
         _btFrom.layer.shadowOpacity = 0.5;   // 阴影透明度
-        _btFrom.layer.shadowOffset = CGSizeMake(0,2); // 阴影的范围
+        _btFrom.layer.shadowOffset = CGSizeMake(2,2); // 阴影的范围
         _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
     }
     return _btFrom;
@@ -268,6 +281,19 @@
         _vReComment = [[RYStatuseReCommentView alloc] init];
     }
     return _vReComment;
+}
+
+- (UIView *)vLine {
+    if (!_vLine) {
+        _vLine = [[UIView alloc] init];
+        _vLine.backgroundColor = RY_COLOR_GRAY_E8E8E8;
+        
+//        _vLine.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
+//        _vLine.layer.shadowOpacity = 0.5;   // 阴影透明度
+//        _vLine.layer.shadowOffset = CGSizeMake(0,3); // 阴影的范围
+//        _vLine.layer.shadowRadius = 3.0;  // 阴影扩散的范围控制
+    }
+    return _vLine;
 }
 
 @end

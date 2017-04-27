@@ -53,6 +53,8 @@
 #define RY_PLACEHOLDER_IMAGE [UIImage imageNamed:@"e8e8e8"]
 //默认头像
 #define RY_AVATAR_IMAGE [UIImage imageNamed:@"a0a0a0"]
+//默认占位图 9:3
+#define RY_COVER_IMAGE [UIImage imageNamed:@"cover"]
 //字体
 #define RY_FONT(x) [UIFont systemFontOfSize:(x)]
 

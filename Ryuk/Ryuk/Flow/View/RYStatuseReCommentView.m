@@ -27,6 +27,10 @@
 
 - (void)setupUI {
     self.backgroundColor = [UIColor whiteColor];
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
+    self.layer.shadowOpacity = 0.5;   // 阴影透明度
+    self.layer.shadowOffset = CGSizeMake(1,2); // 阴影的范围
+    self.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
     
     [self addSubview:self.lbText];
     [self.lbText mas_makeConstraints:^(MASConstraintMaker *make) {
