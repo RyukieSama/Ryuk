@@ -25,19 +25,43 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    [self setupUI];
+    //基础UI
+     [self setupBaseUI];
+    //根据cellId布局
+    
+    //纯文本
+    if ([reuseIdentifier isEqualToString:RYStatuseCellIDText]) {
+        [self setupUIRYStatuseCellIDText];
+    }
+    //单张至8张
+    if ([reuseIdentifier isEqualToString:RYStatuseCellIDOne]) {
+        [self setupUIRYStatuseCellIDOne];
+    }
+    //九宫格
+    if ([reuseIdentifier isEqualToString:RYStatuseCellIDNine]) {
+        [self setupUIRYStatuseCellIDNine];
+    }
+    //视频
+    if ([reuseIdentifier isEqualToString:RYStatuseCellIDVideo]) {
+        [self setupUIRYStatuseCellIDVideo];
+    }
+
     return self;
 }
 
-- (void)setupUI {
+#pragma mark - UI
+- (void)setupBaseUI {
     self.backgroundColor = RY_COLOR_GRAY_E8E8E8;
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    //图片
+}
+
+- (void)setupUIRYStatuseCellIDText {
+    //用户背景
     [self.contentView addSubview:self.btCover];
     [self.btCover mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(RY_UI_SCREEN_WID);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
     }];
     
     //文本
@@ -78,22 +102,34 @@
     [self.contentView addSubview:self.vReComment];
     [self.vReComment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.btFrom.mas_top).offset(-4);
-        make.width.mas_lessThanOrEqualTo(250);
-        make.right.mas_equalTo(-40);
+        make.width.mas_lessThanOrEqualTo(300);
+        make.right.mas_equalTo(-30);
     }];
-    
 }
 
+- (void)setupUIRYStatuseCellIDOne {
+    [self setupUIRYStatuseCellIDText];
+    [self.btCover mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID);
+    }];
+}
+
+- (void)setupUIRYStatuseCellIDNine {
+    [self setupUIRYStatuseCellIDOne];
+}
+
+- (void)setupUIRYStatuseCellIDVideo {
+    [self setupUIRYStatuseCellIDText];
+}
+
+#pragma mark - data
 - (void)setStatuse:(RYStatuse *)statuse {
     _statuse = statuse;
     
-    //封面
+    //清封面
     [self.btCover setImage:RY_PLACEHOLDER_IMAGE forState:UIControlStateNormal];
-    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
-    //头像
-    [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
-    
-    //原po
+    //公共部分
     if (statuse.retweeted_status) {//转发
         self.btFrom.hidden = NO;
         self.vReComment.hidden = NO;
@@ -115,7 +151,52 @@
         [self.lbNickName setText:statuse.user.screen_name];
         //原po内容
         [self.lbContent setText:statuse.text];
+        //头像
+        [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
     }
+    
+    //纯文本
+    if ([statuse.cellID isEqualToString:RYStatuseCellIDText]) {
+        [self setStatuseRYStatuseCellIDText:statuse];
+    }
+    //单张至8张
+    if ([statuse.cellID isEqualToString:RYStatuseCellIDOne]) {
+        [self setStatuseRYStatuseCellIDOne:statuse];
+    }
+    //九宫格
+    if ([statuse.cellID isEqualToString:RYStatuseCellIDNine]) {
+        [self setStatuseRYStatuseCellIDNine:statuse];
+    }
+    //视频
+    if ([statuse.cellID isEqualToString:RYStatuseCellIDVideo]) {
+        [self setStatuseRYStatuseCellIDVideo:statuse];
+    }
+}
+
+- (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
+    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+}
+
+- (void)setStatuseRYStatuseCellIDOne:(RYStatuse *)statuse {
+    //原po
+    if (statuse.retweeted_status) {//转发
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    } else {//原创
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    }
+}
+
+- (void)setStatuseRYStatuseCellIDNine:(RYStatuse *)statuse {
+    //原po
+    if (statuse.retweeted_status) {//转发
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    } else {//原创
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    }
+}
+
+- (void)setStatuseRYStatuseCellIDVideo:(RYStatuse *)statuse {
+    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
 }
 
 #pragma mark - lazy

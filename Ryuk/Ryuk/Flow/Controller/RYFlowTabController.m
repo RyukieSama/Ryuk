@@ -11,8 +11,6 @@
 #import "RYFlowPageModel.h"
 #import "RYFlowStatuseCell.h"
 
-static NSString *cellID = @"RYFlowStatuseCell";
-
 #define API_MY_TIMELINE @"https://api.weibo.com/2/statuses/home_timeline.json"
 
 @interface RYFlowTabController ()<UITableViewDelegate,UITableViewDataSource>
@@ -68,27 +66,47 @@ static NSString *cellID = @"RYFlowStatuseCell";
 }
 
 - (void)loadData:(BOOL)header {
+    
+    NSDictionary *param;
+    if (header) {
+        param = @{
+          @"since_id" : @(self.since_id),//若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+          @"count" : @20,//单页返回的记录条数，最大不超过100，默认为20。
+          @"page" : @(self.page),//返回结果的页码，默认为1。
+          @"base_app" : @0,//是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+          @"feature" : @(self.feature),//过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
+          @"trim_user" : @0 //返回值中user字段开关，0：返回完整user字段、1：user字段仅返回user_id，默认为0。
+          };
+    } else {
+        param = @{
+                  @"max_id" : @(self.max_id),//若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+                  @"count" : @20,//单页返回的记录条数，最大不超过100，默认为20。
+                  @"page" : @(self.page),//返回结果的页码，默认为1。
+                  @"base_app" : @0,//是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+                  @"feature" : @(self.feature),//过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
+                  @"trim_user" : @0 //返回值中user字段开关，0：返回完整user字段、1：user字段仅返回user_id，默认为0。
+                  };
+    }
+    
     __weak typeof(self) weakSelf = self;
     [RYNetworkManager ry_getWithUrl:API_MY_TIMELINE
-                  requestDictionary:@{
-                                      @"since_id" : @(self.since_id),//若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
-                                      @"max_id" : @(self.max_id),//若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
-                                      @"count" : @20,//单页返回的记录条数，最大不超过100，默认为20。
-                                      @"page" : @(self.page),//返回结果的页码，默认为1。
-                                      @"base_app" : @0,//是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-                                      @"feature" : @(self.feature),//过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
-                                      @"trim_user" : @0 //返回值中user字段开关，0：返回完整user字段、1：user字段仅返回user_id，默认为0。
-                                      }
+                  requestDictionary:param
                       responseModel:[RYFlowPageModel class]
                            useCache:NO
                   completionHandler:^(id data) {
                       [weakSelf.tvFlow.mj_header endRefreshing];
                       [weakSelf.tvFlow.mj_footer endRefreshing];
                       
-                      //TODO: 错误处理
                       weakSelf.since_id = ((RYFlowPageModel *)data).since_id;
                       weakSelf.max_id = ((RYFlowPageModel *)data).max_id;
-                      weakSelf.statuses = ((RYFlowPageModel *)data).statuses.mutableCopy;
+                      NSMutableArray *arr = ((RYFlowPageModel *)data).statuses.mutableCopy;
+                      if (header) {
+                          [arr addObjectsFromArray:weakSelf.statuses];//把原来的加在后面
+                          weakSelf.statuses = arr;
+                      } else {
+                          [weakSelf.statuses addObjectsFromArray:arr];//吧新来的加在后面
+                          weakSelf.statuses = weakSelf.statuses;
+                      }
                   }];
 }
 
@@ -115,8 +133,9 @@ static NSString *cellID = @"RYFlowStatuseCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RYFlowStatuseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    cell.statuse = [self.statuses objectAtIndex:indexPath.section];
+    RYStatuse *statuse = [self.statuses objectAtIndex:indexPath.section];
+    RYFlowStatuseCell *cell = [tableView dequeueReusableCellWithIdentifier:statuse.cellID forIndexPath:indexPath];
+    cell.statuse = statuse;
     return cell;
 }
 
@@ -141,7 +160,10 @@ static NSString *cellID = @"RYFlowStatuseCell";
         _tvFlow.rowHeight = UITableViewAutomaticDimension;
         _tvFlow.backgroundColor = RY_COLOR_GRAY_E8E8E8;
 //        [_tvFlow registerNib:[UINib nibWithNibName:@"RYFlowStatuseCell" bundle:nil] forCellReuseIdentifier:cellID];
-        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:cellID];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDText];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDNine];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDVideo];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDOne];
         __weak typeof(self) weakSelf = self;
         _tvFlow.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [weakSelf loadData:YES];

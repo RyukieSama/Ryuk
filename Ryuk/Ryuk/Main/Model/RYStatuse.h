@@ -20,16 +20,15 @@
 typedef NS_ENUM(NSInteger, RYStatuseType) {
     RYStatuseTypeText = 10,
     RYStatuseTypeImageOne = 11,
-    RYStatuseTypeImageTwo = 12,
-    RYStatuseTypeImageThree = 13,
-    RYStatuseTypeImageFour = 14,
-    RYStatuseTypeImageFive = 15,
-    RYStatuseTypeImageSix = 16,
-    RYStatuseTypeImageSeven = 17,
-    RYStatuseTypeImageEight = 18,
     RYStatuseTypeImageNine = 19,
     RYStatuseTypeVideo = 20,
 };
+
+//复用id
+static NSString *RYStatuseCellIDText = @"RYStatuseCellIDText";
+static NSString *RYStatuseCellIDOne = @"RYStatuseCellIDOne";
+static NSString *RYStatuseCellIDNine = @"RYStatuseCellIDNine";
+static NSString *RYStatuseCellIDVideo = @"RYStatuseCellIDVideo";
 
 @interface RYStatuse : NSObject
 
@@ -78,5 +77,7 @@ typedef NS_ENUM(NSInteger, RYStatuseType) {
 //@property (nonatomic, strong) <#class#> *pic_ids; 微博配图ID。多图时返回多图ID，用来拼接图片url。用返回字段thumbnail_pic的地址配上该返回字段的图片ID，即可得到多个图片url。
 //pic_urls
 
+//自用
+@property (nonatomic, strong) NSString *cellID;
 
 @end

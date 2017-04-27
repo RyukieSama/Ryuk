@@ -45,7 +45,7 @@
     if (!_lbText) {
         _lbText = [[UILabel alloc] init];
         _lbText.numberOfLines = 0;
-        _lbText.font = RY_FONT(15);
+        _lbText.font = RY_FONT(14);
 //        _lbText.textAlignment = NSTextAlignmentRight;
     }
     return _lbText;

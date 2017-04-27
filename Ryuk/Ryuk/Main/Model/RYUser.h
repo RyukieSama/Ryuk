@@ -69,7 +69,8 @@
  用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
  */
 @property (nonatomic, copy) NSString *lang;
-
+@property (nonatomic, copy) NSString *cover_image;
+@property (nonatomic, copy) NSString *cover_image_phone;
 //@property (nonatomic, strong) RYStatuse *status;
 
 @end
