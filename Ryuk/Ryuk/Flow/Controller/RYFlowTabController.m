@@ -37,6 +37,16 @@ static NSString *cellID = @"RYFlowStatuseCell";
     [self.tvFlow.mj_header beginRefreshing];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)dealloc {
     NSLog(@"- [%@ dealloc]",[self class]);
 }
@@ -92,6 +102,7 @@ static NSString *cellID = @"RYFlowStatuseCell";
         make.edges.mas_equalTo(0);
     }];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 #pragma mark - tableVIew

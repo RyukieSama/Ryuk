@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7958883B5BC547AE99B768A9 /* libPods-Ryuk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2A1492EDE872382379545B /* libPods-Ryuk.a */; };
 		A414EB5D1EB09AD6006CA134 /* RYReStatuse.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB5C1EB09AD6006CA134 /* RYReStatuse.m */; };
+		A414EB601EB18C24006CA134 /* RYStatuseReCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */; };
+		A414EB621EB1A082006CA134 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB611EB1A082006CA134 /* AVFoundation.framework */; };
+		A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB631EB1A0C5006CA134 /* AVKit.framework */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -44,6 +47,10 @@
 		789F30E5C89FDCBDD0B98CE2 /* Pods-Ryuk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryuk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ryuk/Pods-Ryuk.debug.xcconfig"; sourceTree = "<group>"; };
 		A414EB5B1EB09AD6006CA134 /* RYReStatuse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYReStatuse.h; sourceTree = "<group>"; };
 		A414EB5C1EB09AD6006CA134 /* RYReStatuse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYReStatuse.m; sourceTree = "<group>"; };
+		A414EB5E1EB18C24006CA134 /* RYStatuseReCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStatuseReCommentView.h; sourceTree = "<group>"; };
+		A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStatuseReCommentView.m; sourceTree = "<group>"; };
+		A414EB611EB1A082006CA134 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A414EB631EB1A0C5006CA134 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -107,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */,
+				A414EB621EB1A082006CA134 /* AVFoundation.framework in Frameworks */,
 				7958883B5BC547AE99B768A9 /* libPods-Ryuk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +135,8 @@
 		3CECEE075C76EC8A889FA542 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A414EB631EB1A0C5006CA134 /* AVKit.framework */,
+				A414EB611EB1A082006CA134 /* AVFoundation.framework */,
 				4F2A1492EDE872382379545B /* libPods-Ryuk.a */,
 			);
 			name = Frameworks;
@@ -297,6 +308,8 @@
 			children = (
 				A4FC71641EB050B3009B245B /* RYFlowStatuseCell.h */,
 				A4FC71651EB050B3009B245B /* RYFlowStatuseCell.m */,
+				A414EB5E1EB18C24006CA134 /* RYStatuseReCommentView.h */,
+				A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -519,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A414EB601EB18C24006CA134 /* RYStatuseReCommentView.m in Sources */,
 				A4FE9A001EAEF59900BE84A7 /* RYGeo.m in Sources */,
 				A49876421EB0902400359766 /* RYImageBrowserInnerController.m in Sources */,
 				A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */,

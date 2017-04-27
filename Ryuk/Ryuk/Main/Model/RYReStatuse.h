@@ -23,6 +23,10 @@
 @property (nonatomic, assign) NSInteger reposts_count;
 @property (nonatomic, assign) NSInteger comments_count;
 @property (nonatomic, assign) NSInteger attitudes_count;
+/**
+ 链接的类型，0：普通网页、1：视频、2：音乐、3：活动、5、投票
+ */
+@property (nonatomic, assign) NSInteger source_type;
 @property (nonatomic, copy) NSString *created_at;
 /**
  微博信息内容

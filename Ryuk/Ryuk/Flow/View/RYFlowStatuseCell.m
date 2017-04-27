@@ -7,14 +7,17 @@
 //
 
 #import "RYFlowStatuseCell.h"
+#import "RYStatuseReCommentView.h"
 
 @interface RYFlowStatuseCell ()
 
 @property (nonatomic, strong) UIButton *btCover;
 @property (nonatomic, strong) UIButton *btAvatar;
 @property (nonatomic, strong) UIButton *btFrom;
+@property (nonatomic, strong) UIButton *btShowReComment;
 @property (nonatomic, strong) UILabel *lbNickName;
 @property (nonatomic, strong) UILabel *lbContent;
+@property (nonatomic, strong) RYStatuseReCommentView *vReComment;
 
 @end
 
@@ -62,6 +65,23 @@
         make.left.mas_equalTo(self.btAvatar.mas_right).offset(8);
     }];
     
+    //原po
+    [self.contentView addSubview:self.btFrom];
+    [self.btFrom mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.btAvatar);
+        make.right.mas_equalTo(-8);
+        make.width.mas_equalTo(50);
+        make.height.mas_equalTo(50);
+    }];
+    
+    //转发的文案
+    [self.contentView addSubview:self.vReComment];
+    [self.vReComment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.btFrom.mas_top).offset(-4);
+        make.width.mas_lessThanOrEqualTo(250);
+        make.right.mas_equalTo(-40);
+    }];
+    
 }
 
 - (void)setStatuse:(RYStatuse *)statuse {
@@ -72,10 +92,30 @@
     [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
     //头像
     [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
+    
     //原po
-    [self.lbContent setText:statuse.text];
-    //昵称
-    [self.lbNickName setText:statuse.user.screen_name];
+    if (statuse.retweeted_status) {//转发
+        self.btFrom.hidden = NO;
+        self.vReComment.hidden = NO;
+        //大头像显示原po
+        [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
+        //小头像显示转发者
+        [self.btFrom sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
+        //昵称显示原po
+        [self.lbNickName setText:statuse.retweeted_status.user.screen_name];
+        //原po内容
+        [self.lbContent setText:statuse.retweeted_status.text];
+        //转发文案
+        [self.vReComment setText:statuse.text];
+    } else {//原创
+        self.btFrom.hidden = YES;
+        self.vReComment.hidden = YES;
+        //全部显示该用户的信息
+        [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
+        [self.lbNickName setText:statuse.user.screen_name];
+        //原po内容
+        [self.lbContent setText:statuse.text];
+    }
 }
 
 #pragma mark - lazy
@@ -140,6 +180,13 @@
         _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
     }
     return _btFrom;
+}
+
+- (RYStatuseReCommentView *)vReComment {
+    if (!_vReComment) {
+        _vReComment = [[RYStatuseReCommentView alloc] init];
+    }
+    return _vReComment;
 }
 
 @end

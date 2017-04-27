@@ -53,7 +53,7 @@
 #define RY_PLACEHOLDER_IMAGE [UIImage imageNamed:@"e8e8e8"]
 //默认头像
 #define RY_AVATAR_IMAGE [UIImage imageNamed:@"a0a0a0"]
-
+//字体
 #define RY_FONT(x) [UIFont systemFontOfSize:(x)]
 
 @interface RYBaseConfig : NSObject
