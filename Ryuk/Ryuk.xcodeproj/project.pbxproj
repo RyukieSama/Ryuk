@@ -12,6 +12,7 @@
 		A414EB601EB18C24006CA134 /* RYStatuseReCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */; };
 		A414EB621EB1A082006CA134 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB611EB1A082006CA134 /* AVFoundation.framework */; };
 		A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB631EB1A0C5006CA134 /* AVKit.framework */; };
+		A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -51,6 +52,8 @@
 		A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStatuseReCommentView.m; sourceTree = "<group>"; };
 		A414EB611EB1A082006CA134 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A414EB631EB1A0C5006CA134 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		A414EB691EB1C32D006CA134 /* RYURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYURLHelper.h; sourceTree = "<group>"; };
+		A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYURLHelper.m; sourceTree = "<group>"; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 			children = (
 				A4FE99EA1EADDAC100BE84A7 /* RYNetworkManager.h */,
 				A4FE99EB1EADDAC100BE84A7 /* RYNetworkManager.m */,
+				A414EB691EB1C32D006CA134 /* RYURLHelper.h */,
+				A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */,
 			);
 			path = RYNetworkManager;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				A4FE99E01EADCDF900BE84A7 /* RYMessageTabController.m in Sources */,
 				A4C9EFDE1EAD958B00DC6EAA /* main.m in Sources */,
 				A49876431EB0902400359766 /* RYImageBrowserPageController.m in Sources */,
+				A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
