@@ -66,13 +66,13 @@
     [self.contentView addSubview:self.ivBack];
     [self.ivBack mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
+        make.height.mas_equalTo(160);
     }];
     //用户背景
     [self.contentView addSubview:self.btCover];
     [self.btCover mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
+        make.height.mas_equalTo(160);
     }];
     
     //line
