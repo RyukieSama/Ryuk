@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIButton *btRe;//转发
 @property (nonatomic, strong) UIButton *btComment;//评论
 @property (nonatomic, strong) UIButton *btFavo;//收藏
+@property (nonatomic, strong) UIImageView *ivBack;
 @property (nonatomic, strong) UILabel *lbNickName;
 @property (nonatomic, strong) UILabel *lbContent;
 @property (nonatomic, strong) UIView *vLine;
@@ -62,11 +63,16 @@
 }
 
 - (void)setupUIRYStatuseCellIDText {
+    [self.contentView addSubview:self.ivBack];
+    [self.ivBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
+    }];
     //用户背景
     [self.contentView addSubview:self.btCover];
     [self.btCover mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(RY_UI_SCREEN_WID/920*300);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID/2);
     }];
     
     //line
@@ -83,7 +89,35 @@
         make.left.mas_equalTo(8);
         make.right.mas_equalTo(-8);
         make.top.mas_equalTo(self.btCover.mas_bottom).offset(45);
+    }];
+    
+    //赞
+    [self.contentView addSubview:self.btLike];
+    [self.btLike mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.lbContent);
+        make.top.mas_equalTo(self.lbContent.mas_bottom).offset(8);
         make.bottom.mas_equalTo(-8);
+    }];
+    
+    //转发
+    [self.contentView addSubview:self.btRe];
+    [self.btRe mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.btLike);
+        make.left.mas_equalTo(self.btLike.mas_right).offset(4);
+    }];
+    
+    //评论
+    [self.contentView addSubview:self.btComment];
+    [self.btComment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.btLike);
+        make.left.mas_equalTo(self.btRe.mas_right).offset(4);
+    }];
+    
+    //收藏
+    [self.contentView addSubview:self.btFavo];
+    [self.btFavo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.btLike);
+        make.right.mas_equalTo(-8);
     }];
     
     //头像
@@ -123,6 +157,10 @@
 - (void)setupUIRYStatuseCellIDOne {
     [self setupUIRYStatuseCellIDText];
     [self.btCover mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(RY_UI_SCREEN_WID);
+    }];
+    [self.ivBack mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
         make.height.mas_equalTo(RY_UI_SCREEN_WID);
     }];
@@ -187,24 +225,30 @@
 }
 
 - (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
-    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_COVER_IMAGE];
+    self.btCover.hidden = YES;
+//    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_COVER_IMAGE];
+    [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] placeholderImage:RY_COVER_IMAGE];
 }
 
 - (void)setStatuseRYStatuseCellIDOne:(RYStatuse *)statuse {
     //原po
     if (statuse.retweeted_status) {//转发
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     } else {//原创
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     }
 }
 
 - (void)setStatuseRYStatuseCellIDNine:(RYStatuse *)statuse {
     //原po
     if (statuse.retweeted_status) {//转发
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     } else {//原创
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.original_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     }
 }
 
@@ -212,11 +256,29 @@
     [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
 }
 
+#pragma mark - action
+- (void)likeClick {
+    NSLog(@"%s",__FUNCTION__);
+}
+
+- (void)reClick {
+    NSLog(@"%s",__FUNCTION__);
+}
+
+- (void)commentClick {
+    NSLog(@"%s",__FUNCTION__);
+}
+
+- (void)favoClick {
+    NSLog(@"%s",__FUNCTION__);
+}
+
 #pragma mark - lazy
 - (UIButton *)btCover {
     if (!_btCover) {
         _btCover = [[UIButton alloc] init];
         _btCover.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_btCover setBackgroundColor:[UIColor clearColor]];
         [_btCover.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
@@ -294,6 +356,83 @@
 //        _vLine.layer.shadowRadius = 3.0;  // 阴影扩散的范围控制
     }
     return _vLine;
+}
+
+- (UIImageView *)ivBack {
+    if (!_ivBack) {
+        _ivBack = [[UIImageView alloc] init];
+        _ivBack.contentMode = UIViewContentModeScaleAspectFill;
+        _ivBack.layer.masksToBounds = YES;
+        //毛玻璃
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        [_ivBack addSubview:effectView];
+        [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(0);
+        }];
+        
+    }
+    return _ivBack;
+}
+
+- (UIButton *)btLike {
+    if (!_btLike) {
+        _btLike = [[UIButton alloc] init];
+        [_btLike setTitle:@"赞" forState:UIControlStateNormal];
+        [_btLike setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        _btLike.layer.borderWidth = 0.5;
+        _btLike.layer.borderColor = [UIColor blackColor].CGColor;
+        _btLike.layer.cornerRadius = 4;
+        _btLike.layer.masksToBounds = YES;
+        
+        [_btLike addTarget:self action:@selector(likeClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btLike;
+}
+
+- (UIButton *)btRe {
+    if (!_btRe) {
+        _btRe = [[UIButton alloc] init];
+        [_btRe setTitle:@"转" forState:UIControlStateNormal];
+        [_btRe setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _btRe.layer.borderWidth = 0.5;
+        _btRe.layer.borderColor = [UIColor blackColor].CGColor;
+        _btRe.layer.cornerRadius = 4;
+        _btRe.layer.masksToBounds = YES;
+        
+        [_btRe addTarget:self action:@selector(reClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btRe;
+}
+
+- (UIButton *)btComment {
+    if (!_btComment) {
+        _btComment = [[UIButton alloc] init];
+        [_btComment setTitle:@"评" forState:UIControlStateNormal];
+        [_btComment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _btComment.layer.borderWidth = 0.5;
+        _btComment.layer.borderColor = [UIColor blackColor].CGColor;
+        _btComment.layer.cornerRadius = 4;
+        _btComment.layer.masksToBounds = YES;
+        
+        [_btComment addTarget:self action:@selector(commentClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btComment;
+}
+
+- (UIButton *)btFavo {
+    if (!_btFavo) {
+        _btFavo = [[UIButton alloc] init];
+        [_btFavo setTitle:@"藏" forState:UIControlStateNormal];
+        [_btFavo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _btFavo.layer.borderWidth = 0.5;
+        _btFavo.layer.borderColor = [UIColor blackColor].CGColor;
+        _btFavo.layer.cornerRadius = 4;
+        _btFavo.layer.masksToBounds = YES;
+        [_btFavo addTarget:self action:@selector(favoClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btFavo;
 }
 
 @end
