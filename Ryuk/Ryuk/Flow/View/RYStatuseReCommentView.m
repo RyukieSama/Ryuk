@@ -41,7 +41,7 @@
     [self.lbText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(4);
         make.right.mas_equalTo(-4);
-        make.bottom.mas_equalTo(-6);
+        make.bottom.mas_equalTo(-18);
     }];
 }
 
@@ -56,6 +56,7 @@
         _lbText = [[UILabel alloc] init];
         _lbText.numberOfLines = 0;
         _lbText.font = RY_FONT(14);
+        _lbText.textColor = [UIColor whiteColor];
 //        _lbText.textAlignment = NSTextAlignmentRight;
     }
     return _lbText;
@@ -64,7 +65,7 @@
 - (UIImageView *)ivBack {
     if (!_ivBack) {
         _ivBack = [[UIImageView alloc] init];
-        _ivBack.image = [UIImage imageNamed:@"ReChat"];
+        _ivBack.image = [UIImage imageNamed:@"ReBackground"];
     }
     return _ivBack;
 }
