@@ -13,6 +13,7 @@
 		A414EB621EB1A082006CA134 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB611EB1A082006CA134 /* AVFoundation.framework */; };
 		A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB631EB1A0C5006CA134 /* AVKit.framework */; };
 		A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */; };
+		A42DAFC21EB97B2000097FC1 /* RYAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -54,6 +55,8 @@
 		A414EB631EB1A0C5006CA134 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A414EB691EB1C32D006CA134 /* RYURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYURLHelper.h; sourceTree = "<group>"; };
 		A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYURLHelper.m; sourceTree = "<group>"; };
+		A42DAFC01EB97B2000097FC1 /* RYAvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAvatarView.h; sourceTree = "<group>"; };
+		A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAvatarView.m; sourceTree = "<group>"; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -143,6 +146,15 @@
 				4F2A1492EDE872382379545B /* libPods-Ryuk.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A42DAFBF1EB97B0100097FC1 /* RYAvatarView */ = {
+			isa = PBXGroup;
+			children = (
+				A42DAFC01EB97B2000097FC1 /* RYAvatarView.h */,
+				A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */,
+			);
+			path = RYAvatarView;
 			sourceTree = "<group>";
 		};
 		A45A79C71EADA90A004207C4 /* Main */ = {
@@ -362,6 +374,7 @@
 		A4FE99E81EADDAAC00BE84A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A42DAFBF1EB97B0100097FC1 /* RYAvatarView */,
 				A49876361EB0902400359766 /* RYPhotosBrowser */,
 				A4FE99ED1EADED1100BE84A7 /* RYDefaults */,
 				A4FE99E91EADDAAC00BE84A7 /* RYNetworkManager */,
@@ -563,6 +576,7 @@
 				A4FE9A061EAEF98000BE84A7 /* RYPrivacy.m in Sources */,
 				A4FE9A0C1EAEF9BE00BE84A7 /* RYURLShort.m in Sources */,
 				A4FE99E01EADCDF900BE84A7 /* RYMessageTabController.m in Sources */,
+				A42DAFC21EB97B2000097FC1 /* RYAvatarView.m in Sources */,
 				A4C9EFDE1EAD958B00DC6EAA /* main.m in Sources */,
 				A49876431EB0902400359766 /* RYImageBrowserPageController.m in Sources */,
 				A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */,

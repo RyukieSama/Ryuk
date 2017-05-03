@@ -79,5 +79,6 @@ static NSString *RYStatuseCellIDVideo = @"RYStatuseCellIDVideo";
 
 //自用
 @property (nonatomic, strong) NSString *cellID;
+@property (nonatomic, assign) BOOL hideRe;
 
 @end

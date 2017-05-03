@@ -12,8 +12,8 @@
 @interface RYFlowStatuseCell ()
 
 @property (nonatomic, strong) UIButton *btCover;
-@property (nonatomic, strong) UIButton *btAvatar;
-@property (nonatomic, strong) UIButton *btFrom;
+@property (nonatomic, strong) RYAvatarView *btAvatar;
+@property (nonatomic, strong) RYAvatarView *btFrom;
 @property (nonatomic, strong) UIButton *btShowReComment;
 @property (nonatomic, strong) UIButton *btLike;//赞
 @property (nonatomic, strong) UIButton *btRe;//转发
@@ -273,6 +273,10 @@
     NSLog(@"%s",__FUNCTION__);
 }
 
+- (void)reHideClick {
+    NSLog(@"%s",__FUNCTION__);
+}
+
 #pragma mark - lazy
 - (UIButton *)btCover {
     if (!_btCover) {
@@ -291,9 +295,9 @@
     return _btCover;
 }
 
-- (UIButton *)btAvatar {
+- (RYAvatarView *)btAvatar {
     if (!_btAvatar) {
-        _btAvatar = [[UIButton alloc] init];
+        _btAvatar = [[RYAvatarView alloc] init];
         _btAvatar.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _btAvatar.imageView.layer.cornerRadius = 8;
         _btAvatar.imageView.layer.masksToBounds = YES;
@@ -302,6 +306,10 @@
         _btAvatar.layer.shadowOpacity = 0.5;   // 阴影透明度
         _btAvatar.layer.shadowOffset = CGSizeMake(-2,2); // 阴影的范围
         _btAvatar.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
+        
+        [_btAvatar ryAV_doubleClick:^{
+            NSLog(@"2");
+        }];
     }
     return _btAvatar;
 }
@@ -323,9 +331,9 @@
     return _lbNickName;
 }
 
-- (UIButton *)btFrom {
+- (RYAvatarView *)btFrom {
     if (!_btFrom) {
-        _btFrom = [[UIButton alloc] init];
+        _btFrom = [[RYAvatarView alloc] init];
         _btFrom.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _btFrom.imageView.layer.cornerRadius = 8;
         _btFrom.imageView.layer.masksToBounds = YES;
@@ -334,6 +342,10 @@
         _btFrom.layer.shadowOpacity = 0.5;   // 阴影透明度
         _btFrom.layer.shadowOffset = CGSizeMake(2,2); // 阴影的范围
         _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
+        
+        [_btFrom ryAV_doubleClick:^{
+            NSLog(@"2");
+        }];
     }
     return _btFrom;
 }
