@@ -183,7 +183,7 @@
     //公共部分
     if (statuse.retweeted_status) {//转发
         self.btFrom.hidden = NO;
-        self.vReComment.hidden = NO;
+        self.vReComment.hidden = statuse.hideRe;
         //大头像显示原po
         [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
         //小头像显示转发者
@@ -275,6 +275,8 @@
 
 - (void)reHideClick {
     NSLog(@"%s",__FUNCTION__);
+    self.statuse.hideRe = !self.statuse.hideRe;
+    self.statuse = self.statuse;//手动set
 }
 
 #pragma mark - lazy
@@ -307,8 +309,9 @@
         _btAvatar.layer.shadowOffset = CGSizeMake(-2,2); // 阴影的范围
         _btAvatar.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
         
+        __weak typeof(self) weakSelf = self;
         [_btAvatar ryAV_doubleClick:^{
-            NSLog(@"2");
+            [weakSelf reHideClick];
         }];
     }
     return _btAvatar;
@@ -343,8 +346,9 @@
         _btFrom.layer.shadowOffset = CGSizeMake(2,2); // 阴影的范围
         _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
         
+        __weak typeof(self) weakSelf = self;
         [_btFrom ryAV_doubleClick:^{
-            NSLog(@"2");
+            [weakSelf reHideClick];
         }];
     }
     return _btFrom;
