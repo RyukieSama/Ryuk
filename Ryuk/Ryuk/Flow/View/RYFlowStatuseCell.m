@@ -148,7 +148,7 @@
     //转发的文案
     [self.contentView addSubview:self.vReComment];
     [self.vReComment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.btFrom.mas_top).offset(-4);
+        make.bottom.mas_equalTo(self.btFrom.mas_top).offset(0);
         make.width.mas_lessThanOrEqualTo(300);
         make.right.mas_equalTo(-30);
     }];

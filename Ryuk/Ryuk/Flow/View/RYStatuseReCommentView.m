@@ -26,16 +26,22 @@
 }
 
 - (void)setupUI {
-    self.backgroundColor = [UIColor whiteColor];
-    self.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
-    self.layer.shadowOpacity = 0.5;   // 阴影透明度
-    self.layer.shadowOffset = CGSizeMake(1,2); // 阴影的范围
-    self.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
+    self.backgroundColor = [UIColor clearColor];
+//    self.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
+//    self.layer.shadowOpacity = 0.5;   // 阴影透明度
+//    self.layer.shadowOffset = CGSizeMake(1,2); // 阴影的范围
+//    self.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
+    
+    [self addSubview:self.ivBack];
+    [self.ivBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     
     [self addSubview:self.lbText];
     [self.lbText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(4);
-        make.right.bottom.mas_equalTo(-4);
+        make.right.mas_equalTo(-4);
+        make.bottom.mas_equalTo(-6);
     }];
 }
 
@@ -53,6 +59,14 @@
 //        _lbText.textAlignment = NSTextAlignmentRight;
     }
     return _lbText;
+}
+
+- (UIImageView *)ivBack {
+    if (!_ivBack) {
+        _ivBack = [[UIImageView alloc] init];
+        _ivBack.image = [UIImage imageNamed:@"ReChat"];
+    }
+    return _ivBack;
 }
 
 @end
