@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
 @property (nonatomic, strong) NSArray <UIView *> *attachViewArr;
 @property (nonatomic, strong) UICollectionView *cv_collectionView;
 /**
- *  滚动时间间隔   默认2s
+ *  滚动时间间隔   默认2s   0s不滚动
  */
 @property (nonatomic, assign) CGFloat autoScrollTimeInterval;
 /**
@@ -81,5 +81,11 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
  *  每次滚动完的回调
  */
 @property (nonatomic, copy) ImageScrollHandler handler_scrollCallBack;
+@property (nonatomic, assign) NSInteger scrollToPage;
+
+//TODO: 自定义分页颜色
+//TODO: 0秒不轮播
+//TODO: 1张不显示分页
+//TODO: 设置当前页数
 
 @end

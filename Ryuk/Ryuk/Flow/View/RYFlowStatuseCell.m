@@ -8,10 +8,11 @@
 
 #import "RYFlowStatuseCell.h"
 #import "RYStatuseReCommentView.h"
+#import "RYImagesScrollView.h"
 
 @interface RYFlowStatuseCell ()
 
-@property (nonatomic, strong) UIButton *btCover;
+@property (nonatomic, strong) RYImagesScrollView *vCover;
 @property (nonatomic, strong) RYAvatarView *btAvatar;
 @property (nonatomic, strong) RYAvatarView *btFrom;
 @property (nonatomic, strong) UIButton *btShowReComment;
@@ -69,8 +70,8 @@
         make.height.mas_equalTo(160);
     }];
     //用户背景
-    [self.contentView addSubview:self.btCover];
-    [self.btCover mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.vCover];
+    [self.vCover mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
         make.height.mas_equalTo(160);
     }];
@@ -79,7 +80,7 @@
     [self.contentView addSubview:self.vLine];
     [self.vLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(self.btCover.mas_bottom);
+        make.top.mas_equalTo(self.vCover.mas_bottom);
         make.width.mas_equalTo(RY_UI_SCREEN_WID);
     }];
     
@@ -88,7 +89,7 @@
     [self.lbContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(8);
         make.right.mas_equalTo(-8);
-        make.top.mas_equalTo(self.btCover.mas_bottom).offset(45);
+        make.top.mas_equalTo(self.vCover.mas_bottom).offset(45);
     }];
     
     //赞
@@ -156,7 +157,7 @@
 
 - (void)setupUIRYStatuseCellIDOne {
     [self setupUIRYStatuseCellIDText];
-    [self.btCover mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.vCover mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
         make.height.mas_equalTo(RY_UI_SCREEN_WID);
     }];
@@ -179,7 +180,9 @@
     _statuse = statuse;
     
     //清封面
-    [self.btCover setImage:RY_COVER_IMAGE forState:UIControlStateNormal];
+//    [self.vCover setImage:RY_COVER_IMAGE forState:UIControlStateNormal];
+//    self.vCover.imageURLs = @[RY_COVER_IMAGE];
+//    self.vCover.currentIndex = 0;
     //公共部分
     if (statuse.retweeted_status) {//转发
         self.btFrom.hidden = NO;
@@ -222,21 +225,23 @@
     if ([statuse.cellID isEqualToString:RYStatuseCellIDVideo]) {
         [self setStatuseRYStatuseCellIDVideo:statuse];
     }
+    
+    self.vCover.scrollToPage = statuse.currentPage;
 }
 
 - (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
-    self.btCover.hidden = YES;
-//    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_COVER_IMAGE];
+    self.vCover.hidden = YES;
+//    [self.vCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_COVER_IMAGE];
     [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.user.avatar_large] placeholderImage:RY_COVER_IMAGE];
 }
 
 - (void)setStatuseRYStatuseCellIDOne:(RYStatuse *)statuse {
     //原po
     if (statuse.retweeted_status) {//转发
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        self.vCover.imageURLs = statuse.retweeted_status.pic_urls_strings;
         [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     } else {//原创
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        self.vCover.imageURLs = statuse.pic_urls_strings;
         [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     }
 }
@@ -244,16 +249,16 @@
 - (void)setStatuseRYStatuseCellIDNine:(RYStatuse *)statuse {
     //原po
     if (statuse.retweeted_status) {//转发
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        self.vCover.imageURLs = statuse.retweeted_status.pic_urls_strings;
         [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     } else {//原创
-        [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+        self.vCover.imageURLs = statuse.pic_urls_strings;
         [self.ivBack sd_setImageWithURL:[NSURL URLWithString:statuse.bmiddle_pic] placeholderImage:RY_COVER_IMAGE];
     }
 }
 
 - (void)setStatuseRYStatuseCellIDVideo:(RYStatuse *)statuse {
-    [self.btCover sd_setImageWithURL:[NSURL URLWithString:statuse.user.cover_image] forState:UIControlStateNormal placeholderImage:RY_PLACEHOLDER_IMAGE];
+    self.vCover.imageURLs = @[statuse.user.cover_image];
 }
 
 #pragma mark - action
@@ -280,21 +285,20 @@
 }
 
 #pragma mark - lazy
-- (UIButton *)btCover {
-    if (!_btCover) {
-        _btCover = [[UIButton alloc] init];
-        _btCover.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [_btCover setBackgroundColor:[UIColor clearColor]];
-        [_btCover.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(0);
-        }];
-        _btCover.imageView.layer.masksToBounds = YES;
-//        _btCover.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
-//        _btCover.layer.shadowOpacity = 0.5;   // 阴影透明度
-//        _btCover.layer.shadowOffset = CGSizeMake(0,3); // 阴影的范围
-//        _btCover.layer.shadowRadius = 3.0;  // 阴影扩散的范围控制
+- (RYImagesScrollView *)vCover {
+    if (!_vCover) {
+        
+        _vCover = [[RYImagesScrollView alloc] initWithFrame:CGRectZero pageStyle:RYImageScrollerPageStyleNormal];
+        _vCover.autoScrollTimeInterval = 0;
+        _vCover.contentMode = UIViewContentModeScaleAspectFit;
+        __weak typeof(self) weakSelf = self;
+        _vCover.handler_scrollCallBack = ^(NSNumber *obj) {
+            weakSelf.statuse.currentPage = [obj integerValue];
+        };
+//        _vCover.normalPageImage = [UIImage imageNamed:@"outdoor_icon_carousel"];
+//        _vCover.currentPageImage = [UIImage imageNamed:@"outdoor_icon_carousel_selected"];
     }
-    return _btCover;
+    return _vCover;
 }
 
 - (RYAvatarView *)btAvatar {

@@ -12,6 +12,12 @@
 
 MJLogAllIvars
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"pic_urls" : @"RYImage"
+             };
+}
+
 - (RYStatuseType)statuseType {
     if (self.original_pic.length == 0 && self.retweeted_status.original_pic.length == 0) {
         return RYStatuseTypeText;
@@ -36,6 +42,17 @@ MJLogAllIvars
         return RYStatuseCellIDVideo;
     }
     return RYStatuseCellIDOne;
+}
+
+- (NSArray<NSString *> *)pic_urls_strings {
+    if (!_pic_urls_strings) {
+        NSMutableArray *muArr = @[].mutableCopy;
+        for (RYImage *img in self.pic_urls) {
+            [muArr addObject:img.bmiddle_pic];
+        }
+        _pic_urls_strings = muArr.copy;
+    }
+    return _pic_urls_strings;
 }
 
 @end

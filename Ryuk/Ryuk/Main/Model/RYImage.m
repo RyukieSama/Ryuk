@@ -13,4 +13,18 @@
 
 MJLogAllIvars
 
+- (NSString *)original_pic {
+    if (!_original_pic) {
+        _original_pic = [self.thumbnail_pic stringByReplacingOccurrencesOfString:@"/thumbnail/" withString:@"/large/"];
+    }
+    return _original_pic;
+}
+
+- (NSString *)bmiddle_pic {
+    if (!_bmiddle_pic) {
+        _bmiddle_pic = [self.thumbnail_pic stringByReplacingOccurrencesOfString:@"/thumbnail/" withString:@"/bmiddle/"];
+    }
+    return _bmiddle_pic;
+}
+
 @end

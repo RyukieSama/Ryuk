@@ -10,6 +10,8 @@
 
 @interface RYImage : NSObject
 
-@property (nonatomic, copy) NSString *thumbnail_pic;
+@property (nonatomic, copy) NSString *thumbnail_pic; //thumbnail
+@property (nonatomic, copy) NSString *original_pic; //large
+@property (nonatomic, copy) NSString *bmiddle_pic; //bmiddle
 
 @end

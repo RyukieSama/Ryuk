@@ -115,9 +115,11 @@ static BOOL useHTTPS = YES;
     if (_imageURLs.count < 2) {
         [self invalidateTimer];
         self.cv_collectionView.scrollEnabled = NO;
+        self.sysPageControl.hidden = YES;
     } else {
         [self invalidateTimer];
         [self setupTimer];
+        self.sysPageControl.hidden = NO;
         self.cv_collectionView.scrollEnabled = YES;
     }
     [self.cv_collectionView reloadData];
@@ -157,9 +159,19 @@ static BOOL useHTTPS = YES;
     }
 }
 
+- (void)setScrollToPage:(NSInteger)scrollToPage {
+    if (self.imageURLs.count < 2) {
+        return;
+    }
+    _scrollToPage = scrollToPage;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:scrollToPage inSection:1];
+    [self.cv_collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:0 animated:NO];
+    self.currentIndex = scrollToPage;
+}
+
 #pragma mark - Timer
 - (void)setupTimer {
-    if (self.imageURLs.count <= 1) {
+    if (self.imageURLs.count <= 1 || self.autoScrollTimeInterval == 0) {
         return;
     }
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval
@@ -263,6 +275,8 @@ static BOOL useHTTPS = YES;
 - (UIPageControl *)sysPageControl {
     if (!_sysPageControl) {
         _sysPageControl = [[UIPageControl alloc] init];
+        _sysPageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        _sysPageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     }
     return _sysPageControl;
 }

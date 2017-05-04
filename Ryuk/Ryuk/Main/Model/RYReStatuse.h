@@ -52,5 +52,6 @@
 @property (nonatomic, strong) RYGeo *geo;
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) NSArray <RYImage *>*pic_urls;
+@property (nonatomic, strong) NSArray <NSString *>*pic_urls_strings;
 
 @end
