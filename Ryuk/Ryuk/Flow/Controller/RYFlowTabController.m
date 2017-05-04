@@ -103,6 +103,9 @@
                       if (header) {
                           [arr addObjectsFromArray:weakSelf.statuses];//把原来的加在后面
                           weakSelf.statuses = arr;
+                          weakSelf.tvFlow.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                              [weakSelf loadData:NO];
+                          }];
                       } else {
                           [weakSelf.statuses addObjectsFromArray:arr];//吧新来的加在后面
                           weakSelf.statuses = weakSelf.statuses;
@@ -168,9 +171,6 @@
         __weak typeof(self) weakSelf = self;
         _tvFlow.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [weakSelf loadData:YES];
-        }];
-        _tvFlow.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakSelf loadData:NO];
         }];
     }
     return _tvFlow;
