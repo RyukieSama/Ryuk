@@ -96,7 +96,7 @@
     [self.contentView addSubview:self.btLike];
     [self.btLike mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.lbContent);
-        make.top.mas_equalTo(self.lbContent.mas_bottom).offset(8);
+        make.top.mas_equalTo(self.lbContent.mas_bottom).offset(12);
         make.bottom.mas_equalTo(-8);
     }];
     
@@ -104,14 +104,14 @@
     [self.contentView addSubview:self.btRe];
     [self.btRe mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.btLike);
-        make.left.mas_equalTo(self.btLike.mas_right).offset(4);
+        make.left.mas_equalTo(self.btLike.mas_right).offset(8);
     }];
     
     //评论
     [self.contentView addSubview:self.btComment];
     [self.btComment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.btLike);
-        make.left.mas_equalTo(self.btRe.mas_right).offset(4);
+        make.left.mas_equalTo(self.btRe.mas_right).offset(8);
     }];
     
     //收藏
@@ -418,7 +418,6 @@
         [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
-        
     }
     return _ivBack;
 }
@@ -426,14 +425,7 @@
 - (UIButton *)btLike {
     if (!_btLike) {
         _btLike = [[UIButton alloc] init];
-        [_btLike setTitle:@"赞" forState:UIControlStateNormal];
-        [_btLike setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        _btLike.layer.borderWidth = 0.5;
-        _btLike.layer.borderColor = [UIColor blackColor].CGColor;
-        _btLike.layer.cornerRadius = 4;
-        _btLike.layer.masksToBounds = YES;
-        
+        [_btLike setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
         [_btLike addTarget:self action:@selector(likeClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btLike;
@@ -442,13 +434,7 @@
 - (UIButton *)btRe {
     if (!_btRe) {
         _btRe = [[UIButton alloc] init];
-        [_btRe setTitle:@"转" forState:UIControlStateNormal];
-        [_btRe setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _btRe.layer.borderWidth = 0.5;
-        _btRe.layer.borderColor = [UIColor blackColor].CGColor;
-        _btRe.layer.cornerRadius = 4;
-        _btRe.layer.masksToBounds = YES;
-        
+        [_btRe setImage:[UIImage imageNamed:@"ios7-redo-outline"] forState:UIControlStateNormal];
         [_btRe addTarget:self action:@selector(reClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btRe;
@@ -457,13 +443,7 @@
 - (UIButton *)btComment {
     if (!_btComment) {
         _btComment = [[UIButton alloc] init];
-        [_btComment setTitle:@"评" forState:UIControlStateNormal];
-        [_btComment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _btComment.layer.borderWidth = 0.5;
-        _btComment.layer.borderColor = [UIColor blackColor].CGColor;
-        _btComment.layer.cornerRadius = 4;
-        _btComment.layer.masksToBounds = YES;
-        
+        [_btComment setImage:[UIImage imageNamed:@"ios7-chatboxes-outline"] forState:UIControlStateNormal];
         [_btComment addTarget:self action:@selector(commentClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btComment;
@@ -472,12 +452,7 @@
 - (UIButton *)btFavo {
     if (!_btFavo) {
         _btFavo = [[UIButton alloc] init];
-        [_btFavo setTitle:@"藏" forState:UIControlStateNormal];
-        [_btFavo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _btFavo.layer.borderWidth = 0.5;
-        _btFavo.layer.borderColor = [UIColor blackColor].CGColor;
-        _btFavo.layer.cornerRadius = 4;
-        _btFavo.layer.masksToBounds = YES;
+        [_btFavo setImage:[UIImage imageNamed:@"ios7-bookmarks-outline"] forState:UIControlStateNormal];
         [_btFavo addTarget:self action:@selector(favoClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btFavo;

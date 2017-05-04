@@ -41,7 +41,7 @@
     [self.lbText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(4);
         make.right.mas_equalTo(-4);
-        make.bottom.mas_equalTo(-18);
+        make.bottom.mas_equalTo(-10);
     }];
 }
 

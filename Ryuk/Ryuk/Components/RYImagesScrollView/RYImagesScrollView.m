@@ -21,6 +21,7 @@ static BOOL useHTTPS = YES;
 @property (nonatomic, copy) NSString *imageUrl;
 @property (nonatomic, strong) UIImageView *iv_image;
 @property (nonatomic, strong) UIView *v_attach;
+@property (nonatomic, strong) UIImageView *ivBack;
 
 @end
 
@@ -35,6 +36,11 @@ static BOOL useHTTPS = YES;
 
 - (void)setUpUI {
     self.contentView.layer.masksToBounds = YES;
+    [self.contentView addSubview:self.ivBack];
+    [self.ivBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    
     [self.contentView addSubview:self.iv_image];
     [self.iv_image mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -44,6 +50,7 @@ static BOOL useHTTPS = YES;
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = imageUrl;
     [self.iv_image sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"bg_default_color"]];
+    [self.ivBack sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"bg_default_color"]];
 }
 
 - (UIImageView *)iv_image {
@@ -60,6 +67,22 @@ static BOOL useHTTPS = YES;
     [self.v_attach mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
+}
+
+- (UIImageView *)ivBack {
+    if (!_ivBack) {
+        _ivBack = [[UIImageView alloc] init];
+        _ivBack.contentMode = UIViewContentModeScaleAspectFill;
+        _ivBack.layer.masksToBounds = YES;
+        //毛玻璃
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        [_ivBack addSubview:effectView];
+        [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(0);
+        }];
+    }
+    return _ivBack;
 }
 
 @end
@@ -275,8 +298,8 @@ static BOOL useHTTPS = YES;
 - (UIPageControl *)sysPageControl {
     if (!_sysPageControl) {
         _sysPageControl = [[UIPageControl alloc] init];
-        _sysPageControl.pageIndicatorTintColor = [UIColor darkGrayColor];
-        _sysPageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
+        _sysPageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        _sysPageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     }
     return _sysPageControl;
 }
