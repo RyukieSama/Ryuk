@@ -120,7 +120,7 @@
         make.edges.mas_equalTo(0);
     }];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 #pragma mark - tableVIew
