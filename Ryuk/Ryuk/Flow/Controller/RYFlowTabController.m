@@ -37,12 +37,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)dealloc {
@@ -112,7 +112,7 @@
 
 #pragma mark - UI
 - (void)setupUI {
-//    self.title = @"微博";
+    self.title = @"Ryuk";
     self.view.backgroundColor = [UIColor blueColor];
     
     [self.view addSubview:self.tvFlow];
@@ -161,6 +161,7 @@
         _tvFlow.backgroundColor = RY_COLOR_GRAY_E8E8E8;
 //        [_tvFlow registerNib:[UINib nibWithNibName:@"RYFlowStatuseCell" bundle:nil] forCellReuseIdentifier:cellID];
         [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDText];
+        [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDTextNoRe];
         [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDNine];
         [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDVideo];
         [_tvFlow registerClass:[RYFlowStatuseCell class] forCellReuseIdentifier:RYStatuseCellIDOne];

@@ -36,9 +36,13 @@
      [self setupBaseUI];
     //根据cellId布局
     
-    //纯文本
+    //纯文本  有转发文案
     if ([reuseIdentifier isEqualToString:RYStatuseCellIDText]) {
         [self setupUIRYStatuseCellIDText];
+    }
+    //纯文本   无转发文案
+    if ([reuseIdentifier isEqualToString:RYStatuseCellIDTextNoRe]) {
+        [self setupUIRYStatuseCellIDTextNoRe];
     }
     //单张至8张
     if ([reuseIdentifier isEqualToString:RYStatuseCellIDOne]) {
@@ -80,16 +84,16 @@
     [self.contentView addSubview:self.vLine];
     [self.vLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(self.vCover.mas_bottom);
+        make.top.mas_equalTo(self.ivBack.mas_bottom);
         make.width.mas_equalTo(RY_UI_SCREEN_WID);
     }];
     
     //文本
     [self.contentView addSubview:self.lbContent];
     [self.lbContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(8);
-        make.right.mas_equalTo(-8);
-        make.top.mas_equalTo(self.vCover.mas_bottom).offset(45);
+        make.left.mas_equalTo(12);
+        make.right.mas_equalTo(-12);
+        make.top.mas_equalTo(self.ivBack.mas_bottom).offset(45);
     }];
     
     //赞
@@ -118,7 +122,7 @@
     [self.contentView addSubview:self.btFavo];
     [self.btFavo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.btLike);
-        make.right.mas_equalTo(-8);
+        make.right.mas_equalTo(-12);
     }];
     
     //头像
@@ -155,6 +159,15 @@
     }];
 }
 
+- (void)setupUIRYStatuseCellIDTextNoRe {
+    [self setupUIRYStatuseCellIDText];
+    [self.ivBack mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(32);
+    }];
+    [self.vCover removeFromSuperview];
+}
+
 - (void)setupUIRYStatuseCellIDOne {
     [self setupUIRYStatuseCellIDText];
     [self.vCover mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -187,6 +200,12 @@
     if (statuse.retweeted_status) {//转发
         self.btFrom.hidden = NO;
         self.vReComment.hidden = statuse.hideRe;
+        if (statuse.hideRe) {
+            self.btFrom.imageView.layer.borderWidth = 2;
+            self.btFrom.imageView.layer.borderColor = [UIColor blackColor].CGColor;
+        } else {
+            self.btFrom.imageView.layer.borderWidth = 0;
+        }
         //大头像显示原po
         [self.btAvatar sd_setImageWithURL:[NSURL URLWithString:statuse.retweeted_status.user.avatar_large] forState:UIControlStateNormal placeholderImage:RY_AVATAR_IMAGE];
         //小头像显示转发者
@@ -210,7 +229,7 @@
     }
     
     //纯文本
-    if ([statuse.cellID isEqualToString:RYStatuseCellIDText]) {
+    if ([statuse.cellID isEqualToString:RYStatuseCellIDText] || [statuse.cellID isEqualToString:RYStatuseCellIDTextNoRe]) {
         [self setStatuseRYStatuseCellIDText:statuse];
     }
     //单张至8张
@@ -300,14 +319,19 @@
     [UIView animateWithDuration:0.2 animations:^{
         if (weakSelf.statuse.hideRe) {
             weakSelf.vReComment.alpha = 0;
+            weakSelf.btFrom.imageView.layer.borderWidth = 2;
+            weakSelf.btFrom.imageView.layer.borderColor = [UIColor darkGrayColor].CGColor;
         } else {
             weakSelf.vReComment.hidden = NO;
             weakSelf.vReComment.alpha = 1;
+            weakSelf.btFrom.imageView.layer.borderWidth = 0;
         }
         [weakSelf layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (weakSelf.statuse.hideRe) {
             weakSelf.vReComment.hidden = YES;
+        } else {
+
         }
     }];
 }
@@ -338,7 +362,7 @@
         //阴影
         _btAvatar.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
         _btAvatar.layer.shadowOpacity = 0.5;   // 阴影透明度
-        _btAvatar.layer.shadowOffset = CGSizeMake(-2,2); // 阴影的范围
+        _btAvatar.layer.shadowOffset = CGSizeMake(0,0); // 阴影的范围
         _btAvatar.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
         
         __weak typeof(self) weakSelf = self;
@@ -375,7 +399,7 @@
         //阴影
         _btFrom.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
         _btFrom.layer.shadowOpacity = 0.5;   // 阴影透明度
-        _btFrom.layer.shadowOffset = CGSizeMake(2,2); // 阴影的范围
+        _btFrom.layer.shadowOffset = CGSizeMake(0,0); // 阴影的范围
         _btFrom.layer.shadowRadius = 2.0;  // 阴影扩散的范围控制
         
         __weak typeof(self) weakSelf = self;

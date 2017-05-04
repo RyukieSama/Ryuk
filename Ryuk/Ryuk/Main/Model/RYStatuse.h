@@ -25,9 +25,10 @@ typedef NS_ENUM(NSInteger, RYStatuseType) {
 };
 
 //复用id
-static NSString *RYStatuseCellIDText = @"RYStatuseCellIDText";
-static NSString *RYStatuseCellIDOne = @"RYStatuseCellIDOne";
-static NSString *RYStatuseCellIDNine = @"RYStatuseCellIDNine";
+static NSString *RYStatuseCellIDText = @"RYStatuseCellIDText";//纯文本  有转发内容
+static NSString *RYStatuseCellIDTextNoRe = @"RYStatuseCellIDTextNoRe";//纯文本  无转发内容
+static NSString *RYStatuseCellIDOne = @"RYStatuseCellIDOne";//1~8张图
+static NSString *RYStatuseCellIDNine = @"RYStatuseCellIDNine";//9图
 static NSString *RYStatuseCellIDVideo = @"RYStatuseCellIDVideo";
 
 @interface RYStatuse : NSObject

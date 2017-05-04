@@ -32,8 +32,13 @@ MJLogAllIvars
 }
 
 - (NSString *)cellID {
-    if (self.statuseType == RYStatuseTypeText) {
+    if (self.statuseType == RYStatuseTypeText && self.retweeted_status && self.text.length > 0) {
         return RYStatuseCellIDText;
+    }
+    if (self.statuseType == RYStatuseTypeText &&
+        ((self.text.length == 0 && self.retweeted_status) || !self.retweeted_status)
+        ) {
+        return RYStatuseCellIDTextNoRe;
     }
     if (self.statuseType == RYStatuseTypeImageNine) {
         return RYStatuseCellIDNine;
