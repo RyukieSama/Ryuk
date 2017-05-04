@@ -369,6 +369,9 @@
         [_btAvatar ryAV_doubleClick:^{
             [weakSelf reHideClick];
         }];
+        [_btAvatar ryAV_oneClick:^{
+            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE];
+        }];
     }
     return _btAvatar;
 }
@@ -405,6 +408,9 @@
         __weak typeof(self) weakSelf = self;
         [_btFrom ryAV_doubleClick:^{
             [weakSelf reHideClick];
+        }];
+        [_btFrom ryAV_oneClick:^{
+            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE];
         }];
     }
     return _btFrom;

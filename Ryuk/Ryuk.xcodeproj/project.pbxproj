@@ -27,6 +27,8 @@
 		A4C8504C1EBAC479000A6235 /* RYImageScrollViewPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C850471EBAC478000A6235 /* RYImageScrollViewPageCell.m */; };
 		A4C8504D1EBAC479000A6235 /* RYImagesScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C850491EBAC478000A6235 /* RYImagesScrollPageView.m */; };
 		A4C8504E1EBAC479000A6235 /* RYImagesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C8504B1EBAC479000A6235 /* RYImagesScrollView.m */; };
+		A4C850511EBB253C000A6235 /* RYUserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C850501EBB253C000A6235 /* RYUserCenterController.m */; };
+		A4C850551EBB262D000A6235 /* RYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C850541EBB262D000A6235 /* RYRouter.m */; };
 		A4C9EFDE1EAD958B00DC6EAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C9EFDD1EAD958B00DC6EAA /* main.m */; };
 		A4C9EFE91EAD958B00DC6EAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C9EFE81EAD958B00DC6EAA /* Assets.xcassets */; };
 		A4C9EFEC1EAD958B00DC6EAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C9EFEA1EAD958B00DC6EAA /* LaunchScreen.storyboard */; };
@@ -86,6 +88,10 @@
 		A4C850491EBAC478000A6235 /* RYImagesScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYImagesScrollPageView.m; sourceTree = "<group>"; };
 		A4C8504A1EBAC479000A6235 /* RYImagesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYImagesScrollView.h; sourceTree = "<group>"; };
 		A4C8504B1EBAC479000A6235 /* RYImagesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYImagesScrollView.m; sourceTree = "<group>"; };
+		A4C8504F1EBB253C000A6235 /* RYUserCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserCenterController.h; sourceTree = "<group>"; };
+		A4C850501EBB253C000A6235 /* RYUserCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserCenterController.m; sourceTree = "<group>"; };
+		A4C850531EBB262D000A6235 /* RYRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRouter.h; sourceTree = "<group>"; };
+		A4C850541EBB262D000A6235 /* RYRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRouter.m; sourceTree = "<group>"; };
 		A4C9EFD91EAD958B00DC6EAA /* Ryuk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryuk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C9EFDD1EAD958B00DC6EAA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4C9EFE81EAD958B00DC6EAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,6 +218,15 @@
 			path = RYImagesScrollView;
 			sourceTree = "<group>";
 		};
+		A4C850521EBB2620000A6235 /* RYRouter */ = {
+			isa = PBXGroup;
+			children = (
+				A4C850531EBB262D000A6235 /* RYRouter.h */,
+				A4C850541EBB262D000A6235 /* RYRouter.m */,
+			);
+			path = RYRouter;
+			sourceTree = "<group>";
+		};
 		A4C9EFD01EAD958B00DC6EAA = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +319,8 @@
 			children = (
 				A4FE99D81EADCDCA00BE84A7 /* RYCenterTabController.h */,
 				A4FE99D91EADCDCA00BE84A7 /* RYCenterTabController.m */,
+				A4C8504F1EBB253C000A6235 /* RYUserCenterController.h */,
+				A4C850501EBB253C000A6235 /* RYUserCenterController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,6 +413,7 @@
 		A4FE99E81EADDAAC00BE84A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A4C850521EBB2620000A6235 /* RYRouter */,
 				A4C850451EBAC478000A6235 /* RYImagesScrollView */,
 				A42DAFBF1EB97B0100097FC1 /* RYAvatarView */,
 				A49876361EB0902400359766 /* RYPhotosBrowser */,
@@ -593,6 +611,8 @@
 				A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */,
 				A49876441EB0902400359766 /* RYImageBrowserScrollView.m in Sources */,
 				A498764B1EB0984000359766 /* RYImage.m in Sources */,
+				A4C850511EBB253C000A6235 /* RYUserCenterController.m in Sources */,
+				A4C850551EBB262D000A6235 /* RYRouter.m in Sources */,
 				A4FE99EC1EADDAC100BE84A7 /* RYNetworkManager.m in Sources */,
 				A4FE99DD1EADCDE300BE84A7 /* RYFlowTabController.m in Sources */,
 				A4FC71671EB050B3009B245B /* RYFlowStatuseCell.m in Sources */,

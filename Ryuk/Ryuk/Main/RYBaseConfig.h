@@ -13,6 +13,8 @@
 #import "RYBaseNavigationController.h"
 //基础微博对象
 #import "RYStatuse.h"
+//Router
+#import "RYRouter.h"
 //本地用户信息
 #import "RYDefaults.h"
 //Net

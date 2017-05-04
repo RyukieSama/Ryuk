@@ -39,7 +39,6 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
     //weibo
     [WeiboSDK registerApp:WEIBO_APPKEY];
