@@ -281,7 +281,35 @@
 - (void)reHideClick {
     NSLog(@"%s",__FUNCTION__);
     self.statuse.hideRe = !self.statuse.hideRe;
-    self.statuse = self.statuse;//手动set
+    if (self.statuse.hideRe) {
+        [self.vReComment mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.btFrom.mas_top).offset(4);
+            make.width.mas_equalTo(10);
+            make.height.mas_equalTo(10);
+            make.right.mas_equalTo(-20);
+        }];
+    } else {
+        [self.vReComment mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.btFrom.mas_top).offset(4);
+            make.width.mas_lessThanOrEqualTo(300);
+            make.right.mas_equalTo(-20);
+        }];
+    }
+//    self.statuse = self.statuse;//手动set
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.2 animations:^{
+        if (weakSelf.statuse.hideRe) {
+            weakSelf.vReComment.alpha = 0;
+        } else {
+            weakSelf.vReComment.hidden = NO;
+            weakSelf.vReComment.alpha = 1;
+        }
+        [weakSelf layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (weakSelf.statuse.hideRe) {
+            weakSelf.vReComment.hidden = YES;
+        }
+    }];
 }
 
 #pragma mark - lazy

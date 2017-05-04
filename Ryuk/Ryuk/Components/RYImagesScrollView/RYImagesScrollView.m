@@ -275,8 +275,8 @@ static BOOL useHTTPS = YES;
 - (UIPageControl *)sysPageControl {
     if (!_sysPageControl) {
         _sysPageControl = [[UIPageControl alloc] init];
-        _sysPageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-        _sysPageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
+        _sysPageControl.pageIndicatorTintColor = [UIColor darkGrayColor];
+        _sysPageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
     }
     return _sysPageControl;
 }
