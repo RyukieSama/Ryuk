@@ -166,7 +166,7 @@
 - (UIButton *)btPost {
     if (!_btPost) {
         _btPost = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        [_btPost setImage:[UIImage imageNamed:@"ios7-checkmark-empty"] forState:UIControlStateNormal];
+        [_btPost setImage:[UIImage imageNamed:@"ios7-paperplane-outline"] forState:UIControlStateNormal];
         [_btPost addTarget:self action:@selector(post) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btPost;
@@ -175,7 +175,7 @@
 - (UITextView *)tvText {
     if (!_tvText) {
         _tvText = [[UITextView alloc] init];
-        _tvText.font = RY_FONT(14);
+        _tvText.font = RY_FONT(16);
         _tvText.textColor = [UIColor blackColor];
         _tvText.scrollEnabled = YES;
         _tvText.delegate = self;
