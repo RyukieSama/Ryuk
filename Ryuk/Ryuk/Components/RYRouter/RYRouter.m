@@ -7,6 +7,7 @@
 //
 
 #import "RYRouter.h"
+#import "RYBaseNavigationController.h"
 
 @interface RYRouter ()
 
@@ -46,6 +47,7 @@
     [((RYRouter *)[self sharedInstance]).routes setObject:cls forKey:vcID];
 }
 
+#pragma mark - PUSH
 + (void)ryPushToVC:(NSString *)vc {
     [self ryPushToVC:vc param:nil];
 }
@@ -70,6 +72,30 @@
         [topVC.navigationController pushViewController:toVC animated:YES];
     }
     
+}
+
+#pragma mark - Present
++ (void)ryPresentVC:(NSString *)vc {
+    [RYRouter ryPresentVC:vc param:nil];
+}
+
++ (void)ryPresentVC:(NSString *)vc param:(id)param {
+    [RYRouter ryPresentVC:vc param:param callBack:^(id obj) {
+        
+    }];
+}
+
++ (void)ryPresentVC:(NSString *)vc param:(id)param callBack:(pushCallBack)callBack {
+    Class vcClass = [RYRouter getClassForID:vc];
+    NSLog(@"\n-------------------------- vcID is %@ ------------------------\n",vc);
+    UIViewController *topVC = [RYRouter getAppTopViewController];
+    UIViewController *toVC = [[vcClass alloc] init];
+    RYBaseNavigationController *navi = [[RYBaseNavigationController alloc] initWithRootViewController:toVC];
+    [topVC presentViewController:navi
+                                             animated:YES
+                                           completion:^{
+                                               
+                                           }];
 }
 
 @end

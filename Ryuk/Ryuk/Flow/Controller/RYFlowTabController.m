@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSInteger feature;
 @property (nonatomic, strong) NSMutableArray <RYStatuse *>*statuses;
 @property (nonatomic, strong) UITableView *tvFlow;
+@property (nonatomic, strong) UIButton *btPost;
 
 @end
 
@@ -113,6 +114,11 @@
                   }];
 }
 
+#pragma mark - action
+- (void)postStatus {
+    [RYPoster postStatuse];
+}
+
 #pragma mark - UI
 - (void)setupUI {
     self.title = @"Ryuk";
@@ -124,6 +130,8 @@
     }];
     
 //    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.btPost];
 }
 
 #pragma mark - tableVIew
@@ -174,6 +182,15 @@
         }];
     }
     return _tvFlow;
+}
+
+- (UIButton *)btPost {
+    if (!_btPost) {
+        _btPost = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [_btPost setImage:[UIImage imageNamed:@"ios7-compose-outline"] forState:UIControlStateNormal];
+        [_btPost addTarget:self action:@selector(postStatus) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btPost;
 }
 
 @end
