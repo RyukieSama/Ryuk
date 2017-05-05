@@ -63,6 +63,8 @@
 #define RY_COVER_IMAGE [UIImage imageNamed:@"cover"]
 //字体
 #define RY_FONT(x) [UIFont systemFontOfSize:(x)]
+//分割线高度
+#define RY_HEIGHT_LINE  1/[UIScreen mainScreen].nativeScale
 
 @interface RYBaseConfig : NSObject
     
