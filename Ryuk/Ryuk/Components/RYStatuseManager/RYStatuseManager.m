@@ -69,11 +69,23 @@
 }
 
 + (void)commentStatuse:(RYStatuse *)statuse completionHandler:(completionHandler)handler {
-    
+    [RYRouter ryPresentVC:RY_ROUTER_VC_KEY_REANDCOMMENT
+                    param:@{
+                            @"type" : @(1)
+                            }
+                 callBack:^(id obj) {
+                     
+                 }];
 }
 
 + (void)reStatuse:(RYStatuse *)statuse completionHandler:(completionHandler)handler {
-    
+    [RYRouter ryPresentVC:RY_ROUTER_VC_KEY_REANDCOMMENT
+                    param:@{
+                            @"type" : @(2)
+                            }
+                 callBack:^(id obj) {
+                     
+                 }];
 }
 
 @end

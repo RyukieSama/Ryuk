@@ -66,6 +66,7 @@
     UIViewController *topVC = [RYRouter getAppTopViewController];
     UIViewController *toVC = [[vcClass alloc] init];
     [toVC setHidesBottomBarWhenPushed:YES];
+    toVC.params = param;
     if ([topVC isKindOfClass:[UINavigationController class]]) {
         [((UINavigationController *)topVC) pushViewController:toVC animated:YES];
     } else {
@@ -90,6 +91,7 @@
     NSLog(@"\n-------------------------- vcID is %@ ------------------------\n",vc);
     UIViewController *topVC = [RYRouter getAppTopViewController];
     UIViewController *toVC = [[vcClass alloc] init];
+    toVC.params = param;
     RYBaseNavigationController *navi = [[RYBaseNavigationController alloc] initWithRootViewController:toVC];
     [topVC presentViewController:navi
                                              animated:YES

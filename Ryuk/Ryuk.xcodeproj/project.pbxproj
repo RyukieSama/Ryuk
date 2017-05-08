@@ -14,6 +14,8 @@
 		A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB631EB1A0C5006CA134 /* AVKit.framework */; };
 		A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */; };
 		A42DAFC21EB97B2000097FC1 /* RYAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */; };
+		A4524DCC1EC055CB009DB7E4 /* RYReAndCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */; };
+		A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -66,6 +68,10 @@
 		A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYURLHelper.m; sourceTree = "<group>"; };
 		A42DAFC01EB97B2000097FC1 /* RYAvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAvatarView.h; sourceTree = "<group>"; };
 		A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAvatarView.m; sourceTree = "<group>"; };
+		A4524DCA1EC055CB009DB7E4 /* RYReAndCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYReAndCommentController.h; sourceTree = "<group>"; };
+		A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYReAndCommentController.m; sourceTree = "<group>"; };
+		A4524DCD1EC05E0D009DB7E4 /* UIViewController+RYRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RYRouter.h"; sourceTree = "<group>"; };
+		A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RYRouter.m"; sourceTree = "<group>"; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -205,6 +211,8 @@
 			children = (
 				A47EC1C91EC008A000569E15 /* RYStatuseManager.h */,
 				A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */,
+				A4524DCA1EC055CB009DB7E4 /* RYReAndCommentController.h */,
+				A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */,
 			);
 			path = RYStatuseManager;
 			sourceTree = "<group>";
@@ -244,6 +252,8 @@
 			children = (
 				A4C850531EBB262D000A6235 /* RYRouter.h */,
 				A4C850541EBB262D000A6235 /* RYRouter.m */,
+				A4524DCD1EC05E0D009DB7E4 /* UIViewController+RYRouter.h */,
+				A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */,
 			);
 			path = RYRouter;
 			sourceTree = "<group>";
@@ -644,6 +654,7 @@
 				A4FE99FD1EAEF56F00BE84A7 /* RYUser.m in Sources */,
 				A4FE99DA1EADCDCA00BE84A7 /* RYCenterTabController.m in Sources */,
 				A4FE99FA1EAEF05B00BE84A7 /* RYStatuse.m in Sources */,
+				A4524DCC1EC055CB009DB7E4 /* RYReAndCommentController.m in Sources */,
 				A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */,
 				A4FE99E71EADD7B000BE84A7 /* RYLoginController.m in Sources */,
 				A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */,
@@ -654,6 +665,7 @@
 				A4C850551EBB262D000A6235 /* RYRouter.m in Sources */,
 				A4FE99EC1EADDAC100BE84A7 /* RYNetworkManager.m in Sources */,
 				A4FE99DD1EADCDE300BE84A7 /* RYFlowTabController.m in Sources */,
+				A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */,
 				A4FC71671EB050B3009B245B /* RYFlowStatuseCell.m in Sources */,
 				A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */,
 				A4FE9A061EAEF98000BE84A7 /* RYPrivacy.m in Sources */,

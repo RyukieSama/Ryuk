@@ -10,4 +10,6 @@
 
 @interface RYPosterController : UIViewController
 
+- (void)setupUI;
+
 @end

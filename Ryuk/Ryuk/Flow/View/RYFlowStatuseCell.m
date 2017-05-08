@@ -286,11 +286,15 @@
 }
 
 - (void)reClick {
-    NSLog(@"%s",__FUNCTION__);
+    [RYStatuseManager reStatuse:self.statuse completionHandler:^(id obj) {
+        
+    }];
 }
 
 - (void)commentClick {
-    NSLog(@"%s",__FUNCTION__);
+    [RYStatuseManager commentStatuse:self.statuse completionHandler:^(id obj) {
+        
+    }];
 }
 
 - (void)favoClick {

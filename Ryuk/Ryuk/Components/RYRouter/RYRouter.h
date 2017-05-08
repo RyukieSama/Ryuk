@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+RYRouter.h"
 
 typedef void(^pushCallBack)(id obj);
 
@@ -37,5 +38,9 @@ typedef void(^pushCallBack)(id obj);
  weibo发布
  */
 #define RY_ROUTER_VC_KEY_POSTSTATUSE @"RY_ROUTER_VC_KEY_POSTSTATUSE"
+/**
+ 评论转发
+ */
+#define RY_ROUTER_VC_KEY_REANDCOMMENT @"RY_ROUTER_VC_KEY_REANDCOMMENT"
 
 @end
