@@ -19,6 +19,8 @@
 #import "RYDefaults.h"
 //Net
 #import "RYNetworkManager.h"
+//微博相关操作
+#import "RYStatuseManager.h"
 //Masnory
 #import <Masonry.h>
 //SD

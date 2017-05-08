@@ -19,6 +19,7 @@
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
 		A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D51EADAAAA004207C4 /* RYBaseConfig.m */; };
 		A47EC1C71EBC526500569E15 /* RYPostToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1C61EBC526500569E15 /* RYPostToolBar.m */; };
+		A47EC1CB1EC008A000569E15 /* RYStatuseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */; };
 		A49876411EB0902400359766 /* RYImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A49876381EB0902400359766 /* RYImageBrowser.m */; };
 		A49876421EB0902400359766 /* RYImageBrowserInnerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A498763A1EB0902400359766 /* RYImageBrowserInnerController.m */; };
 		A49876431EB0902400359766 /* RYImageBrowserPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A498763C1EB0902400359766 /* RYImageBrowserPageController.m */; };
@@ -75,6 +76,8 @@
 		A45A79D51EADAAAA004207C4 /* RYBaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYBaseConfig.m; sourceTree = "<group>"; };
 		A47EC1C51EBC526500569E15 /* RYPostToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPostToolBar.h; sourceTree = "<group>"; };
 		A47EC1C61EBC526500569E15 /* RYPostToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostToolBar.m; sourceTree = "<group>"; };
+		A47EC1C91EC008A000569E15 /* RYStatuseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStatuseManager.h; sourceTree = "<group>"; };
+		A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStatuseManager.m; sourceTree = "<group>"; };
 		A49876371EB0902400359766 /* RYImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYImageBrowser.h; sourceTree = "<group>"; };
 		A49876381EB0902400359766 /* RYImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYImageBrowser.m; sourceTree = "<group>"; };
 		A49876391EB0902400359766 /* RYImageBrowserInnerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYImageBrowserInnerController.h; sourceTree = "<group>"; };
@@ -195,6 +198,15 @@
 				A45A79D51EADAAAA004207C4 /* RYBaseConfig.m */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		A47EC1C81EC0087F00569E15 /* RYStatuseManager */ = {
+			isa = PBXGroup;
+			children = (
+				A47EC1C91EC008A000569E15 /* RYStatuseManager.h */,
+				A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */,
+			);
+			path = RYStatuseManager;
 			sourceTree = "<group>";
 		};
 		A49876361EB0902400359766 /* RYPhotosBrowser */ = {
@@ -435,6 +447,7 @@
 		A4FE99E81EADDAAC00BE84A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A47EC1C81EC0087F00569E15 /* RYStatuseManager */,
 				A4C850561EBC2417000A6235 /* RYPoster */,
 				A4C850521EBB2620000A6235 /* RYRouter */,
 				A4C850451EBAC478000A6235 /* RYImagesScrollView */,
@@ -615,6 +628,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A414EB601EB18C24006CA134 /* RYStatuseReCommentView.m in Sources */,
+				A47EC1CB1EC008A000569E15 /* RYStatuseManager.m in Sources */,
 				A4FE9A001EAEF59900BE84A7 /* RYGeo.m in Sources */,
 				A49876421EB0902400359766 /* RYImageBrowserInnerController.m in Sources */,
 				A4C8504E1EBAC479000A6235 /* RYImagesScrollView.m in Sources */,

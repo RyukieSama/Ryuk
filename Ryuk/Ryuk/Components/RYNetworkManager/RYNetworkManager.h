@@ -16,11 +16,11 @@ typedef void(^networkCallBack)(id data);
 
 + (instancetype)sharedManager;
 
-+ (void)postURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
+//+ (void)postURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
+//
+//+ (void)getURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
 
-+ (void)getURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail;
-
-+ (NSURLSessionDataTask *)ry_postWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache writeToCache:(BOOL)writeToCache completionHandler:(networkCallBack)completionHandler;
++ (NSURLSessionDataTask *)ry_postWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache completionHandler:(networkCallBack)completionHandler;
 
 + (NSURLSessionDataTask *)ry_getWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache completionHandler:(networkCallBack)completionHandler;
 

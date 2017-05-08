@@ -16,10 +16,9 @@
 @property (nonatomic, strong) RYAvatarView *btAvatar;
 @property (nonatomic, strong) RYAvatarView *btFrom;
 @property (nonatomic, strong) UIButton *btShowReComment;
-@property (nonatomic, strong) UIButton *btLike;//赞
+@property (nonatomic, strong) UIButton *btFavo;//收藏
 @property (nonatomic, strong) UIButton *btRe;//转发
 @property (nonatomic, strong) UIButton *btComment;//评论
-@property (nonatomic, strong) UIButton *btFavo;//收藏
 @property (nonatomic, strong) UIImageView *ivBack;
 @property (nonatomic, strong) UILabel *lbNickName;
 @property (nonatomic, strong) UILabel *lbContent;
@@ -96,9 +95,9 @@
         make.top.mas_equalTo(self.ivBack.mas_bottom).offset(45);
     }];
     
-    //赞
-    [self.contentView addSubview:self.btLike];
-    [self.btLike mas_makeConstraints:^(MASConstraintMaker *make) {
+    //收藏
+    [self.contentView addSubview:self.btFavo];
+    [self.btFavo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.lbContent);
         make.top.mas_equalTo(self.lbContent.mas_bottom).offset(12);
         make.bottom.mas_equalTo(-8);
@@ -107,22 +106,15 @@
     //转发
     [self.contentView addSubview:self.btRe];
     [self.btRe mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.btLike);
-        make.left.mas_equalTo(self.btLike.mas_right).offset(8);
+        make.centerY.mas_equalTo(self.btFavo);
+        make.left.mas_equalTo(self.btFavo.mas_right).offset(8);
     }];
     
     //评论
     [self.contentView addSubview:self.btComment];
     [self.btComment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.btLike);
+        make.centerY.mas_equalTo(self.btFavo);
         make.left.mas_equalTo(self.btRe.mas_right).offset(8);
-    }];
-    
-    //收藏
-    [self.contentView addSubview:self.btFavo];
-    [self.btFavo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.btLike);
-        make.right.mas_equalTo(-12);
     }];
     
     //头像
@@ -246,6 +238,13 @@
     }
     
     self.vCover.scrollToPage = statuse.currentPage;
+    
+    //收藏按钮
+    if (statuse.favorited) {
+        [self.btFavo setImage:[UIImage imageNamed:@"ios7-heart"] forState:UIControlStateNormal];
+    } else {
+        [self.btFavo setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
@@ -282,7 +281,8 @@
 
 #pragma mark - action
 - (void)likeClick {
-    NSLog(@"%s",__FUNCTION__);
+//    NSLog(@"%s",__FUNCTION__);
+//    [RYStatuseManager likeStatuse:self.statuse];
 }
 
 - (void)reClick {
@@ -294,7 +294,20 @@
 }
 
 - (void)favoClick {
-    NSLog(@"%s",__FUNCTION__);
+    __weak typeof(self) weakSelf = self;
+    if (self.statuse.favorited) {
+        [RYStatuseManager unfavoStatuse:self.statuse completionHandler:^(id obj) {
+            if ([obj integerValue] == 0) {
+                [weakSelf.btFavo setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
+            }
+        }];
+    } else {
+        [RYStatuseManager favoStatuse:self.statuse completionHandler:^(id obj) {
+            if ([obj integerValue] == 1) {
+                [weakSelf.btFavo setImage:[UIImage imageNamed:@"ios7-heart"] forState:UIControlStateNormal];
+            }
+        }];
+    }
 }
 
 - (void)reHideClick {
@@ -379,7 +392,7 @@
 - (UILabel *)lbContent {
     if (!_lbContent) {
         _lbContent = [[UILabel alloc] init];
-        _lbContent.font = RY_FONT(15);
+        _lbContent.font = RY_FONT(14);
         _lbContent.numberOfLines = 0;
     }
     return _lbContent;
@@ -452,13 +465,13 @@
     return _ivBack;
 }
 
-- (UIButton *)btLike {
-    if (!_btLike) {
-        _btLike = [[UIButton alloc] init];
-        [_btLike setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
-        [_btLike addTarget:self action:@selector(likeClick) forControlEvents:UIControlEventTouchUpInside];
+- (UIButton *)btFavo {
+    if (!_btFavo) {
+        _btFavo = [[UIButton alloc] init];
+        [_btFavo setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
+        [_btFavo addTarget:self action:@selector(favoClick) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _btLike;
+    return _btFavo;
 }
 
 - (UIButton *)btRe {
@@ -477,15 +490,6 @@
         [_btComment addTarget:self action:@selector(commentClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btComment;
-}
-
-- (UIButton *)btFavo {
-    if (!_btFavo) {
-        _btFavo = [[UIButton alloc] init];
-        [_btFavo setImage:[UIImage imageNamed:@"ios7-bookmarks-outline"] forState:UIControlStateNormal];
-        [_btFavo addTarget:self action:@selector(favoClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _btFavo;
 }
 
 @end

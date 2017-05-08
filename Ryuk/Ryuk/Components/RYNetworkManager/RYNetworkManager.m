@@ -39,15 +39,15 @@ static NSConditionLock *conditionLock;
     return instance;
 }
 
-+ (void)postURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail {
-    
-}
+//+ (void)postURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail {
+//    
+//}
+//
+//+ (void)getURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail {
+//    
+//}
 
-+ (void)getURL:(NSString *)URL parameter:(NSDictionary *)parameter successCallBack:(networkCallBack)success failCallback:(networkCallBack)fail {
-    
-}
-
-+ (NSURLSessionDataTask *)ry_postWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache writeToCache:(BOOL)writeToCache completionHandler:(networkCallBack)completionHandler {
++ (NSURLSessionDataTask *)ry_postWithUrl:(NSString *)url requestDictionary:(NSDictionary *)requestDict responseModel:(Class)responseModel useCache:(BOOL)useCache completionHandler:(networkCallBack)completionHandler {
     if([url rangeOfString:@" "].location != NSNotFound) {
         url = [url stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
