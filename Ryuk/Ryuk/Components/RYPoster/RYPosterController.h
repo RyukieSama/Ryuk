@@ -10,6 +10,12 @@
 
 @interface RYPosterController : UIViewController
 
+@property (nonatomic, strong) UITextView *tvText;
+
 - (void)setupUI;
+
+- (void)post;
+
+- (void)dismiss;
 
 @end

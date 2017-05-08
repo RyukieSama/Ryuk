@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIButton *btClose;
 @property (nonatomic, strong) UIButton *btPost;
-@property (nonatomic, strong) UITextView *tvText;
 @property (nonatomic, strong) RYPostToolBar *tbToolBar;
 @property (nonatomic, assign) BOOL isKetboardShowed;
 
