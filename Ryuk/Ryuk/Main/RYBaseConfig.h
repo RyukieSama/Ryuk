@@ -67,6 +67,8 @@
 #define RY_FONT(x) [UIFont systemFontOfSize:(x)]
 //分割线高度
 #define RY_HEIGHT_LINE  1/[UIScreen mainScreen].nativeScale
+//默认圆角
+#define RY_DETAULT_CORNER_R 8
 
 @interface RYBaseConfig : NSObject
     

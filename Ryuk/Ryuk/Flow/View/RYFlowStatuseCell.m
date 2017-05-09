@@ -245,6 +245,12 @@
     } else {
         [self.btFavo setImage:[UIImage imageNamed:@"ios7-heart-outline"] forState:UIControlStateNormal];
     }
+    
+    //评论按钮
+    NSString *re = statuse.reposts_count > 0 ? [NSString stringWithFormat:@" %ld",(long)statuse.reposts_count] : nil;
+    [self.btRe setTitle:re forState:UIControlStateNormal];
+    NSString *cm = statuse.comments_count > 0 ? [NSString stringWithFormat:@" %ld",(long)statuse.comments_count] : nil;
+    [self.btComment setTitle:cm forState:UIControlStateNormal];
 }
 
 - (void)setStatuseRYStatuseCellIDText:(RYStatuse *)statuse {
@@ -374,7 +380,7 @@
     if (!_btAvatar) {
         _btAvatar = [[RYAvatarView alloc] init];
         _btAvatar.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _btAvatar.imageView.layer.cornerRadius = 8;
+        _btAvatar.imageView.layer.cornerRadius = RY_DETAULT_CORNER_R;
         _btAvatar.imageView.layer.masksToBounds = YES;
         //阴影
         _btAvatar.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
@@ -414,7 +420,7 @@
     if (!_btFrom) {
         _btFrom = [[RYAvatarView alloc] init];
         _btFrom.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _btFrom.imageView.layer.cornerRadius = 8;
+        _btFrom.imageView.layer.cornerRadius = RY_DETAULT_CORNER_R;
         _btFrom.imageView.layer.masksToBounds = YES;
         //阴影
         _btFrom.layer.shadowColor = [[UIColor blackColor] CGColor];//阴影的颜色
@@ -483,6 +489,8 @@
         _btRe = [[UIButton alloc] init];
         [_btRe setImage:[UIImage imageNamed:@"ios7-redo-outline"] forState:UIControlStateNormal];
         [_btRe addTarget:self action:@selector(reClick) forControlEvents:UIControlEventTouchUpInside];
+        [_btRe setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btRe.titleLabel setFont:RY_FONT(12)];
     }
     return _btRe;
 }
@@ -492,6 +500,8 @@
         _btComment = [[UIButton alloc] init];
         [_btComment setImage:[UIImage imageNamed:@"ios7-chatboxes-outline"] forState:UIControlStateNormal];
         [_btComment addTarget:self action:@selector(commentClick) forControlEvents:UIControlEventTouchUpInside];
+        [_btComment setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btComment.titleLabel setFont:RY_FONT(12)];
     }
     return _btComment;
 }
