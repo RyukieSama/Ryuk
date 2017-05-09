@@ -9,11 +9,9 @@
 #import "RYCommentListController.h"
 #import "RYBaseConfig.h"
 
-#define API_GET_COMMENTLIST @"https://api.weibo.com/2/comments/show.json"
-
 @interface RYCommentListController ()<UIScrollViewDelegate>
 
-@property (nonatomic, assign) NSInteger id;
+@property (nonatomic, assign) long long id;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView *containerView;
@@ -45,12 +43,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationItem.titleView = self.segmentedControl;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationItem.titleView = self.segmentedControl;
 }
 
 - (void)dealloc {
@@ -94,6 +90,11 @@
     if (VCClass == nil)
         return;
     NSDictionary *dic = (self.type == 2) ? @{@"type" : @(2),@"id" : @(self.id)} : @{@"type" : @(1),@"id" : @(self.id)} ;
+    if (self.type == 2) {
+        self.type = 1;
+    } else {
+        self.type = 2;
+    }
     UIViewController *vc = [[VCClass alloc] init];
     vc.params = dic;
     [self addChildViewController:vc];
@@ -122,6 +123,8 @@
 
 #pragma mark - UI
 - (void)setupUI {
+    self.navigationItem.titleView = self.segmentedControl;
+    
     [self.view addSubview:self.containerView];
     
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {

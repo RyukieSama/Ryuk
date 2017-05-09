@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RYBaseConfig.h"
+#import "RYComment.h"
 
 @interface RYFlowPageModel : NSObject
 
@@ -20,8 +21,16 @@
  */
 @property (nonatomic, assign) long long max_id;
 /**
- list
+ list weibo 列表
  */
 @property (nonatomic, strong) NSArray <RYStatuse *>*statuses;
+/**
+ list weibo 列表
+ */
+@property (nonatomic, strong) NSArray <RYComment *>*comments;
+/**
+ list weibo 列表
+ */
+@property (nonatomic, strong) NSArray <RYStatuse *>*reposts;
 
 @end

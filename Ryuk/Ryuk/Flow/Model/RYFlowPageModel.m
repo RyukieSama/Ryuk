@@ -14,7 +14,9 @@ MJLogAllIvars
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"statuses" : @"RYStatuse"
+             @"statuses" : @"RYStatuse",
+             @"reposts" : @"RYStatuse",
+             @"comments" : @"RYComment"
              };
 }
 

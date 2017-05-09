@@ -18,6 +18,7 @@
 		A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */; };
 		A4524DD21EC0788C009DB7E4 /* RYCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DD11EC0788C009DB7E4 /* RYCommentListController.m */; };
 		A4524DD51EC15F81009DB7E4 /* RYCommentListChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DD41EC15F81009DB7E4 /* RYCommentListChildController.m */; };
+		A4524DD81EC16FA5009DB7E4 /* RYStatuseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DD71EC16FA5009DB7E4 /* RYStatuseCommentCell.m */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -78,6 +79,8 @@
 		A4524DD11EC0788C009DB7E4 /* RYCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCommentListController.m; sourceTree = "<group>"; };
 		A4524DD31EC15F81009DB7E4 /* RYCommentListChildController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCommentListChildController.h; sourceTree = "<group>"; };
 		A4524DD41EC15F81009DB7E4 /* RYCommentListChildController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCommentListChildController.m; sourceTree = "<group>"; };
+		A4524DD61EC16FA5009DB7E4 /* RYStatuseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStatuseCommentCell.h; sourceTree = "<group>"; };
+		A4524DD71EC16FA5009DB7E4 /* RYStatuseCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStatuseCommentCell.m; sourceTree = "<group>"; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -414,6 +417,8 @@
 				A4FC71651EB050B3009B245B /* RYFlowStatuseCell.m */,
 				A414EB5E1EB18C24006CA134 /* RYStatuseReCommentView.h */,
 				A414EB5F1EB18C24006CA134 /* RYStatuseReCommentView.m */,
+				A4524DD61EC16FA5009DB7E4 /* RYStatuseCommentCell.h */,
+				A4524DD71EC16FA5009DB7E4 /* RYStatuseCommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -647,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4524DD81EC16FA5009DB7E4 /* RYStatuseCommentCell.m in Sources */,
 				A414EB601EB18C24006CA134 /* RYStatuseReCommentView.m in Sources */,
 				A47EC1CB1EC008A000569E15 /* RYStatuseManager.m in Sources */,
 				A4FE9A001EAEF59900BE84A7 /* RYGeo.m in Sources */,
