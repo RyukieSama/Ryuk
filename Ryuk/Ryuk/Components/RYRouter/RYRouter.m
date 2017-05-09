@@ -72,7 +72,6 @@
     } else {
         [topVC.navigationController pushViewController:toVC animated:YES];
     }
-    
 }
 
 #pragma mark - Present

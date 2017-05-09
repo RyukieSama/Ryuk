@@ -16,6 +16,8 @@
 		A42DAFC21EB97B2000097FC1 /* RYAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */; };
 		A4524DCC1EC055CB009DB7E4 /* RYReAndCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */; };
 		A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */; };
+		A4524DD21EC0788C009DB7E4 /* RYCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DD11EC0788C009DB7E4 /* RYCommentListController.m */; };
+		A4524DD51EC15F81009DB7E4 /* RYCommentListChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DD41EC15F81009DB7E4 /* RYCommentListChildController.m */; };
 		A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79C91EADA942004207C4 /* AppDelegate.m */; };
 		A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79CC1EADA995004207C4 /* RYMainTabBarController.m */; };
 		A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D21EADA9FE004207C4 /* RYBaseNavigationController.m */; };
@@ -72,6 +74,10 @@
 		A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYReAndCommentController.m; sourceTree = "<group>"; };
 		A4524DCD1EC05E0D009DB7E4 /* UIViewController+RYRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RYRouter.h"; sourceTree = "<group>"; };
 		A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RYRouter.m"; sourceTree = "<group>"; };
+		A4524DD01EC0788C009DB7E4 /* RYCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCommentListController.h; sourceTree = "<group>"; };
+		A4524DD11EC0788C009DB7E4 /* RYCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCommentListController.m; sourceTree = "<group>"; };
+		A4524DD31EC15F81009DB7E4 /* RYCommentListChildController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCommentListChildController.h; sourceTree = "<group>"; };
+		A4524DD41EC15F81009DB7E4 /* RYCommentListChildController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCommentListChildController.m; sourceTree = "<group>"; };
 		A45A79C81EADA942004207C4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A45A79C91EADA942004207C4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A45A79CB1EADA995004207C4 /* RYMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMainTabBarController.h; sourceTree = "<group>"; };
@@ -417,6 +423,10 @@
 			children = (
 				A4FE99DB1EADCDE300BE84A7 /* RYFlowTabController.h */,
 				A4FE99DC1EADCDE300BE84A7 /* RYFlowTabController.m */,
+				A4524DD01EC0788C009DB7E4 /* RYCommentListController.h */,
+				A4524DD11EC0788C009DB7E4 /* RYCommentListController.m */,
+				A4524DD31EC15F81009DB7E4 /* RYCommentListChildController.h */,
+				A4524DD41EC15F81009DB7E4 /* RYCommentListChildController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -643,10 +653,12 @@
 				A49876421EB0902400359766 /* RYImageBrowserInnerController.m in Sources */,
 				A4C8504E1EBAC479000A6235 /* RYImagesScrollView.m in Sources */,
 				A4C8505C1EBC2534000A6235 /* RYPosterController.m in Sources */,
+				A4524DD51EC15F81009DB7E4 /* RYCommentListChildController.m in Sources */,
 				A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */,
 				A414EB5D1EB09AD6006CA134 /* RYReStatuse.m in Sources */,
 				A4FE99F31EAEED6200BE84A7 /* RYFlowPageModel.m in Sources */,
 				A4FE9A091EAEF99600BE84A7 /* RYRemind.m in Sources */,
+				A4524DD21EC0788C009DB7E4 /* RYCommentListController.m in Sources */,
 				A49876451EB0902400359766 /* RYImageBrowserTransitionAnimator.m in Sources */,
 				A49876411EB0902400359766 /* RYImageBrowser.m in Sources */,
 				A4FE99F01EADED2200BE84A7 /* RYDefaults.m in Sources */,

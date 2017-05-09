@@ -42,5 +42,9 @@ typedef void(^pushCallBack)(id obj);
  评论转发
  */
 #define RY_ROUTER_VC_KEY_REANDCOMMENT @"RY_ROUTER_VC_KEY_REANDCOMMENT"
+/**
+ 评论转发列表
+ */
+#define RY_ROUTER_VC_KEY_COMMENTLIST @"RY_ROUTER_VC_KEY_COMMENTLIST"
 
 @end

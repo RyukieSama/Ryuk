@@ -69,7 +69,7 @@
 }
 
 + (void)commentStatuse:(RYStatuse *)statuse completionHandler:(completionHandler)handler {
-    [RYRouter ryPresentVC:RY_ROUTER_VC_KEY_REANDCOMMENT
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_COMMENTLIST
                     param:@{
                             @"type" : @(1),
                             @"id" : @(statuse.id)
@@ -80,7 +80,7 @@
 }
 
 + (void)reStatuse:(RYStatuse *)statuse completionHandler:(completionHandler)handler {
-    [RYRouter ryPresentVC:RY_ROUTER_VC_KEY_REANDCOMMENT
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_COMMENTLIST
                     param:@{
                             @"type" : @(2),
                             @"id" : @(statuse.id)

@@ -59,7 +59,6 @@
         return;
     }
     
-    
     //[(self.tvText.text ?: @"") stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]
     NSDictionary *param = @{
                             @"comment" : (self.tvText.text ?: @""), //评论内容，必须做URLencode，内容不超过140个汉字。
