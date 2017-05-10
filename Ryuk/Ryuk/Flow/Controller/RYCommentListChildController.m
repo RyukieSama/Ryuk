@@ -10,6 +10,7 @@
 #import "RYBaseConfig.h"
 #import "RYStatuseCommentCell.h"
 #import "RYFlowPageModel.h"
+#import "RYCommentBar.h"
 
 static NSString *cellID = @"RYStatuseCommentCell";
 
@@ -24,6 +25,7 @@ static NSString *cellID = @"RYStatuseCommentCell";
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, strong) UITableView *tvList;
+@property (nonatomic, strong) RYCommentBar *cbComment;
 @property (nonatomic, strong) NSMutableArray <RYComment *>*comments;
 @property (nonatomic, strong) NSMutableArray <RYStatuse *>*reposts;
 
@@ -185,13 +187,18 @@ static NSString *cellID = @"RYStatuseCommentCell";
     return cell;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.cbComment endEdit];
+}
+
 #pragma mark - UI 
 - (void)setupUI {
-    self.view.backgroundColor = (self.type == 2) ? [UIColor redColor] : [UIColor cyanColor];
+//    self.view.backgroundColor = (self.type == 2) ? [UIColor redColor] : [UIColor cyanColor];
     [self.view addSubview:self.tvList];
     [self.tvList mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
+    [self.view addSubview:self.cbComment];
 }
 
 #pragma mark - lazy
@@ -217,6 +224,13 @@ static NSString *cellID = @"RYStatuseCommentCell";
         }];
     }
     return _tvList;
+}
+
+- (RYCommentBar *)cbComment {
+    if (!_cbComment) {
+        _cbComment = [[RYCommentBar alloc] init];
+    }
+    return _cbComment;
 }
 
 @end
