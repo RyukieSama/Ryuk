@@ -203,11 +203,12 @@ static NSString *cellID = @"RYStatuseCommentCell";
 #pragma mark - UI 
 - (void)setupUI {
 //    self.view.backgroundColor = (self.type == 2) ? [UIColor redColor] : [UIColor cyanColor];
+    [self.view addSubview:self.cbComment];
     [self.view addSubview:self.tvList];
     [self.tvList mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.top.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.cbComment.mas_top);
     }];
-    [self.view addSubview:self.cbComment];
 }
 
 #pragma mark - lazy
