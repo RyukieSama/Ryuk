@@ -68,8 +68,41 @@
         make.width.mas_equalTo(BUTTON_WID);
         make.height.mas_equalTo(BUTTON_WID);
     }];
+    
+    //发送
+    [self addSubview:self.btSent];
+    [self.btSent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.btAt);
+        make.right.mas_equalTo(-4);
+        make.height.mas_equalTo(BUTTON_WID);
+        make.width.mas_equalTo(40);
+    }];
 }
 
+#pragma mark - data
+- (void)commentStatuse {
+    NSDictionary *dic = @{
+                          @"comment" : self.tvText.text,
+                          @"id" : @(self.id),
+                          @"comment_ori" : @(0) //当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
+                          };
+    __weak typeof(self) weakSelf = self;
+    [RYNetworkManager ry_postWithUrl:API_GIVE_COMMENT
+                   requestDictionary:dic
+                       responseModel:nil
+                            useCache:NO
+                   completionHandler:^(id data) {
+                       if (data) {
+                           weakSelf.tvText.text = @"";
+                           [weakSelf endEdit];
+                           [[NSNotificationCenter defaultCenter] postNotificationName:NOTI_COMMENT_SUCCESS object:nil userInfo:nil];
+                       }
+                   }];
+}
+
+- (void)commentComment {
+    
+}
 
 #pragma mark - function
 - (void)atClick {
@@ -88,6 +121,14 @@
 //    if ([self.delegate respondsToSelector:@selector(postToolBarEmojiClick)]) {
 //        [self.delegate postToolBarEmojiClick];
 //    }
+}
+
+- (void)sendClick {
+    if (self.tvText.text == 0 || self.tvText.text.length > 140) {
+        NSLog(@"长度不对");
+    } else {
+        [self commentStatuse];
+    }
 }
 
 - (void)kSHow {
@@ -171,6 +212,23 @@
         _vLine.backgroundColor = RY_COLOR_GRAY_E8E8E8;
     }
     return _vLine;
+}
+
+- (UIButton *)btSent {
+    if (!_btSent) {
+        _btSent = [[UIButton alloc] init];
+        _btSent.layer.borderColor = [UIColor blackColor].CGColor;
+        _btSent.layer.borderWidth = RY_HEIGHT_LINE;
+        _btSent.layer.cornerRadius = RY_DETAULT_CORNER_R;
+        _btSent.layer.masksToBounds = YES;
+        [_btSent addTarget:self action:@selector(sendClick) forControlEvents:UIControlEventTouchUpInside];
+        [_btSent setBackgroundColor:[UIColor whiteColor]];
+        [_btSent setTitle:@"发送" forState:UIControlStateNormal];
+        [_btSent setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btSent.titleLabel setFont:RY_FONT(15)];
+        [_btSent.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    }
+    return _btSent;
 }
 
 @end

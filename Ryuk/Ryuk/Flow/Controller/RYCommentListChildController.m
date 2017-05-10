@@ -38,6 +38,7 @@ static NSString *cellID = @"RYStatuseCommentCell";
     self.id = [[self.params objectForKey:@"id"] integerValue];
     self.type = [[self.params objectForKey:@"type"] integerValue];
     self.page = 1;
+    [self addNoti];
     [self setupUI];
     [self.tvList.mj_header beginRefreshing];
 }
@@ -52,6 +53,14 @@ static NSString *cellID = @"RYStatuseCommentCell";
 }
 
 #pragma mark - data
+- (void)addNoti {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList) name:NOTI_COMMENT_SUCCESS object:nil];
+}
+
+- (void)reloadList {
+    [self loadData:YES];
+}
+
 - (void)loadData:(BOOL)header {
     NSDictionary *param;
     if (header) {
@@ -229,6 +238,7 @@ static NSString *cellID = @"RYStatuseCommentCell";
 - (RYCommentBar *)cbComment {
     if (!_cbComment) {
         _cbComment = [[RYCommentBar alloc] init];
+        _cbComment.id = self.id;
     }
     return _cbComment;
 }

@@ -10,7 +10,11 @@
 
 @interface RYCommentBar : UIView
 
+@property (nonatomic, assign) long long id;
+
 - (void)endEdit;
 - (void)startEdit;
+
+#define NOTI_COMMENT_SUCCESS @"NOTI_COMMENT_SUCCESS"
 
 @end
