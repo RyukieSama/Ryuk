@@ -9,6 +9,7 @@
 #import "RYFlowStatuseCell.h"
 #import "RYStatuseReCommentView.h"
 #import "RYImagesScrollView.h"
+#import "RYImageBrowser.h"
 
 @interface RYFlowStatuseCell ()
 
@@ -369,6 +370,10 @@
         __weak typeof(self) weakSelf = self;
         _vCover.handler_scrollCallBack = ^(NSNumber *obj) {
             weakSelf.statuse.currentPage = [obj integerValue];
+        };
+        _vCover.handler_imageClick = ^(NSNumber *obj) {
+            NSArray *arr = weakSelf.statuse.pic_urls_strings.count > 0 ? weakSelf.statuse.pic_urls_strings : weakSelf.statuse.retweeted_status.pic_urls_strings;
+            [RYImageBrowser showBrowserWithImageURLs:arr thumbnailsSize:CGSizeZero atIndex:[obj integerValue] withPageStyle:RYImageBrowserPageStyleAuto];
         };
 //        _vCover.normalPageImage = [UIImage imageNamed:@"outdoor_icon_carousel"];
 //        _vCover.currentPageImage = [UIImage imageNamed:@"outdoor_icon_carousel_selected"];

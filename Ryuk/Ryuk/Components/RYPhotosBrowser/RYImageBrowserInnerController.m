@@ -11,11 +11,8 @@
 #import <SDWebImageManager.h>
 #import <Masonry.h>
 #import "RYImageBrowserPageController.h"
-//#import "RYWebImageHelper.h"
 
 #define PREVIEW_IV_WIDTH 100
-
-//static BOOL useHTTPS = YES;
 
 @interface RYImageBrowserInnerController ()
 
@@ -130,34 +127,33 @@
         }
         
         //否则就下载
-//        __weak typeof(self)weakSelf = self;
+        __weak typeof(self)weakSelf = self;
         
-//        NSString *imageURLString = self.imageURL;
-        //支持Webp
-//        NSURL *imageURL = [RYWebImageHelper imageStringToURL:imageURLString width:0 height:0];
+        NSString *imageURLString = self.imageURL;
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
         
         [self showHUD];
-//        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:imageURL
-//                                                              options:0
-//                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                                                                 __strong __typeof(weakSelf)strongSelf = weakSelf;
-//                                                                 [strongSelf showHUD];
-//                                                             }
-//                                                            completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//                                                                __strong __typeof(weakSelf)strongSelf = weakSelf;
-//                                                                
-//                                                                if (!finished) {
-//                                                                    return;
-//                                                                }
-//                                                                
-//                                                                if (error) {
-//                                                                    [strongSelf dismissHUD];
-//                                                                    [strongSelf showErrorHUD];
-//                                                                } else {
-//                                                                    [[SDWebImageManager sharedManager] saveImageToCache:image forURL:imageURL];
-//                                                                    [strongSelf setImageForScrollView:image];
-//                                                                }
-//                                                            }];
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:imageURL
+                                                              options:0
+                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+                                                                 __strong __typeof(weakSelf)strongSelf = weakSelf;
+                                                                 [strongSelf showHUD];
+                                                             }
+                                                            completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                                                                
+                                                                if (!finished) {
+                                                                    return;
+                                                                }
+                                                                
+                                                                if (error) {
+                                                                    [strongSelf dismissHUD];
+                                                                    [strongSelf showErrorHUD];
+                                                                } else {
+                                                                    [[SDWebImageManager sharedManager] saveImageToCache:image forURL:imageURL];
+                                                                    [strongSelf setImageForScrollView:image];
+                                                                }
+                                                            }];
     }
 }
 
@@ -172,12 +168,12 @@
 }
 
 - (UIImage *)getCachedImage:(NSString *)URLString withSize:(CGSize)size {
-//    NSURL *URL = [RYWebImageHelper imageStringToURL:URLString width:size.width height:size.height];
-    //从缓存中取
+    NSURL *URL = [NSURL URLWithString:URLString];
+//    从缓存中取
 //    if ([[SDWebImageManager sharedManager] diskImageExistsForURL:URL]) {
 //        return [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[URL absoluteString]];
 //    }
-    return nil;
+    return [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[URL absoluteString]];
 }
 
 - (NSInteger)checkImageCache:(NSURL *)URL {
