@@ -398,7 +398,8 @@
             [weakSelf reHideClick];
         }];
         [_btAvatar ryAV_oneClick:^{
-            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE];
+            RYUser *user = weakSelf.statuse.retweeted_status.user ?: weakSelf.statuse.user;
+            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE param:@{@"user" : user}];
         }];
     }
     return _btAvatar;
@@ -438,7 +439,7 @@
             [weakSelf reHideClick];
         }];
         [_btFrom ryAV_oneClick:^{
-            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE];
+            [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE param:@{@"user" : weakSelf.statuse.user}];
         }];
     }
     return _btFrom;
