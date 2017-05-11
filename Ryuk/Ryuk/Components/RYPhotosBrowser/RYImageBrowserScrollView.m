@@ -8,8 +8,6 @@
 
 #import "RYImageBrowserScrollView.h"
 #import "RYImageBrowserPageController.h"
-//#import "RYActionSheet.h"
-//#import <RYCustomHUD.h>
 
 @interface RYImageBrowserScrollView ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
