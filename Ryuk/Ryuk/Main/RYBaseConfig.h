@@ -24,10 +24,10 @@
 //Masnory
 #import <Masonry.h>
 //SD
-#import <UIView+WebCache.h>
 #import <UIButton+WebCache.h>
-#import <UIView+WebCache.h>
+//#import <UIView+WebCache.h>
 #import <UIImageView+WebCache.h>
+#import <UIImage+GIF.h>
 #import <WeiboSDK.h>
 #import <MJRefresh.h>
 //组件
