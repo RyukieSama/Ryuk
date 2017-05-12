@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIButton *btComment;//评论
 @property (nonatomic, strong) UIImageView *ivBack;
 @property (nonatomic, strong) UILabel *lbNickName;
-@property (nonatomic, strong) UILabel *lbContent;
+@property (nonatomic, strong) RYLabel *lbContent;
 @property (nonatomic, strong) UIView *vLine;
 @property (nonatomic, strong) RYStatuseReCommentView *vReComment;
 

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYBaseConfig.h"
 
 @interface RYPosterController : UIViewController
 
-@property (nonatomic, strong) UITextView *tvText;
+@property (nonatomic, strong) RYTextView *tvText;
 
 - (void)setupUI;
 

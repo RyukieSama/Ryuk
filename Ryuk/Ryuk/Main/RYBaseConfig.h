@@ -32,6 +32,8 @@
 #import <MJRefresh.h>
 //组件
 #import "RYAvatarView.h"
+#import "RYLabel.h"
+#import "RYTextView.h"
 //微博发布器
 #import "RYPoster.h"
 

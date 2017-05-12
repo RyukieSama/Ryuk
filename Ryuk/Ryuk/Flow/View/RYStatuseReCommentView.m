@@ -12,7 +12,7 @@
 @interface RYStatuseReCommentView ()
 
 @property (nonatomic, strong) UIImageView *ivBack;
-@property (nonatomic, strong) UILabel *lbText;
+@property (nonatomic, strong) RYLabel *lbText;
 @property (nonatomic, strong) UIButton *btClose;
 
 @end

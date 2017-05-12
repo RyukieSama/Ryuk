@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIButton *btAvatar;
 @property (nonatomic, strong) UILabel *lbName;
-@property (nonatomic, strong) UILabel *lbText;
+@property (nonatomic, strong) RYLabel *lbText;
 @property (nonatomic, strong) UIButton *btImage;
 
 @end

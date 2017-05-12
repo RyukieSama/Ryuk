@@ -27,6 +27,8 @@
 		A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D51EADAAAA004207C4 /* RYBaseConfig.m */; };
 		A47EC1C71EBC526500569E15 /* RYPostToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1C61EBC526500569E15 /* RYPostToolBar.m */; };
 		A47EC1CB1EC008A000569E15 /* RYStatuseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */; };
+		A49436C11EC55C9400CF8A8A /* RYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A49436C01EC55C9400CF8A8A /* RYLabel.m */; };
+		A49436C41EC55CA400CF8A8A /* RYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A49436C31EC55CA400CF8A8A /* RYTextView.m */; };
 		A49876411EB0902400359766 /* RYImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A49876381EB0902400359766 /* RYImageBrowser.m */; };
 		A49876421EB0902400359766 /* RYImageBrowserInnerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A498763A1EB0902400359766 /* RYImageBrowserInnerController.m */; };
 		A49876431EB0902400359766 /* RYImageBrowserPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A498763C1EB0902400359766 /* RYImageBrowserPageController.m */; };
@@ -99,6 +101,10 @@
 		A47EC1C61EBC526500569E15 /* RYPostToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostToolBar.m; sourceTree = "<group>"; };
 		A47EC1C91EC008A000569E15 /* RYStatuseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStatuseManager.h; sourceTree = "<group>"; };
 		A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStatuseManager.m; sourceTree = "<group>"; };
+		A49436BF1EC55C9400CF8A8A /* RYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLabel.h; sourceTree = "<group>"; };
+		A49436C01EC55C9400CF8A8A /* RYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLabel.m; sourceTree = "<group>"; };
+		A49436C21EC55CA400CF8A8A /* RYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTextView.h; sourceTree = "<group>"; };
+		A49436C31EC55CA400CF8A8A /* RYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTextView.m; sourceTree = "<group>"; };
 		A49876371EB0902400359766 /* RYImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYImageBrowser.h; sourceTree = "<group>"; };
 		A49876381EB0902400359766 /* RYImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYImageBrowser.m; sourceTree = "<group>"; };
 		A49876391EB0902400359766 /* RYImageBrowserInnerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYImageBrowserInnerController.h; sourceTree = "<group>"; };
@@ -230,6 +236,24 @@
 				A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */,
 			);
 			path = RYStatuseManager;
+			sourceTree = "<group>";
+		};
+		A49436BA1EC55C6700CF8A8A /* RYTextView */ = {
+			isa = PBXGroup;
+			children = (
+				A49436C21EC55CA400CF8A8A /* RYTextView.h */,
+				A49436C31EC55CA400CF8A8A /* RYTextView.m */,
+			);
+			path = RYTextView;
+			sourceTree = "<group>";
+		};
+		A49436BB1EC55C6700CF8A8A /* RYLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A49436BF1EC55C9400CF8A8A /* RYLabel.h */,
+				A49436C01EC55C9400CF8A8A /* RYLabel.m */,
+			);
+			path = RYLabel;
 			sourceTree = "<group>";
 		};
 		A49876361EB0902400359766 /* RYPhotosBrowser */ = {
@@ -482,6 +506,8 @@
 		A4FE99E81EADDAAC00BE84A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A49436BA1EC55C6700CF8A8A /* RYTextView */,
+				A49436BB1EC55C6700CF8A8A /* RYLabel */,
 				A47EC1C81EC0087F00569E15 /* RYStatuseManager */,
 				A4C850561EBC2417000A6235 /* RYPoster */,
 				A4C850521EBB2620000A6235 /* RYRouter */,
@@ -678,6 +704,7 @@
 				A4FE9A091EAEF99600BE84A7 /* RYRemind.m in Sources */,
 				A4524DD21EC0788C009DB7E4 /* RYCommentListController.m in Sources */,
 				A49876451EB0902400359766 /* RYImageBrowserTransitionAnimator.m in Sources */,
+				A49436C11EC55C9400CF8A8A /* RYLabel.m in Sources */,
 				A49876411EB0902400359766 /* RYImageBrowser.m in Sources */,
 				A4FE99F01EADED2200BE84A7 /* RYDefaults.m in Sources */,
 				A4FE9A031EAEF96100BE84A7 /* RYComment.m in Sources */,
@@ -695,6 +722,7 @@
 				A4C850551EBB262D000A6235 /* RYRouter.m in Sources */,
 				A4FE99EC1EADDAC100BE84A7 /* RYNetworkManager.m in Sources */,
 				A4FE99DD1EADCDE300BE84A7 /* RYFlowTabController.m in Sources */,
+				A49436C41EC55CA400CF8A8A /* RYTextView.m in Sources */,
 				A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */,
 				A4FC71671EB050B3009B245B /* RYFlowStatuseCell.m in Sources */,
 				A45A79CD1EADA995004207C4 /* RYMainTabBarController.m in Sources */,
