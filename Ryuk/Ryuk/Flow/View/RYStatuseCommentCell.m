@@ -107,9 +107,9 @@
     return _lbName;
 }
 
-- (UILabel *)lbText {
+- (RYLabel *)lbText {
     if (!_lbText) {
-        _lbText = [[UILabel alloc] init];
+        _lbText = [[RYLabel alloc] init];
         _lbText.font = RY_FONT(14);
         _lbText.textColor = [UIColor blackColor];
         _lbText.numberOfLines = 0;

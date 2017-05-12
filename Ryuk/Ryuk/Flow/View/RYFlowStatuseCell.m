@@ -405,9 +405,9 @@
     return _btAvatar;
 }
 
-- (UILabel *)lbContent {
+- (RYLabel *)lbContent {
     if (!_lbContent) {
-        _lbContent = [[UILabel alloc] init];
+        _lbContent = [[RYLabel alloc] init];
         _lbContent.font = RY_FONT(14);
         _lbContent.numberOfLines = 0;
     }

@@ -11,6 +11,9 @@
 
 @interface RYLabel ()
 
+@property (nonatomic, strong) NSMutableArray *arrLinks;
+@property (nonatomic, strong) NSMutableArray *arrImages;
+@property (nonatomic, strong) NSMutableArray *arrAts;
 
 @end
 
@@ -18,7 +21,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    
+    self.arrAts = @[].mutableCopy;
+    self.arrImages = @[].mutableCopy;
+    self.arrLinks = @[].mutableCopy;
     return self;
 }
 
@@ -28,6 +33,11 @@
 
 - (void)setText:(NSString *)text {
     [super setText:text];
+}
+
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+    
+    [super setAttributedText:attributedText];
 }
 
 #pragma mark - function

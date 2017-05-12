@@ -170,9 +170,9 @@
     return _btPost;
 }
 
-- (UITextView *)tvText {
+- (RYTextView *)tvText {
     if (!_tvText) {
-        _tvText = [[UITextView alloc] init];
+        _tvText = [[RYTextView alloc] init];
         _tvText.font = RY_FONT(16);
         _tvText.textColor = [UIColor blackColor];
         _tvText.scrollEnabled = YES;

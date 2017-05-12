@@ -51,9 +51,9 @@
 }
 
 #pragma mark - lazy
-- (UILabel *)lbText {
+- (RYLabel *)lbText {
     if (!_lbText) {
-        _lbText = [[UILabel alloc] init];
+        _lbText = [[RYLabel alloc] init];
         _lbText.numberOfLines = 0;
         _lbText.font = RY_FONT(14);
         _lbText.textColor = [UIColor whiteColor];
