@@ -410,6 +410,8 @@
         _lbContent = [[RYLabel alloc] init];
         _lbContent.font = RY_FONT(14);
         _lbContent.numberOfLines = 0;
+        _lbContent.textColor = [UIColor blackColor];
+        _lbContent.lineBreakMode = NSLineBreakByWordWrapping;
     }
     return _lbContent;
 }

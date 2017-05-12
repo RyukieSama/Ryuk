@@ -58,6 +58,7 @@
         _lbText.font = RY_FONT(14);
         _lbText.textColor = [UIColor whiteColor];
 //        _lbText.textAlignment = NSTextAlignmentRight;
+        _lbText.lineBreakMode = NSLineBreakByWordWrapping;
     }
     return _lbText;
 }
