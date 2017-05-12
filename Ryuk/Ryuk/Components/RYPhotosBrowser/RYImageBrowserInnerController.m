@@ -88,6 +88,7 @@
     
     RYImageBrowserScrollView *scrollView = [[RYImageBrowserScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.scrollView = scrollView;
+    self.scrollView.vc = self;
     [self.view addSubview:self.scrollView];
     
     [self.view layoutIfNeeded];
