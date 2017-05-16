@@ -132,10 +132,8 @@
     return _arrAts;
 }
 
-
 // 将点击的位置转换成字符串的偏移量，如果没有找到，则返回-1
 - (CFIndex)touchContentOffsetInViewAtPoint:(CGPoint)point {
-//    CTFrameRef textFrame = data.ctFrame;
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedText);
     
     CGMutablePathRef path = CGPathCreateMutable();
@@ -144,7 +142,6 @@
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
     CFRelease(path);
     
-//    CTFrameRef textFrame;
     CFArrayRef lines = CTFrameGetLines(frame);
     if (!lines) {
         return -1;
