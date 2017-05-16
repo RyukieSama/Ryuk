@@ -99,7 +99,7 @@
         
         for(int i =0; i < [newStr length]; i++) {
             temp = [newStr substringWithRange:NSMakeRange(i, 1)];
-            if (appendSwitch && ![temp isEqualToString:@" "] && ![temp isEqualToString:@":"]) {
+            if (appendSwitch && ![temp isEqualToString:@" "] && ![temp isEqualToString:@":"] && ((i+1) != [newStr length])) {
                 [muStr appendString:temp];
             } else {
                 if ([temp isEqualToString:@"@"]) {
@@ -108,6 +108,12 @@
                     startRange = i;
                 } else if (appendSwitch && ([temp isEqualToString:@" "] || ((i+1) == [newStr length]) || [temp isEqualToString:@":"])) {
                     endRange = i;
+                    
+                    if ((i+1) == [newStr length]) {
+                        [muStr appendString:temp];
+                        endRange = i+1;
+                    }
+                    
                     RYTextUnit *unit = [[RYTextUnit alloc] init];
                     unit.content = muStr;
                     unit.range = NSMakeRange(startRange, endRange - startRange);
