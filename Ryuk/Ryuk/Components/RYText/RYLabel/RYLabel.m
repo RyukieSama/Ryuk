@@ -10,11 +10,14 @@
 #import "YYText.h"
 #import "RYTextUnit.h"
 
+static NSString *urlPre = @"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))";
+static NSString *atPre = @"@[0-9a-zA-Z\\u4e00-\\u9fa5-_]+";
+static NSString *sharpPre = @"#[0-9a-zA-Z\\u4e00-\\u9fa5]+#";
+static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
+
 @interface RYLabel ()<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) NSMutableArray <RYTextUnit *>*arrLinks;
-@property (nonatomic, strong) NSMutableArray <RYTextUnit *>*arrImages;
-@property (nonatomic, strong) NSMutableArray <RYTextUnit *>*arrAts;
+@property (nonatomic, strong) NSMutableArray <RYTextUnit *>*arrUnints;
 
 @end
 
@@ -44,9 +47,9 @@
     muAtt.yy_color = self.textColor;
     
     //遍历文本中的元素
-    for (RYTextUnit *unit in self.arrAts) {
+    for (RYTextUnit *unit in self.arrUnints) {
         [muAtt yy_setTextHighlightRange:unit.range
-                                  color:[UIColor blueColor]
+                                  color:[UIColor cyanColor]
                         backgroundColor:[UIColor clearColor]
                               tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                   NSLog(@"%@",unit.content);
@@ -57,9 +60,10 @@
 }
 
 - (void)clearText {
-    self.arrAts = nil;
-    self.arrImages = nil;
-    self.arrLinks = nil;
+    self.arrUnints = nil;
+//    self.arrAts = nil;
+//    self.arrImages = nil;
+//    self.arrLinks = nil;
 }
 
 #pragma mark - function
@@ -73,64 +77,77 @@
 }
 
 #pragma mark - lazy
-- (NSMutableArray *)arrLinks {
-    if (!_arrLinks) {
-        _arrLinks = @[].mutableCopy;
+- (NSMutableArray<RYTextUnit *> *)arrUnints {
+    if (!_arrUnints) {
+        _arrUnints = @[].mutableCopy;
+        [_arrUnints addObjectsFromArray:[self validateLink:self.text]];
+        [_arrUnints addObjectsFromArray:[self validateAt:self.text]];
+        [_arrUnints addObjectsFromArray:[self validateSharp:self.text]];
+        [_arrUnints addObjectsFromArray:[self validateEmoji:self.text]];
     }
-    return _arrLinks;
+    return _arrUnints;
 }
 
-- (NSMutableArray *)arrImages {
-    if (!_arrImages) {
-        _arrImages = @[].mutableCopy;
-    }
-    return _arrImages;
-}
-
-- (NSMutableArray *)arrAts {
-    if (!_arrAts) {
-        _arrAts = @[].mutableCopy;
-        
-        NSString *newStr = self.text;
-        NSString *temp = nil;
-        NSMutableString *muStr = [[NSMutableString alloc] init];
-        BOOL appendSwitch = NO; //拼接开关
-        NSInteger startRange = 0;
-        NSInteger endRange = 0;
-        
-        for(int i =0; i < [newStr length]; i++) {
-            temp = [newStr substringWithRange:NSMakeRange(i, 1)];
-            if (appendSwitch && ![temp isEqualToString:@" "] && ![temp isEqualToString:@":"] && ((i+1) != [newStr length])) {
-                [muStr appendString:temp];
-            } else {
-                if ([temp isEqualToString:@"@"]) {
-                    appendSwitch = YES;
-                    [muStr appendString:temp];
-                    startRange = i;
-                } else if (appendSwitch && ([temp isEqualToString:@" "] || ((i+1) == [newStr length]) || [temp isEqualToString:@":"])) {
-                    endRange = i;
-                    
-                    if ((i+1) == [newStr length]) {
-                        [muStr appendString:temp];
-                        endRange = i+1;
-                    }
-                    
-                    RYTextUnit *unit = [[RYTextUnit alloc] init];
-                    unit.content = muStr;
-                    unit.range = NSMakeRange(startRange, endRange - startRange);
-//                    NSLog(@"%@",muStr);
-                    [_arrAts addObject:unit];
-                    
-                    muStr = [[NSMutableString alloc] init];
-                    appendSwitch = NO;
-                    startRange = 0;
-                    endRange = 0;
-                }
-            }
-        }
-    }
-    return _arrAts;
-}
+//- (NSMutableArray *)arrAts {
+//    if (!_arrAts) {
+//        _arrAts = [self validateAt:self.text].mutableCopy;
+//        
+//        //先看有没有 @
+////        if ([self.text containsString:@"@"]) {
+////            NSString *newStr = self.text;
+////            NSString *temp = nil;
+////            NSMutableString *muStr = [[NSMutableString alloc] init];
+////            BOOL appendSwitch = NO; //拼接开关
+////            NSInteger startRange = 0;
+////            NSInteger endRange = 0;
+////            
+////            for(int i =0; i < [newStr length]; i++) {
+////                temp = [newStr substringWithRange:NSMakeRange(i, 1)];
+////                if (appendSwitch && ![temp isEqualToString:@" "] && ![temp isEqualToString:@":"] && ![temp isEqualToString:@"："] && ((i+1) != [newStr length])) {
+////                    [muStr appendString:temp];
+////                } else {
+////                    if ([temp isEqualToString:@"@"]) {
+////                        appendSwitch = YES;
+////                        [muStr appendString:temp];
+////                        startRange = i;
+////                    } else if (appendSwitch && ([temp isEqualToString:@" "] || ((i+1) == [newStr length]) || [temp isEqualToString:@":"] || [temp isEqualToString:@"："])) {
+////                        endRange = i;
+////                        
+////                        if ((i+1) == [newStr length]) {
+////                            [muStr appendString:temp];
+////                            endRange = i+1;
+////                        }
+////                        
+////                        RYTextUnit *unit = [[RYTextUnit alloc] init];
+////                        unit.content = muStr;
+////                        unit.range = NSMakeRange(startRange, endRange - startRange);
+////                        unit.type = RYTextUnitTypeAt;
+////                        [_arrAts addObject:unit];
+////                        
+////                        //还原
+////                        muStr = [[NSMutableString alloc] init];
+////                        appendSwitch = NO;
+////                        startRange = 0;
+////                        endRange = 0;
+////                    }
+////                }
+////            }
+////        }
+//        
+////        NSArray *arr = [self validateAt:self.text];
+////        if (arr.count > 0) {
+////            for (NSString *str in arr) {
+////                RYTextUnit *unit = [[RYTextUnit alloc] init];
+////                unit.content = str;
+////                unit.range = [self.text rangeOfString:str];
+////                unit.type = RYTextUnitTypeAt;
+////                [_arrAts addObject:unit];
+////            }
+////        }
+//        
+//    }
+//    return _arrAts;
+//}
 
 // 将点击的位置转换成字符串的偏移量，如果没有找到，则返回-1
 - (CFIndex)touchContentOffsetInViewAtPoint:(CGPoint)point {
@@ -188,7 +205,7 @@
 
 - (void)touchEventAtIndex:(CFIndex)index {
     //找出在这个额位置的Unit
-    for (RYTextUnit *unit in self.arrAts) {
+    for (RYTextUnit *unit in self.arrUnints) {
         if ((index >= unit.range.location) && (index <= unit.range.location + unit.range.length)) {
             NSLog(@"%@",unit.content);
         }
@@ -211,6 +228,83 @@
 - (void)handleTapping:(UITapGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self];
     [self touchEventAtIndex:[self touchContentOffsetInViewAtPoint:point]];
+}
+
+#pragma mark - predicate
+- (NSArray <RYTextUnit *>*)validateLink:(NSString *)link {
+    NSMutableArray *arr = @[].mutableCopy;
+    // | 匹配多个条件,相当于or\或
+    NSString *pattern = [NSString stringWithFormat:@"%@",urlPre];
+    // 使用系统的正则类来遍历
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+    // 2.测试字符串
+    NSArray *results = [regex matchesInString:link options:0 range:NSMakeRange(0, link.length)];
+    // 3.遍历结果
+    for (NSTextCheckingResult *result in results) {
+        RYTextUnit *unit = [[RYTextUnit alloc] init];
+        unit.content = [link substringWithRange:result.range];
+        unit.range = result.range;
+        unit.type = RYTextUnitTypeURL;
+        [arr addObject:unit];
+    }
+    return arr.copy;
+}
+
+- (NSArray <RYTextUnit *>*)validateAt:(NSString *)at {
+    NSMutableArray *arr = @[].mutableCopy;
+    // | 匹配多个条件,相当于or\或
+    NSString *pattern = [NSString stringWithFormat:@"%@",atPre];
+    // 使用系统的正则类来遍历
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+    // 2.测试字符串
+    NSArray *results = [regex matchesInString:at options:0 range:NSMakeRange(0, at.length)];
+    // 3.遍历结果
+    for (NSTextCheckingResult *result in results) {
+        RYTextUnit *unit = [[RYTextUnit alloc] init];
+        unit.content = [at substringWithRange:result.range];
+        unit.range = result.range;
+        unit.type = RYTextUnitTypeAt;
+        [arr addObject:unit];
+    }
+    return arr.copy;
+}
+
+- (NSArray <RYTextUnit *>*)validateSharp:(NSString *)sharp {
+    NSMutableArray *arr = @[].mutableCopy;
+    // | 匹配多个条件,相当于or\或
+    NSString *pattern = [NSString stringWithFormat:@"%@",sharpPre];
+    // 使用系统的正则类来遍历
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+    // 2.测试字符串
+    NSArray *results = [regex matchesInString:sharp options:0 range:NSMakeRange(0, sharp.length)];
+    // 3.遍历结果
+    for (NSTextCheckingResult *result in results) {
+        RYTextUnit *unit = [[RYTextUnit alloc] init];
+        unit.content = [sharp substringWithRange:result.range];
+        unit.range = result.range;
+        unit.type = RYTextUnitTypeSharp;
+        [arr addObject:unit];
+    }
+    return arr.copy;
+}
+
+- (NSArray <RYTextUnit *>*)validateEmoji:(NSString *)emoji {
+    NSMutableArray *arr = @[].mutableCopy;
+    // | 匹配多个条件,相当于or\或
+    NSString *pattern = [NSString stringWithFormat:@"%@",emojiPre];
+    // 使用系统的正则类来遍历
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:0 error:nil];
+    // 2.测试字符串
+    NSArray *results = [regex matchesInString:emoji options:0 range:NSMakeRange(0, emoji.length)];
+    // 3.遍历结果
+    for (NSTextCheckingResult *result in results) {
+        RYTextUnit *unit = [[RYTextUnit alloc] init];
+        unit.content = [emoji substringWithRange:result.range];
+        unit.range = result.range;
+        unit.type = RYTextUnitTypeEmoji;
+        [arr addObject:unit];
+    }
+    return arr.copy;
 }
 
 @end
