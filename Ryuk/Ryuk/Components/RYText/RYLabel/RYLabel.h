@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YYLabel.h"
+#import <CoreText/CoreText.h>
 
 @interface RYLabel : UILabel
 

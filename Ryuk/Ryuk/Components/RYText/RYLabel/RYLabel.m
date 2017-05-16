@@ -7,7 +7,6 @@
 //
 
 #import "RYLabel.h"
-#import "YYText.h"
 #import "RYTextUnit.h"
 
 static NSString *urlPre = @"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))";
@@ -43,17 +42,16 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
 - (void)setAttributedText:(NSAttributedString *)attributedText {
     [self clearText];
     NSMutableAttributedString *muAtt = attributedText.mutableCopy;
-    muAtt.yy_font = self.font;
-    muAtt.yy_color = self.textColor;
+//    muAtt.yy_font = self.font;
+//    muAtt.yy_color = self.textColor;
     
     //遍历文本中的元素
     for (RYTextUnit *unit in self.arrUnints) {
-        [muAtt yy_setTextHighlightRange:unit.range
-                                  color:[UIColor cyanColor]
-                        backgroundColor:[UIColor clearColor]
-                              tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                  NSLog(@"%@",unit.content);
-                              }];
+        [muAtt setAttributes:@{
+                               NSForegroundColorAttributeName:[UIColor cyanColor]
+                               }
+                       range:unit.range];
+
     }
     
     [super setAttributedText:muAtt];
@@ -61,13 +59,9 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
 
 - (void)clearText {
     self.arrUnints = nil;
-//    self.arrAts = nil;
-//    self.arrImages = nil;
-//    self.arrLinks = nil;
 }
 
 #pragma mark - function
-
 - (void)atClick {
     
 }
