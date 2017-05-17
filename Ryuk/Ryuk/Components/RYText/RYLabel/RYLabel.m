@@ -34,21 +34,27 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
 }
 
 - (void)setText:(NSString *)text {
-    [super setText:text];
-    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:text];
+    NSMutableString *muStr = text.mutableCopy;
+//    [muStr appendString:@"\n"];
+    [super setText:muStr];
+    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:muStr];
     self.attributedText = attStr;
 }
 
 - (void)setAttributedText:(NSAttributedString *)attributedText {
     [self clearText];
     NSMutableAttributedString *muAtt = attributedText.mutableCopy;
-//    muAtt.yy_font = self.font;
-//    muAtt.yy_color = self.textColor;
+    
+    [muAtt setAttributes:@{
+                           NSFontAttributeName : self.font
+                           }
+                   range:NSMakeRange(0, attributedText.length)];
     
     //遍历文本中的元素
     for (RYTextUnit *unit in self.arrUnints) {
         [muAtt setAttributes:@{
-                               NSForegroundColorAttributeName:[UIColor cyanColor]
+                               NSForegroundColorAttributeName:[UIColor cyanColor],
+                               NSFontAttributeName : self.font
                                }
                        range:unit.range];
 
@@ -144,78 +150,6 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
 //}
 
 #pragma mark - touch
-- (NSRange)ctRunRangeAtPoint:(CGPoint)point{
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedText);
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, self.bounds);
-    
-    CTFrameRef textFrame;
-    textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [self.attributedText length]), path, NULL);
-    CFArrayRef lines = CTFrameGetLines(textFrame);
-    CFIndex count = CFArrayGetCount(lines);
-    
-    // 获得每一行的origin坐标
-    CGPoint origins[count];
-    CTFrameGetLineOrigins(textFrame, CFRangeMake(0,0), origins);
-    
-    // 翻转坐标系
-    CGAffineTransform transform =  CGAffineTransformMakeTranslation(0, self.bounds.size.height);
-    transform = CGAffineTransformScale(transform, 1.f, -1.f);
-    
-    NSRange runRange = NSMakeRange(0, 0);
-    for (int i = 0; i < count; i++) {
-        CGPoint linePoint = origins[i];
-        CTLineRef line = CFArrayGetValueAtIndex(lines, i);
-        
-        // 获得每一行的CGRect信息
-        CGRect flippedRect = [self getLineBounds:line point:linePoint];
-        CGRect rect = CGRectApplyAffineTransform(flippedRect, transform);
-        
-        if (point.y < CGRectGetMinY(rect)) {
-            break;
-        }
-        
-//        CALayer *lineLayer = [[CALayer alloc] init];
-//        CGRect lineLayerFrame = CGRectApplyAffineTransform(CGRectMake(0, linePoint.y - CGRectGetMinY(self.bounds), CGRectGetWidth(self.bounds), 1), transform);
-//        lineLayer.frame = lineLayerFrame;
-//        lineLayer.backgroundColor = [UIColor redColor].CGColor;
-//        //lineLayer.opacity = 0.5;
-//        [self.layer addSublayer:lineLayer];
-        
-        CFArrayRef runs = CTLineGetGlyphRuns(line);
-        for (int j = 0; j < CFArrayGetCount(runs); j++) {
-            // 遍历每一个CTRun
-            CGFloat runAscent,runDescent,lineSpace;
-            // 获取当前的CTRun
-            CTRunRef run = CFArrayGetValueAtIndex(runs, j);
-            CGRect runRect;
-            runRect.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0,0), &runAscent, &runDescent, &lineSpace);
-            runRect = CGRectMake(linePoint.x + CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL), linePoint.y - runDescent - CGRectGetMinY(self.bounds), runRect.size.width, runAscent + runDescent + lineSpace);
-            runRect = CGRectApplyAffineTransform(runRect, transform);
-            
-//            CALayer *ctRunLayer = [[CALayer alloc] init];
-//            ctRunLayer.frame = runRect;
-//            ctRunLayer.backgroundColor = [self randomColor].CGColor;
-//            ctRunLayer.opacity = 0.5;
-//            [self.layer addSublayer:ctRunLayer];
-            
-            CFRange ctRunRange = CTRunGetStringRange(run);
-            
-            if (CGRectContainsPoint(runRect, point)) {
-                // 获得当前点击坐标对应的点击范围
-                runRange = NSMakeRange(ctRunRange.location, ctRunRange.length);
-                break;
-            }
-        }
-    }
-    CFRelease(framesetter);
-    CFRelease(textFrame);
-    CFRelease(path);
-    NSLog(@"点击位置:%ld ```````````````    字符为:%@",runRange.location,[self.text substringWithRange:runRange]);
-    
-    return runRange;
-}
-
 // 将点击的位置转换成字符串的偏移量，如果没有找到，则返回-1
 - (CFIndex)touchContentOffsetInViewAtPoint:(CGPoint)point {
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedText);
@@ -301,7 +235,6 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
 - (void)handleTapping:(UITapGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self];
     [self touchEventAtIndex:[self touchContentOffsetInViewAtPoint:point]];
-//    [self touchEventAtIndex:[self ctRunRangeAtPoint:point].location];
 }
 
 #pragma mark - predicate

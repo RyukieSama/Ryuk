@@ -411,7 +411,7 @@
         _lbContent.font = RY_FONT(14);
         _lbContent.numberOfLines = 0;
         _lbContent.textColor = [UIColor blackColor];
-        _lbContent.lineBreakMode = NSLineBreakByWordWrapping;
+//        _lbContent.lineBreakMode = NSLineBreakByCharWrapping; //切勿修改换行方式会导致点击出问题
     }
     return _lbContent;
 }
