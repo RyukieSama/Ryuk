@@ -102,6 +102,7 @@
 // 接收到服务器跳转请求之后调用
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
     NSLog(@"跳转到其他的服务器");
+    
 }
 
 // 在收到响应后，决定是否跳转
