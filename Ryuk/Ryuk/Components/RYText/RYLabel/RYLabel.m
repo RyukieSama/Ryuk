@@ -54,7 +54,7 @@
  preg_replace("/([u4e00-u9fa5])/","",$str);
  */
 
-static NSString *urlPre = @"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))";
+static NSString *urlPre = @"http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/[a-zA-Z|\\d|\\-|\\+|_./?%=]*)?";
 static NSString *atPre = @"@[0-9a-zA-Z\\u2E80-\\u9FFF-_]+";
 static NSString *sharpPre = @"#[0-9a-zA-Z\\u2E80-\\u9FFF-_/]+#";
 static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
@@ -97,12 +97,14 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
     
     //遍历文本中的元素
     for (RYTextUnit *unit in self.arrUnints) {
+        if (unit.type == RYTextUnitTypeEmoji) {
+            continue;
+        }
         [muAtt setAttributes:@{
                                NSForegroundColorAttributeName:[UIColor cyanColor],
                                NSFontAttributeName : self.font
                                }
                        range:unit.range];
-
     }
     
     [super setAttributedText:muAtt];
@@ -133,6 +135,7 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
     return _arrUnints;
 }
 
+//华丽丽的手动正则...TAT
 //- (NSMutableArray *)arrAts {
 //    if (!_arrAts) {
 //        _arrAts = [self validateAt:self.text].mutableCopy;
@@ -259,7 +262,7 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
     //找出在这个额位置的Unit
     for (RYTextUnit *unit in self.arrUnints) {
         if ((index >= unit.range.location) && (index <= unit.range.location + unit.range.length)) {
-            NSLog(@"%@",unit.content);
+            [unit touchEventGo];//触发点击事件
         }
     }
 }
