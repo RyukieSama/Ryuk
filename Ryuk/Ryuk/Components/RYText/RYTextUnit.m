@@ -8,6 +8,7 @@
 
 #import "RYTextUnit.h"
 #import <MJExtension.h>
+#import "RYBaseConfig.h"
 
 @implementation RYTextUnit
 
@@ -35,6 +36,7 @@ MJLogAllIvars
 #pragma mark - function
 - (void)atClick {
     NSLog(@"%s",__FUNCTION__);
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE param:@{@"userName" : self.content}];
 }
 
 - (void)sharpClick {

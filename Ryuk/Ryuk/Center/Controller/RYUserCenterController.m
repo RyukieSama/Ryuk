@@ -20,6 +20,7 @@
 @property (nonatomic, assign) long long max_id;
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, assign) NSInteger feature;
+@property (nonatomic, copy) NSString *userName;
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) RYUserHeaderView *vHeader;
 @property (nonatomic, strong) UITableView *tvFlow;
@@ -38,6 +39,9 @@
     if ([self.params objectForKey:@"user"]) {
         self.user = [self.params objectForKey:@"user"];
     }
+    if ([self.params objectForKey:@"userName"]) {
+        self.userName = [self.params objectForKey:@"userName"];
+    }
     [self setupUI];
     [self setDefault];
     [self.tvFlow.mj_header beginRefreshing];
@@ -52,9 +56,7 @@
 }
 
 - (void)setupUI {
-    self.title = self.user.name;
-//    self.view.backgroundColor = [UIColor greenColor];
-    
+    self.title = self.user.name ?: self.userName;
     [self.view addSubview:self.tvFlow];
     [self.tvFlow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -76,7 +78,7 @@
     NSDictionary *param;
     if (header) {
         param = @{
-                  @"screen_name" : self.user.screen_name,
+                  @"screen_name" : self.user.screen_name ?: self.userName,
                   @"since_id" : @(self.since_id),//若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
                   @"count" : @20,//单页返回的记录条数，最大不超过100，默认为20。
                   @"page" : @(self.page),//返回结果的页码，默认为1。
@@ -86,7 +88,7 @@
                   };
     } else {
         param = @{
-                  @"screen_name" : self.user.screen_name,
+                  @"screen_name" : self.user.screen_name ?: self.userName,
                   @"max_id" : @(self.max_id),//若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
                   @"count" : @20,//单页返回的记录条数，最大不超过100，默认为20。
                   @"page" : @(self.page),//返回结果的页码，默认为1。
