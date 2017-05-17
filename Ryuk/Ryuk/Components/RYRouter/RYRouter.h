@@ -50,5 +50,9 @@ typedef void(^pushCallBack)(id obj);
  某话题微博页面
  */
 #define RY_ROUTER_VC_KEY_TOPIC_FLOW @"RY_ROUTER_VC_KEY_TOPIC_FLOW"
+/**
+ 浏览器
+ */
+#define RY_ROUTER_VC_KEY_WEBVIEW @"RY_ROUTER_VC_KEY_WEBVIEW"
 
 @end

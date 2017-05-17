@@ -35,17 +35,15 @@ MJLogAllIvars
 
 #pragma mark - function
 - (void)atClick {
-    NSLog(@"%s",__FUNCTION__);
     [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE param:@{@"userName" : self.content}];
 }
 
 - (void)sharpClick {
-    NSLog(@"%s",__FUNCTION__);
     [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_TOPIC_FLOW param:@{@"topicName" : self.content}];
 }
 
 - (void)linkClick {
-    NSLog(@"%s",__FUNCTION__);
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_WEBVIEW param:@{@"url" : self.content}];
 }
 
 - (void)emojiClick {
