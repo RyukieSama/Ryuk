@@ -46,5 +46,9 @@ typedef void(^pushCallBack)(id obj);
  评论转发列表
  */
 #define RY_ROUTER_VC_KEY_COMMENTLIST @"RY_ROUTER_VC_KEY_COMMENTLIST"
+/**
+ 某话题微博页面
+ */
+#define RY_ROUTER_VC_KEY_TOPIC_FLOW @"RY_ROUTER_VC_KEY_TOPIC_FLOW"
 
 @end

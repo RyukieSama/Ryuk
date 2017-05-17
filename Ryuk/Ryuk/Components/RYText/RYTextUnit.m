@@ -41,6 +41,7 @@ MJLogAllIvars
 
 - (void)sharpClick {
     NSLog(@"%s",__FUNCTION__);
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_TOPIC_FLOW param:@{@"topicName" : self.content}];
 }
 
 - (void)linkClick {
