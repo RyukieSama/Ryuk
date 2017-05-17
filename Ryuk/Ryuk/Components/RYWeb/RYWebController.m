@@ -78,41 +78,43 @@
     [self.vWeb loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.linkString ?: @""]]];
 }
 
-//#pragma mark - webViewNavi
-//// 页面开始加载时调用
-//- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-//    
-//}
-//
-//// 当内容开始返回时调用
-//- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-//    
-//}
-//
-//// 页面加载完成之后调用
-//- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-//    
-//}
-//
-//// 页面加载失败时调用
-//- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
-//    
-//}
-//
-//// 接收到服务器跳转请求之后调用
-//- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
-//    
-//}
-//
-//// 在收到响应后，决定是否跳转
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-//    
-//}
-//
-//// 在发送请求之前，决定是否跳转
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-//    
-//}
+#pragma mark - webViewNavi
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    
+}
+
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    
+}
+
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
+}
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
+    
+}
+
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
+    NSLog(@"跳转到其他的服务器");
+}
+
+// 在收到响应后，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
+    NSLog(@"知道返回内容之后，是否允许加载，允许加载");
+    decisionHandler(WKNavigationResponsePolicyAllow);
+}
+
+// 在发送请求之前，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSLog(@"是否允许这个导航");
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
 
 #pragma mark - webVIewUI
 //这个协议主要用于WKWebView处理web界面的三种提示框(警告框、确认框、输入框)，下面是警告框的例子:
@@ -125,7 +127,52 @@
  *  @param completionHandler 警告框消失调用
  */
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    
+    NSLog(@"%s", __FUNCTION__);
+    // 确定按钮
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }];
+    // alert弹出框
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:alertAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark Confirm选择框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(nonnull NSString *)message initiatedByFrame:(nonnull WKFrameInfo *)frame completionHandler:(nonnull void (^)(BOOL))completionHandler {
+    NSLog(@"%s", __FUNCTION__);
+    // 按钮
+    UIAlertAction *alertActionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // 返回用户选择的信息
+        completionHandler(NO);
+    }];
+    UIAlertAction *alertActionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }];
+    // alert弹出框
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:alertActionCancel];
+    [alertController addAction:alertActionOK];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark TextInput输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(nonnull NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(nonnull WKFrameInfo *)frame completionHandler:(nonnull void (^)(NSString * _Nullable))completionHandler {
+    NSLog(@"%s",__FUNCTION__);
+    // alert弹出框
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:nil preferredStyle:UIAlertControllerStyleAlert];
+    // 输入框
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = defaultText;
+    }];
+    // 确定按钮
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 返回用户输入的信息
+        UITextField *textField = alertController.textFields.firstObject;
+        completionHandler(textField.text);
+    }]];
+    // 显示
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - UI
