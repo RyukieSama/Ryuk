@@ -412,6 +412,9 @@
         _lbContent.numberOfLines = 0;
         _lbContent.textColor = [UIColor blackColor];
 //        _lbContent.lineBreakMode = NSLineBreakByCharWrapping; //切勿修改换行方式会导致点击出问题
+        _lbContent.textClick = ^(RYTextUnit *unit) {
+            [RYRouter textClickOnUnit:unit];
+        };
     }
     return _lbContent;
 }

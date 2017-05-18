@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+RYRouter.h"
+#import "RYTextUnit.h"
 
 typedef void(^pushCallBack)(id obj);
 
@@ -28,6 +29,9 @@ typedef void(^pushCallBack)(id obj);
 + (void)ryPresentVC:(NSString *)vc param:(id)param callBack:(pushCallBack)callBack;
 + (void)ryPresentVC:(NSString *)vc param:(id)param;
 + (void)ryPresentVC:(NSString *)vc;
+
+//点击文字
++ (void)textClickOnUnit:(RYTextUnit *)unit;
 
 #pragma mark - VCKeys
 /**

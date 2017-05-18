@@ -8,6 +8,7 @@ target 'Ryuk' do
 
     #第三方库
     pod 'Masonry'
+#pod 'RYText'
     pod 'SDWebImage' , '3.8.2'
     # pod 'SDWebImage/WebP'
     pod 'MJExtension'

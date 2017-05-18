@@ -58,7 +58,10 @@
         _lbText.font = RY_FONT(14);
         _lbText.textColor = [UIColor whiteColor];
 //        _lbText.textAlignment = NSTextAlignmentRight;
-        _lbText.lineBreakMode = NSLineBreakByWordWrapping;
+//        _lbText.lineBreakMode = NSLineBreakByWordWrapping;
+        _lbText.textClick = ^(RYTextUnit *unit) {
+            [RYRouter textClickOnUnit:unit];
+        };
     }
     return _lbText;
 }

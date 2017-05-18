@@ -21,6 +21,4 @@ typedef NS_ENUM(NSInteger, RYTextUnitType) {
 @property (nonatomic, assign) NSRange range;
 @property (nonatomic, assign) RYTextUnitType type;
 
-- (void)touchEventGo;
-
 @end

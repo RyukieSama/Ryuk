@@ -99,4 +99,40 @@
                                            }];
 }
 
++ (void)textClickOnUnit:(RYTextUnit *)unit {
+    switch (unit.type) {
+        case RYTextUnitTypeURL:
+            [self linkClick:unit];
+            break;
+        case RYTextUnitTypeAt:
+            [self atClick:unit];
+            break;
+        case RYTextUnitTypeEmoji:
+            [self emojiClick:unit];
+            break;
+        case RYTextUnitTypeSharp:
+            [self sharpClick:unit];
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)atClick:(RYTextUnit *)unit {
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_USERHOMEPAGE param:@{@"userName" : unit.content}];
+}
+
++ (void)sharpClick:(RYTextUnit *)unit {
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_TOPIC_FLOW param:@{@"topicName" : unit.content}];
+}
+
++ (void)linkClick:(RYTextUnit *)unit {
+    [RYRouter ryPushToVC:RY_ROUTER_VC_KEY_WEBVIEW param:@{@"url" : unit.content}];
+}
+
++ (void)emojiClick:(RYTextUnit *)unit {
+    NSLog(@"%s",__FUNCTION__);
+}
+
+
 @end

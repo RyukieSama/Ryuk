@@ -262,7 +262,9 @@ static NSString *emojiPre = @"\\[[0-9a-zA-Z\\u4e00-\\u9fa5]+\\]";
     //找出在这个额位置的Unit
     for (RYTextUnit *unit in self.arrUnints) {
         if ((index >= unit.range.location) && (index <= unit.range.location + unit.range.length)) {
-            [unit touchEventGo];//触发点击事件
+            if (self.textClick) {
+                self.textClick(unit);
+            }
         }
     }
 }
