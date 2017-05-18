@@ -7,7 +7,6 @@
 //
 
 #import "RYTextUnit.h"
-#import "RYBaseConfig.h"
 
 @implementation RYTextUnit
 
