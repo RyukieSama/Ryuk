@@ -13,7 +13,6 @@
 		A414EB621EB1A082006CA134 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB611EB1A082006CA134 /* AVFoundation.framework */; };
 		A414EB641EB1A0C5006CA134 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A414EB631EB1A0C5006CA134 /* AVKit.framework */; };
 		A414EB6B1EB1C32D006CA134 /* RYURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */; };
-		A419D0F11EC593FD0021784B /* RYTextUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = A419D0F01EC593FD0021784B /* RYTextUnit.m */; };
 		A42DAFC21EB97B2000097FC1 /* RYAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */; };
 		A4524DCC1EC055CB009DB7E4 /* RYReAndCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCB1EC055CB009DB7E4 /* RYReAndCommentController.m */; };
 		A4524DCF1EC05E0D009DB7E4 /* UIViewController+RYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A4524DCE1EC05E0D009DB7E4 /* UIViewController+RYRouter.m */; };
@@ -28,8 +27,6 @@
 		A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A45A79D51EADAAAA004207C4 /* RYBaseConfig.m */; };
 		A46CE3981EC58B7F006962F9 /* RYEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = A46CE3971EC58B7F006962F9 /* RYEmoji.m */; };
 		A46CE39B1EC58DE6006962F9 /* RYEmojiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46CE39A1EC58DE6006962F9 /* RYEmojiModel.m */; };
-		A46CE3F91EC5939A006962F9 /* RYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46CE3F51EC5939A006962F9 /* RYLabel.m */; };
-		A46CE3FA1EC5939A006962F9 /* RYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A46CE3F81EC5939A006962F9 /* RYTextView.m */; };
 		A47EC1C71EBC526500569E15 /* RYPostToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1C61EBC526500569E15 /* RYPostToolBar.m */; };
 		A47EC1CB1EC008A000569E15 /* RYStatuseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A47EC1CA1EC008A000569E15 /* RYStatuseManager.m */; };
 		A49876411EB0902400359766 /* RYImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A49876381EB0902400359766 /* RYImageBrowser.m */; };
@@ -79,8 +76,6 @@
 		A414EB631EB1A0C5006CA134 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A414EB691EB1C32D006CA134 /* RYURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYURLHelper.h; sourceTree = "<group>"; };
 		A414EB6A1EB1C32D006CA134 /* RYURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYURLHelper.m; sourceTree = "<group>"; };
-		A419D0EF1EC593FD0021784B /* RYTextUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTextUnit.h; sourceTree = "<group>"; };
-		A419D0F01EC593FD0021784B /* RYTextUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTextUnit.m; sourceTree = "<group>"; };
 		A42DAFC01EB97B2000097FC1 /* RYAvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAvatarView.h; sourceTree = "<group>"; };
 		A42DAFC11EB97B2000097FC1 /* RYAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAvatarView.m; sourceTree = "<group>"; };
 		A4524DCA1EC055CB009DB7E4 /* RYReAndCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYReAndCommentController.h; sourceTree = "<group>"; };
@@ -109,10 +104,6 @@
 		A46CE3971EC58B7F006962F9 /* RYEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYEmoji.m; sourceTree = "<group>"; };
 		A46CE3991EC58DE6006962F9 /* RYEmojiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYEmojiModel.h; sourceTree = "<group>"; };
 		A46CE39A1EC58DE6006962F9 /* RYEmojiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYEmojiModel.m; sourceTree = "<group>"; };
-		A46CE3F41EC5939A006962F9 /* RYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLabel.h; sourceTree = "<group>"; };
-		A46CE3F51EC5939A006962F9 /* RYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLabel.m; sourceTree = "<group>"; };
-		A46CE3F71EC5939A006962F9 /* RYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTextView.h; sourceTree = "<group>"; };
-		A46CE3F81EC5939A006962F9 /* RYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTextView.m; sourceTree = "<group>"; };
 		A47EC1C51EBC526500569E15 /* RYPostToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPostToolBar.h; sourceTree = "<group>"; };
 		A47EC1C61EBC526500569E15 /* RYPostToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostToolBar.m; sourceTree = "<group>"; };
 		A47EC1C91EC008A000569E15 /* RYStatuseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStatuseManager.h; sourceTree = "<group>"; };
@@ -254,35 +245,6 @@
 				A46CE39A1EC58DE6006962F9 /* RYEmojiModel.m */,
 			);
 			path = RYEmoji;
-			sourceTree = "<group>";
-		};
-		A46CE3F21EC5939A006962F9 /* RYText */ = {
-			isa = PBXGroup;
-			children = (
-				A46CE3F31EC5939A006962F9 /* RYLabel */,
-				A46CE3F61EC5939A006962F9 /* RYTextView */,
-				A419D0EF1EC593FD0021784B /* RYTextUnit.h */,
-				A419D0F01EC593FD0021784B /* RYTextUnit.m */,
-			);
-			path = RYText;
-			sourceTree = "<group>";
-		};
-		A46CE3F31EC5939A006962F9 /* RYLabel */ = {
-			isa = PBXGroup;
-			children = (
-				A46CE3F41EC5939A006962F9 /* RYLabel.h */,
-				A46CE3F51EC5939A006962F9 /* RYLabel.m */,
-			);
-			path = RYLabel;
-			sourceTree = "<group>";
-		};
-		A46CE3F61EC5939A006962F9 /* RYTextView */ = {
-			isa = PBXGroup;
-			children = (
-				A46CE3F71EC5939A006962F9 /* RYTextView.h */,
-				A46CE3F81EC5939A006962F9 /* RYTextView.m */,
-			);
-			path = RYTextView;
 			sourceTree = "<group>";
 		};
 		A47EC1C81EC0087F00569E15 /* RYStatuseManager */ = {
@@ -560,7 +522,6 @@
 			isa = PBXGroup;
 			children = (
 				A4C7CE9E1ECC39C30008F83B /* RYWeb */,
-				A46CE3F21EC5939A006962F9 /* RYText */,
 				A46CE3951EC58B67006962F9 /* RYEmoji */,
 				A47EC1C81EC0087F00569E15 /* RYStatuseManager */,
 				A4C850561EBC2417000A6235 /* RYPoster */,
@@ -750,7 +711,6 @@
 				A4524DE11EC443F7009DB7E4 /* RYUserHeaderView.m in Sources */,
 				A4C8504E1EBAC479000A6235 /* RYImagesScrollView.m in Sources */,
 				A4524DDB1EC2AC2A009DB7E4 /* RYCommentBar.m in Sources */,
-				A46CE3FA1EC5939A006962F9 /* RYTextView.m in Sources */,
 				A4C8505C1EBC2534000A6235 /* RYPosterController.m in Sources */,
 				A4524DD51EC15F81009DB7E4 /* RYCommentListChildController.m in Sources */,
 				A45A79CA1EADA942004207C4 /* AppDelegate.m in Sources */,
@@ -766,9 +726,7 @@
 				A4FE99DA1EADCDCA00BE84A7 /* RYCenterTabController.m in Sources */,
 				A4FE99FA1EAEF05B00BE84A7 /* RYStatuse.m in Sources */,
 				A4524DCC1EC055CB009DB7E4 /* RYReAndCommentController.m in Sources */,
-				A419D0F11EC593FD0021784B /* RYTextUnit.m in Sources */,
 				A45A79D61EADAAAA004207C4 /* RYBaseConfig.m in Sources */,
-				A46CE3F91EC5939A006962F9 /* RYLabel.m in Sources */,
 				A4FE99E71EADD7B000BE84A7 /* RYLoginController.m in Sources */,
 				A4C7CEA11ECC39D50008F83B /* RYWebController.m in Sources */,
 				A45A79D31EADA9FE004207C4 /* RYBaseNavigationController.m in Sources */,
