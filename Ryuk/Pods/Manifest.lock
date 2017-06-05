@@ -17,6 +17,8 @@ PODS:
   - Masonry (1.0.2)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
+  - RYImagePicker (0.0.4):
+    - Masonry (~> 1.0.2)
   - RYImagesScroller (0.0.2):
     - Masonry
     - SDWebImage
@@ -31,6 +33,7 @@ DEPENDENCIES:
   - Masonry
   - MJExtension
   - MJRefresh
+  - RYImagePicker
   - RYImagesScroller
   - RYText
   - SDWebImage (= 3.8.2)
@@ -50,11 +53,12 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  RYImagePicker: 842b8fb62000c185a85ac5e3c2f8d53196f19f5e
   RYImagesScroller: fc5896141828d3f9e2532b7dc1328cf4fa04ad25
   RYText: 9867578b3211e5e8e89e985fc9bc272a4099ad48
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
-PODFILE CHECKSUM: 77b27f9550d4639a892bd58cea4b33ecf1630005
+PODFILE CHECKSUM: 04b2419bdb76c2ffec7c82ae5cff316e76fead91
 
 COCOAPODS: 1.2.0

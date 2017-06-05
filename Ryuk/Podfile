@@ -16,7 +16,7 @@ target 'Ryuk' do
     pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
 
     pod 'RYText'
-#    pod 'RYImagePicker'
+    pod 'RYImagePicker'
     pod 'RYImagesScroller'
 
 end
