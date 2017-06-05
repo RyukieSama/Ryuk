@@ -1,9 +1,9 @@
 //
 //  RYImagesScrollView.h
-//  Ryuk
+//  RYImagesScroller
 //
 //  Created by RongqingWang on 16/8/6.
-//  Copyright © 2016年 RyukieSama. All rights reserved.
+//  Copyright © 2016年 RongqingWang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -19,17 +19,13 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
      用户自定义分页样式
      */
     RYImageScrollerPageStyleCustom = 100
-//    /**
-//     数字样式
-//     */
-//    RYImageScrollerPageStyleNumber = 101
 };
 
 @interface RYImagesScrollView : UIView
 
 /**
  初始化方法   并设置分页样式
-
+ 
  @param style 分页样式
  */
 - (instancetype)initWithFrame:(CGRect)frame pageStyle:(RYImageScrollerPageStyle)style;
@@ -58,7 +54,7 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
 @property (nonatomic, strong) NSArray <UIView *> *attachViewArr;
 @property (nonatomic, strong) UICollectionView *cv_collectionView;
 /**
- *  滚动时间间隔   默认2s   0s不滚动
+ *  滚动时间间隔   默认2s
  */
 @property (nonatomic, assign) CGFloat autoScrollTimeInterval;
 /**
@@ -74,6 +70,10 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
  */
 @property (nonatomic, strong) UIImage *currentPageImage;
 /**
+ 加载图片的占位图
+ */
+@property (nonatomic, strong) UIImage *placeHolderImage;
+/**
  *  点击图片的回调
  */
 @property (nonatomic, copy) ImageScrollHandler handler_imageClick;
@@ -81,11 +81,9 @@ typedef NS_ENUM(NSInteger, RYImageScrollerPageStyle) {
  *  每次滚动完的回调
  */
 @property (nonatomic, copy) ImageScrollHandler handler_scrollCallBack;
+/**
+ 指定当前位置
+ */
 @property (nonatomic, assign) NSInteger scrollToPage;
-
-//TODO: 自定义分页颜色
-//TODO: 0秒不轮播
-//TODO: 1张不显示分页
-//TODO: 设置当前页数
 
 @end

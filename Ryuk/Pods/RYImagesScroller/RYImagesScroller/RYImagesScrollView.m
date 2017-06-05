@@ -1,27 +1,25 @@
 //
 //  RYImagesScrollView.m
-//  Ryuk
+//  RYImagesScroller
 //
 //  Created by RongqingWang on 16/8/6.
-//  Copyright © 2016年 RyukieSama. All rights reserved.
+//  Copyright © 2016年 RongqingWang. All rights reserved.
 //
 
 #import "RYImagesScrollView.h"
-#import <Masonry.h>
-#import <UIImageView+WebCache.h>
+#import "Masonry.h"
+#import "UIImageView+WebCache.h"
 #import "RYImagesScrollPageView.h"
 
 static NSString *ID = @"imageCell";
 static NSString *videoID = @"imageCellWithVideo";
-
-static BOOL useHTTPS = YES;
 
 @interface RYImagesScrollViewCell : UICollectionViewCell
 
 @property (nonatomic, copy) NSString *imageUrl;
 @property (nonatomic, strong) UIImageView *iv_image;
 @property (nonatomic, strong) UIView *v_attach;
-@property (nonatomic, strong) UIImageView *ivBack;
+@property (nonatomic, strong) UIImage *placeHolderImage;
 
 @end
 
@@ -36,11 +34,6 @@ static BOOL useHTTPS = YES;
 
 - (void)setUpUI {
     self.contentView.layer.masksToBounds = YES;
-    [self.contentView addSubview:self.ivBack];
-    [self.ivBack mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    
     [self.contentView addSubview:self.iv_image];
     [self.iv_image mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -49,8 +42,7 @@ static BOOL useHTTPS = YES;
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = imageUrl;
-    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"bg_default_color"]];
-    [self.ivBack sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"bg_default_color"]];
+    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:self.placeHolderImage];
 }
 
 - (UIImageView *)iv_image {
@@ -67,22 +59,6 @@ static BOOL useHTTPS = YES;
     [self.v_attach mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
-}
-
-- (UIImageView *)ivBack {
-    if (!_ivBack) {
-        _ivBack = [[UIImageView alloc] init];
-        _ivBack.contentMode = UIViewContentModeScaleAspectFill;
-        _ivBack.layer.masksToBounds = YES;
-        //毛玻璃
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-        [_ivBack addSubview:effectView];
-        [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(0);
-        }];
-    }
-    return _ivBack;
 }
 
 @end
@@ -113,11 +89,11 @@ static BOOL useHTTPS = YES;
         make.edges.mas_equalTo(0);
     }];
     if (self.pageStyle == RYImageScrollerPageStyleCustom) {
-//        [self addSubview:self.pageControl];
-//        [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.mas_equalTo(0);
-//            make.bottom.mas_equalTo(-12);
-//        }];
+        //        [self addSubview:self.pageControl];
+        //        [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.centerX.mas_equalTo(0);
+        //            make.bottom.mas_equalTo(-12);
+        //        }];
     } else {
         [self addSubview:self.sysPageControl];
         [self.sysPageControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,11 +114,9 @@ static BOOL useHTTPS = YES;
     if (_imageURLs.count < 2) {
         [self invalidateTimer];
         self.cv_collectionView.scrollEnabled = NO;
-        self.sysPageControl.hidden = YES;
     } else {
         [self invalidateTimer];
         [self setupTimer];
-        self.sysPageControl.hidden = NO;
         self.cv_collectionView.scrollEnabled = YES;
     }
     [self.cv_collectionView reloadData];
@@ -194,7 +168,7 @@ static BOOL useHTTPS = YES;
 
 #pragma mark - Timer
 - (void)setupTimer {
-    if (self.imageURLs.count <= 1 || self.autoScrollTimeInterval == 0) {
+    if (self.imageURLs.count <= 1) {
         return;
     }
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval
@@ -298,8 +272,6 @@ static BOOL useHTTPS = YES;
 - (UIPageControl *)sysPageControl {
     if (!_sysPageControl) {
         _sysPageControl = [[UIPageControl alloc] init];
-        _sysPageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-        _sysPageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     }
     return _sysPageControl;
 }
@@ -329,6 +301,7 @@ static BOOL useHTTPS = YES;
     RYImagesScrollViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.imageUrl = self.imageURLs[indexPath.row];
     cell.iv_image.contentMode = self.contentMode ? self.contentMode : UIViewContentModeScaleAspectFill;
+    cell.placeHolderImage = self.placeHolderImage;
     return cell;
 }
 

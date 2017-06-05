@@ -8,12 +8,15 @@ target 'Ryuk' do
 
     #第三方库
     pod 'Masonry'
-    pod 'RYText' , '0.0.3'
     pod 'SDWebImage' , '3.8.2'
     # pod 'SDWebImage/WebP'
     pod 'MJExtension'
     pod 'AFNetworking'
     pod 'MJRefresh'
     pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
+
+    pod 'RYText'
+#    pod 'RYImagePicker'
+    pod 'RYImagesScroller'
 
 end
