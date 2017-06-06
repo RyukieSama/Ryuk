@@ -8,8 +8,8 @@
 
 #import "RYImageBrowserInnerController.h"
 #import "RYImageBrowserScrollView.h"
-#import <SDWebImageManager.h>
-#import <Masonry.h>
+#import "SDWebImageManager.h"
+#import "Masonry.h"
 #import "RYImageBrowserPageController.h"
 
 #define PREVIEW_IV_WIDTH 100

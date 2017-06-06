@@ -8,13 +8,12 @@
 
 #import "RYImageBrowserPageController.h"
 #import "RYImageBrowserInnerController.h"
-#import <Masonry.h>
-#import <SDImageCache.h>
-#import <SDWebImageManager.h>
+#import "Masonry.h"
+#import "SDImageCache.h"
+#import "SDWebImageManager.h"
+#import "RYImageBrowserURLChecker.h"
 
 #define PAGE_BOTTOM_OFFSET -20
-
-typedef void(^CheckURLCallBack)(id obj);
 
 @interface RYImageBrowserPageController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
@@ -152,22 +151,6 @@ typedef void(^CheckURLCallBack)(id obj);
     self.lbIndex.text = [NSString stringWithFormat:@"%ld/%lu",(long)index,(unsigned long)self.images.count];
 }
 
-#pragma mark - function
-- (BOOL)checkIsURL:(id)image StringDo:(CheckURLCallBack)stringCall ImageDo:(CheckURLCallBack)imageCall {
-    if ([image isKindOfClass:[NSString class]]) {
-        if (stringCall) {
-            stringCall(nil);
-        }
-        return YES;
-    }
-    else {
-        if (imageCall) {
-            imageCall(nil);
-        }
-        return NO;
-    }
-}
-
 #pragma mark - PageController 设置分页
 - (NSInteger)pageIndex {
     return [self.images indexOfObject:self.currentImage];
@@ -180,7 +163,9 @@ typedef void(^CheckURLCallBack)(id obj);
         __block RYImageBrowserInnerController *vc;
         id img = [self.images objectAtIndex:pageIndex];
         //根据不同类型初始化不同控制器   UIImage 或者   URLString
-        [self checkIsURL:img StringDo:^(id obj) {
+        [RYImageBrowserURLChecker checkIsURL:img WebStringDo:^(id obj) {
+            vc = [RYImageBrowserInnerController innerControllerWithImageURL:img];
+        } FileStringDo:^(id obj) {
             vc = [RYImageBrowserInnerController innerControllerWithImageURL:img];
         } ImageDo:^(id obj) {
             vc = [RYImageBrowserInnerController innerControllerWithImage:img];
@@ -217,7 +202,10 @@ typedef void(^CheckURLCallBack)(id obj);
     
     id imageObj = [self.images objectAtIndex:indexT - 1];
     __block RYImageBrowserInnerController *inner;
-    [self checkIsURL:imageObj StringDo:^(id obj) {
+    
+    [RYImageBrowserURLChecker checkIsURL:imageObj WebStringDo:^(id obj) {
+        inner = [RYImageBrowserInnerController innerControllerWithImageURL:imageObj];
+    } FileStringDo:^(id obj) {
         inner = [RYImageBrowserInnerController innerControllerWithImageURL:imageObj];
     } ImageDo:^(id obj) {
         inner = [RYImageBrowserInnerController innerControllerWithImage:imageObj];
@@ -244,11 +232,15 @@ typedef void(^CheckURLCallBack)(id obj);
     
     id imageObj = [self.images objectAtIndex:indexT + 1];
     __block RYImageBrowserInnerController *inner;
-    [self checkIsURL:imageObj StringDo:^(id obj) {
+    
+    [RYImageBrowserURLChecker checkIsURL:imageObj WebStringDo:^(id obj) {
+        inner = [RYImageBrowserInnerController innerControllerWithImageURL:imageObj];
+    } FileStringDo:^(id obj) {
         inner = [RYImageBrowserInnerController innerControllerWithImageURL:imageObj];
     } ImageDo:^(id obj) {
         inner = [RYImageBrowserInnerController innerControllerWithImage:imageObj];
     }];
+    
     inner.thumbnailsSize = self.thumbnailsSize;
     return inner ?:nil;
 }

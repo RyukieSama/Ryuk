@@ -47,6 +47,9 @@
     self.window.rootViewController = [self setRootController];
     [self.window makeKeyAndVisible];
     [self setupNetWork];
+    
+    //UI调试
+    [NSClassFromString(@"UIDebuggingInformationOverlay") performSelector:NSSelectorFromString(@"prepareDebuggingOverlay")];
     return YES;
 }
 
