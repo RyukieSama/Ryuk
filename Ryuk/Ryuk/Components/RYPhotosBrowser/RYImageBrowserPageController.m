@@ -73,9 +73,16 @@
     [[SDWebImageDownloader sharedDownloader] cancelAllDownloads];
 //    [RYCustomHUD dismiss];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    [self dismissViewControllerAnimated:YES completion:^{
-//        [RYCustomHUD dismiss];
-    }];
+    
+    if (self.dismissCallBack) {
+        self.dismissCallBack(nil);
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }
 }
 
 #pragma mark - life

@@ -12,11 +12,11 @@
 #import "RYImageBrowserURLChecker.h"
 #import "UIImageView+WebCache.h"
 
-typedef void(^showCallBack)(id obj);
-
 @interface RYImageBrowser ()<UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) CGSize thumbnailsSize;
+@property (nonatomic, copy) showCallBack presentCallBack;
+@property (nonatomic, copy) showCallBack dismissCallBack;
 
 @end
 
@@ -34,9 +34,7 @@ typedef void(^showCallBack)(id obj);
     if (!imageView) {//没有指定点击控件
         RYImageBrowser *ib = [[RYImageBrowser alloc] init];
         ib.thumbnailsSize = size;
-        [ib showBrowserWithURLs:imageURLs thumbnailsSize:size atIndex:index withPageStyle:style callBack:^(id obj) {
-            
-        }];
+        [ib showBrowserWithURLs:imageURLs thumbnailsSize:size atIndex:index withPageStyle:style];
         return;
     }
     
@@ -54,6 +52,8 @@ typedef void(^showCallBack)(id obj);
     topImage.contentMode = UIViewContentModeScaleAspectFit;
     [backView addSubview:topImage];
 //    topImage.backgroundColor = [UIColor clearColor];
+    
+    CGPoint dismissToCenter = topImage.center;
     
     id imageObj = [imageURLs objectAtIndex:index];
     [RYImageBrowserURLChecker checkIsURL:imageObj WebStringDo:^(id obj) {
@@ -79,13 +79,25 @@ typedef void(^showCallBack)(id obj);
     } completion:^(BOOL finished) {
         RYImageBrowser *ib = [[RYImageBrowser alloc] init];
         ib.thumbnailsSize = size;
-        [ib showBrowserWithURLs:imageURLs thumbnailsSize:size atIndex:index withPageStyle:style callBack:^(id obj) {
-            [backView removeFromSuperview];
-        }];
+        ib.presentCallBack = ^(id obj) {
+            backView.hidden = YES;
+        };
+        ib.dismissCallBack = ^(id obj) {
+            backView.hidden = NO;
+            [UIView animateWithDuration:0.25 animations:^{
+                backView.backgroundColor = [UIColor clearColor];
+                topImage.frame = imageRect;
+                topImage.center = dismissToCenter;
+            } completion:^(BOOL finished) {
+                backView.hidden = YES;
+                [backView removeFromSuperview];
+            }];
+        };
+        [ib showBrowserWithURLs:imageURLs thumbnailsSize:size atIndex:index withPageStyle:style];
     }];
 }
 
-- (void)showBrowserWithURLs:(NSArray *)imageURLs thumbnailsSize:(CGSize)size atIndex:(NSInteger)index withPageStyle:(RYImageBrowserPageStyle)style callBack:(showCallBack)callBack {
+- (void)showBrowserWithURLs:(NSArray *)imageURLs thumbnailsSize:(CGSize)size atIndex:(NSInteger)index withPageStyle:(RYImageBrowserPageStyle)style {
     //checkArr    提高容错
     for (id obj in imageURLs) {
         if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[UIImage class]]) {
@@ -104,6 +116,7 @@ typedef void(^showCallBack)(id obj);
     vc.pageIndex = (index>=0 && index < imageURLs.count) ? index : 0;
     //持有一下它防止在dimiss之前被释放掉导致自定义的专场动画的代理没有了
     vc.browser = self;
+    vc.dismissCallBack = self.dismissCallBack;
     
     //设置分页样式
     if (style > 99) {
@@ -121,8 +134,8 @@ typedef void(^showCallBack)(id obj);
     vc.modalPresentationStyle = UIModalPresentationFullScreen;
     
     [[self getAppTopVieController] presentViewController:vc animated:YES completion:^{
-        if (callBack) {
-            callBack(nil);
+        if (self.presentCallBack) {
+            self.presentCallBack(nil);
         }
     }];
 }
