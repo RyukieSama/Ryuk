@@ -165,9 +165,6 @@
 //                                                                    [strongSelf dismissHUD];
 //                                                                    [strongSelf showErrorHUD];
                                                                 } else {
-                                                                    if (strongSelf.loadedCallBack) {
-                                                                        strongSelf.loadedCallBack(0, 0, nil);
-                                                                    }
                                                                     [[SDWebImageManager sharedManager] saveImageToCache:image forURL:imageURL];
                                                                     [strongSelf setImageForScrollView:image];
                                                                 }
@@ -205,9 +202,12 @@
 - (void)setImageForScrollView:(UIImage *)image {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf dismissHUD];
+//        [weakSelf dismissHUD];
         [weakSelf.ivPre removeFromSuperview];
         weakSelf.scrollView.image = image;
+        if (weakSelf.loadedCallBack) {
+            weakSelf.loadedCallBack(0, 0, nil);
+        }
     });
 }
 

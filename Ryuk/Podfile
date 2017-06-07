@@ -14,6 +14,7 @@ target 'Ryuk' do
     pod 'AFNetworking'
     pod 'MJRefresh'
     pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
+    pod 'SVProgressHUD'
 
     pod 'RYText'
     pod 'RYImagePicker'
