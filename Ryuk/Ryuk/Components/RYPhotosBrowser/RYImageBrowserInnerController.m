@@ -136,7 +136,7 @@
         [self showHUD];
         [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:imageURL
                                                               options:0
-                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
                                                                  __strong __typeof(weakSelf)strongSelf = weakSelf;
                                                                  [strongSelf showHUD];
                                                              }
