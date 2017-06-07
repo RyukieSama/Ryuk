@@ -52,6 +52,17 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    //隐藏HUD
+    if (self.changeCallBack) {
+        self.changeCallBack(0, 0, nil);
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (self.loadedCallBack) {
+        self.loadedCallBack(0, 0, nil);
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -120,12 +131,12 @@
         return;
     }
     else {
-        //2: 再看有没有缓存缩略图
-        UIImage *thumbnails = [self getCachedImage:self.imageURL withSize:self.thumbnailsSize];
-        if (thumbnails) {
-            //已经缓存了缩略图就展示  没有就不展示
-            self.ivPre.image = thumbnails;
-        }
+//        //2: 再看有没有缓存缩略图
+//        UIImage *thumbnails = [self getCachedImage:self.imageURL withSize:self.thumbnailsSize];
+//        if (thumbnails) {
+//            //已经缓存了缩略图就展示  没有就不展示
+//            self.ivPre.image = thumbnails;
+//        }
         
         //否则就下载
         __weak typeof(self)weakSelf = self;
@@ -138,7 +149,10 @@
                                                               options:0
                                                              progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
                                                                  __strong __typeof(weakSelf)strongSelf = weakSelf;
-                                                                 [strongSelf showHUD];
+//                                                                 [strongSelf showHUD];
+                                                                 if (strongSelf.progressCallBack) {
+                                                                     strongSelf.progressCallBack(receivedSize, expectedSize, targetURL);
+                                                                 }
                                                              }
                                                             completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
                                                                 __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -148,9 +162,12 @@
                                                                 }
                                                                 
                                                                 if (error) {
-                                                                    [strongSelf dismissHUD];
-                                                                    [strongSelf showErrorHUD];
+//                                                                    [strongSelf dismissHUD];
+//                                                                    [strongSelf showErrorHUD];
                                                                 } else {
+                                                                    if (strongSelf.loadedCallBack) {
+                                                                        strongSelf.loadedCallBack(0, 0, nil);
+                                                                    }
                                                                     [[SDWebImageManager sharedManager] saveImageToCache:image forURL:imageURL];
                                                                     [strongSelf setImageForScrollView:image];
                                                                 }
