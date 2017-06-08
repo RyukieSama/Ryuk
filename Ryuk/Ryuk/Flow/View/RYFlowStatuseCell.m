@@ -384,6 +384,9 @@
                 NSLog(@"loadedImage");
                 [SVProgressHUD dismiss];
             }];
+
+//            [RYImageBrowser showBrowserWithImageURLs:arr atIndex:[obj integerValue] withPageStyle:RYImageBrowserPageStyleAuto];
+            
         };
 //        _vCover.normalPageImage = [UIImage imageNamed:@"outdoor_icon_carousel"];
 //        _vCover.currentPageImage = [UIImage imageNamed:@"outdoor_icon_carousel_selected"];
