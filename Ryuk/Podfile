@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 # run: pod install --no-repo-update
-platform :ios, '8.0'
+platform :ios, '9.0'
 # 工程不显示任何警告
 inhibit_all_warnings!
 
@@ -19,5 +19,6 @@ target 'Ryuk' do
     pod 'RYText'
     pod 'RYImagePicker'
     pod 'RYImagesScroller'
+    pod 'RYPhotosBrowser'
 
 end

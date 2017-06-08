@@ -22,6 +22,9 @@ PODS:
   - RYImagesScroller (0.0.2):
     - Masonry
     - SDWebImage
+  - RYPhotosBrowser (0.0.1):
+    - Masonry
+    - SDWebImage
   - RYText (0.0.3)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -36,6 +39,7 @@ DEPENDENCIES:
   - MJRefresh
   - RYImagePicker
   - RYImagesScroller
+  - RYPhotosBrowser
   - RYText
   - SVProgressHUD
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
@@ -56,11 +60,12 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   RYImagePicker: 894fdc61f52f8902c0f05db95910200afc275367
   RYImagesScroller: fc5896141828d3f9e2532b7dc1328cf4fa04ad25
+  RYPhotosBrowser: a849b56d0ec5c3eeaad0bec2c4bb9872d87f3def
   RYText: 9867578b3211e5e8e89e985fc9bc272a4099ad48
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
-PODFILE CHECKSUM: 3a6e9f59a35f8f78f62225f22e646b04c20d3b7c
+PODFILE CHECKSUM: 99c8e39b4aa7c59514d50e0ac643d8c912810a49
 
 COCOAPODS: 1.2.0
