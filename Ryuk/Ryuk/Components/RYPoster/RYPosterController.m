@@ -9,6 +9,7 @@
 #import "RYPosterController.h"
 #import "RYBaseConfig.h"
 #import "RYPostToolBar.h"
+#import "RYEmoji.h"
 
 #define KEYBOARD_OFFSET 515/2
 #define TOOLBAR_HEIGHT 50
@@ -94,6 +95,15 @@
 
 - (void)postToolBarEmojiClick {
     NSLog(@"%s",__FUNCTION__);
+    [RYEmoji getEmojisFace:^(NSArray<RYEmojiModel *> *emojis) {
+        
+    }];
+    [RYEmoji getEmojisAni:^(NSArray<RYEmojiModel *> *emojis) {
+        
+    }];
+    [RYEmoji getEmojisCartoon:^(NSArray<RYEmojiModel *> *emojis) {
+        
+    }];
 }
 
 - (void)postToolBarTopicClick {

@@ -264,6 +264,7 @@
         _vWeb = [[RYWebView alloc] init];
         _vWeb.navigationDelegate = self;
         _vWeb.UIDelegate = self;
+        _vWeb.allowsBackForwardNavigationGestures = YES;//支持手势进退
     }
     return _vWeb;
 }
