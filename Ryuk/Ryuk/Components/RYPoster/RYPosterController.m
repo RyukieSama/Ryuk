@@ -10,6 +10,7 @@
 #import "RYBaseConfig.h"
 #import "RYPostToolBar.h"
 #import "RYEmoji.h"
+#import <RYImagePicker.h>
 
 #define KEYBOARD_OFFSET 515/2
 #define TOOLBAR_HEIGHT 50
@@ -86,7 +87,13 @@
 }
 
 - (void)postToolBarAlbumClick {
-    NSLog(@"%s",__FUNCTION__);
+    RYImagePicker *imagePicker = [RYImagePicker sharedInstance];
+    imagePicker.maxSelectedNumber = 9;
+    [imagePicker presentImagePickerControllerWithFinishedHandler:^(NSArray *selectedImages, NSArray *selectedAssets, NSDictionary *info) {
+        NSLog(@"%@",selectedAssets);
+    } cancelHandler:^{
+        
+    } from:self];
 }
 
 - (void)postToolBarAtClick {
