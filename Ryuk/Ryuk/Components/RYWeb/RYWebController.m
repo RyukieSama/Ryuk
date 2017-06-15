@@ -209,7 +209,7 @@
     [self.view addSubview:self.vWeb];
     [self.vWeb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.bottom.mas_equalTo(tbHeight);
+        make.bottom.mas_equalTo(-tbHeight);
     }];
     [self.view addSubview:self.tbBar];
     [self.tbBar mas_makeConstraints:^(MASConstraintMaker *make) {
