@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RYImageBrowser.h"
+#import "RYImageBrowserInnerController.h"
+
+typedef void(^showCallBack)(id obj);
 
 @interface RYImageBrowserPageController : UIPageViewController
 
@@ -31,7 +34,11 @@
  防止RYImageBrowser被释放掉
  */
 @property (nonatomic, strong) RYImageBrowser *browser;
-@property (nonatomic) CGSize thumbnailsSize;
+@property (nonatomic, copy) showCallBack dismissCallBack;
+//@property (nonatomic) CGSize thumbnailsSize;
+@property (nonatomic, copy) RYWebImageDownloaderProgressBlock progressCallBack;
+@property (nonatomic, copy) RYWebImageDownloaderProgressBlock changeCallBack;
+@property (nonatomic, copy) RYWebImageDownloaderProgressBlock loadedCallBack;
 
 #pragma mark - NOTI
 #define kRYImageBrowserOneClick @"kRYImageBrowserOneClick"

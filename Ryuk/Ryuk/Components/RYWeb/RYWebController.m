@@ -16,6 +16,11 @@
 @property (nonatomic, strong) UIColor *progressColor;
 @property (strong, nonatomic) CALayer *progresslayer;
 @property (nonatomic, strong) RYWebView *vWeb;
+@property (nonatomic, strong) UIToolbar *tbBar;
+@property (nonatomic, strong) UIButton *btBack;
+@property (nonatomic, strong) UIButton *btForward;
+@property (nonatomic, strong) UIButton *btRefresh;
+@property (nonatomic, strong) UIButton *btShare;
 
 @end
 
@@ -52,6 +57,28 @@
     [self.vWeb addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+- (void)webViewBack {
+    if (!self.vWeb.canGoBack) {
+        return;
+    }
+    [self.vWeb goBack];
+}
+
+- (void)webViewForward {
+    if (!self.vWeb.canGoForward) {
+        return;
+    }
+    [self.vWeb goForward];
+}
+
+- (void)webViewRefresh {
+    [self.vWeb reload];
+}
+
+- (void)webViewShare {
+    NSLog(@"%s",__FUNCTION__);
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         self.progresslayer.opacity = 1;
@@ -81,7 +108,7 @@
 #pragma mark - webViewNavi
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    
+    [self setupToolBarState];
 }
 
 // 当内容开始返回时调用
@@ -91,7 +118,7 @@
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    
+    self.title = webView.title;
 }
 
 // 页面加载失败时调用
@@ -178,11 +205,57 @@
 
 #pragma mark - UI
 - (void)setupUI {
+    CGFloat tbHeight = 40;
     [self.view addSubview:self.vWeb];
     [self.vWeb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.left.right.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(-tbHeight);
+    }];
+    [self.view addSubview:self.tbBar];
+    [self.tbBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(tbHeight);
     }];
     NSLog(@"%@",self.progresslayer);
+    
+    [self setupToolBar];
+}
+
+- (void)setupToolBar {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width/4;
+    [self.tbBar addSubview:self.btBack];
+    [self.btBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(width);
+    }];
+    
+    [self.tbBar addSubview:self.btForward];
+    [self.btForward mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.btBack.mas_right);
+        make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(width);
+    }];
+    
+    [self.tbBar addSubview:self.btRefresh];
+    [self.btRefresh mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.btForward.mas_right);
+        make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(width);
+    }];
+    
+    [self.tbBar addSubview:self.btShare];
+    [self.btShare mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.btRefresh.mas_right);
+        make.centerY.mas_equalTo(0);
+        make.width.mas_equalTo(width);
+    }];
+    
+}
+
+- (void)setupToolBarState {
+    self.btBack.enabled = self.vWeb.canGoBack;
+    self.btForward.enabled = self.vWeb.canGoForward;
 }
 
 #pragma mark - lazy
@@ -191,6 +264,7 @@
         _vWeb = [[RYWebView alloc] init];
         _vWeb.navigationDelegate = self;
         _vWeb.UIDelegate = self;
+        _vWeb.allowsBackForwardNavigationGestures = YES;//支持手势进退
     }
     return _vWeb;
 }
@@ -207,6 +281,56 @@
         _progresslayer = layer;
     }
     return _progresslayer;
+}
+
+- (UIToolbar *)tbBar {
+    if (!_tbBar) {
+        _tbBar = [[UIToolbar alloc] init];
+        
+    }
+    return _tbBar;
+}
+
+- (UIButton *)btBack {
+    if (!_btBack) {
+        _btBack = [[UIButton alloc] init];
+        [_btBack setTitle:@"B" forState:UIControlStateNormal];
+        [_btBack addTarget:self action:@selector(webViewBack) forControlEvents:UIControlEventTouchUpInside];
+        [_btBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btBack setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
+    return _btBack;
+}
+
+- (UIButton *)btForward {
+    if (!_btForward) {
+        _btForward = [[UIButton alloc] init];
+        [_btForward setTitle:@"F" forState:UIControlStateNormal];
+        [_btForward addTarget:self action:@selector(webViewForward) forControlEvents:UIControlEventTouchUpInside];
+        [_btForward setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btForward setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
+    return _btForward;
+}
+
+- (UIButton *)btRefresh {
+    if (!_btRefresh) {
+        _btRefresh = [[UIButton alloc] init];
+        [_btRefresh setTitle:@"R" forState:UIControlStateNormal];
+        [_btRefresh setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btRefresh addTarget:self action:@selector(webViewRefresh) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btRefresh;
+}
+
+- (UIButton *)btShare {
+    if (!_btShare) {
+        _btShare = [[UIButton alloc] init];
+        [_btShare setTitle:@"S" forState:UIControlStateNormal];
+        [_btShare setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btShare addTarget:self action:@selector(webViewShare) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btShare;
 }
 
 @end

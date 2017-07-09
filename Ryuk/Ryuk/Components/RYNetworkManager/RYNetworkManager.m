@@ -66,20 +66,56 @@ static NSConditionLock *conditionLock;
                                                                          if ([operationCachePool objectForKey:url]) {
                                                                              [operationCachePool removeObjectForKey:url];
                                                                          }
-                                                                         NSDictionary *dic = responseObject;
                                                                          
-                                                                         NSLog(@"------------------------------- \n %@ \n -------------------------------",dic);
-                                                                         
-                                                                         if (dic.allKeys.count == 0) {
+                                                                         if ([responseObject isKindOfClass:[NSArray class]]) {
+                                                                             if ([responseObject count] == 0) {
+                                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                     completionHandler(nil);
+                                                                                 });
+                                                                                 return;
+                                                                             }
+                                                                             
+                                                                             NSLog(@"------------------------------- \n %@ \n -------------------------------",responseObject);
+                                                                             
+                                                                             //正常返回
                                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                 completionHandler(nil);
+                                                                                 if (responseModel) {
+                                                                                     completionHandler([responseModel mj_objectArrayWithKeyValuesArray:responseObject] ?: nil);
+                                                                                 } else {
+                                                                                     completionHandler(responseObject ?: nil);
+                                                                                 }
                                                                              });
-                                                                             return;
+                                                                             
+                                                                         } else {
+                                                                             NSDictionary *dic = responseObject;
+                                                                             
+                                                                             NSLog(@"------------------------------- \n %@ \n -------------------------------",dic);
+                                                                             
+                                                                             //空
+                                                                             if (dic.allKeys.count == 0) {
+                                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                     completionHandler(nil);
+                                                                                 });
+                                                                                 return;
+                                                                             }
+                                                                             
+                                                                             //是否报错
+                                                                             if ([dic objectForKey:@"error_code"]) {
+                                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                     completionHandler(dic ?: nil);
+                                                                                 });
+                                                                             }
+                                                                             
+                                                                             //正常返回
+                                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                 if (responseModel) {
+                                                                                     completionHandler([responseModel mj_objectWithKeyValues:dic] ?: nil);
+                                                                                 } else {
+                                                                                     completionHandler(dic ?: nil);
+                                                                                 }
+                                                                             });
                                                                          }
                                                                          
-                                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                                             completionHandler(dic ?: nil);
-                                                                         });
                                                                      }
                                                                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                                                          if ([operationCachePool objectForKey:url]) {
@@ -130,33 +166,56 @@ static NSConditionLock *conditionLock;
                                                                         if ([operationCachePool objectForKey:url]) {
                                                                             [operationCachePool removeObjectForKey:url];
                                                                         }
-                                                                        NSDictionary *dic = responseObject;
                                                                         
-                                                                        NSLog(@"------------------------------- \n %@ \n -------------------------------",dic);
-                                                                        
-                                                                        //空
-                                                                        if (dic.allKeys.count == 0) {
-                                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                completionHandler(nil);
-                                                                            });
-                                                                            return;
-                                                                        }
-                                                                        
-                                                                        //是否报错
-                                                                        if ([dic objectForKey:@"error_code"]) {
-                                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                completionHandler(dic ?: nil);
-                                                                            });
-                                                                        }
-                                                                        
-                                                                        //正常返回
-                                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                                            if (responseModel) {
-                                                                                completionHandler([responseModel mj_objectWithKeyValues:dic] ?: nil);
-                                                                            } else {
-                                                                                completionHandler(dic ?: nil);
+                                                                        if ([responseObject isKindOfClass:[NSArray class]]) {
+                                                                            if ([responseObject count] == 0) {
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                    completionHandler(nil);
+                                                                                });
+                                                                                return;
                                                                             }
-                                                                        });
+                                                                            
+                                                                            NSLog(@"------------------------------- \n %@ \n -------------------------------",responseObject);
+                                                                            
+                                                                            //正常返回
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                if (responseModel) {
+                                                                                    completionHandler([responseModel mj_objectArrayWithKeyValuesArray:responseObject] ?: nil);
+                                                                                } else {
+                                                                                    completionHandler(responseObject ?: nil);
+                                                                                }
+                                                                            });
+                                                                            
+                                                                        } else {
+                                                                            NSDictionary *dic = responseObject;
+                                                                            
+                                                                            NSLog(@"------------------------------- \n %@ \n -------------------------------",dic);
+                                                                            
+                                                                            //空
+                                                                            if (dic.allKeys.count == 0) {
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                    completionHandler(nil);
+                                                                                });
+                                                                                return;
+                                                                            }
+                                                                            
+                                                                            //是否报错
+                                                                            if ([dic objectForKey:@"error_code"]) {
+                                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                    completionHandler(dic ?: nil);
+                                                                                });
+                                                                            }
+                                                                            
+                                                                            //正常返回
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                if (responseModel) {
+                                                                                    completionHandler([responseModel mj_objectWithKeyValues:dic] ?: nil);
+                                                                                } else {
+                                                                                    completionHandler(dic ?: nil);
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        
                                                                     }
                                                                     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                                                         if ([operationCachePool objectForKey:url]) {

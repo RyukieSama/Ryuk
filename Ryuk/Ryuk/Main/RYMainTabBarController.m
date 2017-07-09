@@ -57,8 +57,10 @@
     id vc = [[NSClassFromString(vcClassString) alloc] init];
     if ([vc isKindOfClass:[UIViewController class]]) {
         RYBaseNavigationController *navi = [[RYBaseNavigationController alloc] initWithRootViewController:vc];
-        navi.title = title;
-        navi.tabBarItem.image = image;
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:nil image:image selectedImage:nil];
+        item.titlePositionAdjustment = UIOffsetMake(0, 20);
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0);//顶部和底部绝对值不同的话点击后图片会变形
+        navi.tabBarItem = item;
         return navi;
     }
     return nil;

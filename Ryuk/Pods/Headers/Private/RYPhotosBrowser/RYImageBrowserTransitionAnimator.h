@@ -1,0 +1,1 @@
+../../../RYPhotosBrowser/RYPhotosBrowser/RYImageBrowserTransitionAnimator.h

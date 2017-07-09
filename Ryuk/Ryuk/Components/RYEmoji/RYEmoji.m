@@ -26,7 +26,7 @@ static NSString *enmojiCartoon = @"cartoon";
     return instance;
 }
 
-+ (void)getEmojis {
++ (void)getEmojisFace:(emojiCallBack)callBack {
     //TODO: 先看本地有没有缓存
     
     //TODO: 从网络下载
@@ -34,11 +34,60 @@ static NSString *enmojiCartoon = @"cartoon";
 //    language	false	string	语言类别，cnname：简体、twname：繁体，默认为cnname。
     
     NSDictionary *param = @{
-                            @"type" : @"",
-                            @"language" : @""
+                            @"type" : @"face",
+                            @"language" : @"cnname"
                             };
     
+    [RYNetworkManager ry_getWithUrl:API_GET_WEIBO_EMOJI
+                  requestDictionary:param
+                      responseModel:[RYEmojiModel class]
+                           useCache:NO
+                  completionHandler:^(id data) {
+                      if ([data isKindOfClass:[NSArray class]]) {
+                          if (callBack) {
+                              callBack(data);
+                          }
+                      }
+                  }];
     
+}
+
++ (void)getEmojisAni:(emojiCallBack)callBack {
+    NSDictionary *param = @{
+                            @"type" : @"ani",
+                            @"language" : @"cnname"
+                            };
+    
+    [RYNetworkManager ry_getWithUrl:API_GET_WEIBO_EMOJI
+                  requestDictionary:param
+                      responseModel:[RYEmojiModel class]
+                           useCache:NO
+                  completionHandler:^(id data) {
+                      if ([data isKindOfClass:[NSArray class]]) {
+                          if (callBack) {
+                              callBack(data);
+                          }
+                      }
+                  }];
+}
+
++ (void)getEmojisCartoon:(emojiCallBack)callBack {
+    NSDictionary *param = @{
+                            @"type" : @"cartoon",
+                            @"language" : @"cnname"
+                            };
+    
+    [RYNetworkManager ry_getWithUrl:API_GET_WEIBO_EMOJI
+                  requestDictionary:param
+                      responseModel:[RYEmojiModel class]
+                           useCache:NO
+                  completionHandler:^(id data) {
+                      if ([data isKindOfClass:[NSArray class]]) {
+                          if (callBack) {
+                              callBack(data);
+                          }
+                      }
+                  }];
 }
 
 @end

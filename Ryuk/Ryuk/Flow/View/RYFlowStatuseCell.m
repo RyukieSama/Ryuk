@@ -10,6 +10,7 @@
 #import "RYStatuseReCommentView.h"
 #import "RYImagesScrollView.h"
 #import "RYImageBrowser.h"
+#import  <SVProgressHUD.h>
 
 @interface RYFlowStatuseCell ()
 
@@ -373,7 +374,19 @@
         };
         _vCover.handler_imageClick = ^(NSNumber *obj) {
             NSArray *arr = weakSelf.statuse.pic_urls_strings.count > 0 ? weakSelf.statuse.pic_urls_strings : weakSelf.statuse.retweeted_status.pic_urls_strings;
-            [RYImageBrowser showBrowserWithImageURLs:arr thumbnailsSize:CGSizeZero atIndex:[obj integerValue] withPageStyle:RYImageBrowserPageStyleAuto];
+            [RYImageBrowser showBrowserWithImageURLs:arr atIndex:[obj integerValue] withPageStyle:RYImageBrowserPageStyleAuto fromImageView:weakSelf.vCover withProgress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL *targetURL) {
+                NSLog(@"withProgress");
+                [SVProgressHUD show];
+            } changImage:^(NSInteger receivedSize, NSInteger expectedSize, NSURL *targetURL) {
+                NSLog(@"changImage");
+                [SVProgressHUD dismiss];
+            } loadedImage:^(NSInteger receivedSize, NSInteger expectedSize, NSURL *targetURL) {
+                NSLog(@"loadedImage");
+                [SVProgressHUD dismiss];
+            }];
+
+//            [RYImageBrowser showBrowserWithImageURLs:arr atIndex:[obj integerValue] withPageStyle:RYImageBrowserPageStyleAuto];
+            
         };
 //        _vCover.normalPageImage = [UIImage imageNamed:@"outdoor_icon_carousel"];
 //        _vCover.currentPageImage = [UIImage imageNamed:@"outdoor_icon_carousel_selected"];
